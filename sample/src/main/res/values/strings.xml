@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">LemniscateTest</string>
+    <string name="strokeWidth">Stroke width</string>
+    <string name="hasHole">Has a hole?</string>
+    <string name="isLineLengthChangeable">Is line length changeable?</string>
+    <string name="lineLength">Line length</string>
+    <string name="lineMaxLength">Max length of line</string>
+    <string name="lineMinLength">Min length of line</string>
+    <string name="sizeMultiplier">Size multiplier</string>
+    <string name="duration">Duration</string>
+    <string name="precision">Precision</string>
+</resources>

@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="lemniscate_stroke_width">10dp</dimen>
+    <dimen name="lemniscate_preferred_width">80dp</dimen>
+    <dimen name="lemniscate_preferred_height">80dp</dimen>
+</resources>
