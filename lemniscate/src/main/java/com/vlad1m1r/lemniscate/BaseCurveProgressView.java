@@ -25,7 +25,7 @@ import java.util.ArrayList;
  * Created by vladimirjovanovic on 12/30/16.
  */
 
-public abstract class BaseLemniscateProgressView extends View {
+public abstract class BaseCurveProgressView extends View {
 
 
     /**
@@ -107,36 +107,36 @@ public abstract class BaseLemniscateProgressView extends View {
     Path mPath = new Path();
     ArrayList<Pair<Float, Float>> mListOfPoints = new ArrayList<>();
 
-    public BaseLemniscateProgressView(Context context) {
+    public BaseCurveProgressView(Context context) {
         super(context);
         init();
     }
 
-    public BaseLemniscateProgressView(Context context, AttributeSet attrs) {
+    public BaseCurveProgressView(Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray a = context.getTheme().obtainStyledAttributes(
                 attrs,
-                R.styleable.BaseLemniscateProgressView,
+                R.styleable.BaseCurveProgressView,
                 0, 0);
 
         try {
-            setLineMinLength(a.getFloat(R.styleable.BaseLemniscateProgressView_minLineLength, mLineMinLength));
-            setLineMaxLength(a.getFloat(R.styleable.BaseLemniscateProgressView_maxLineLength, mLineMaxLength));
-            setLineLength(a.getFloat(R.styleable.BaseLemniscateProgressView_lineLength, mLineLength));
-            setIsLineLengthChangeable(a.getBoolean(R.styleable.BaseLemniscateProgressView_lineLengthChangeable, true));
-            setColor(a.getColor(R.styleable.BaseLemniscateProgressView_lineColor, Color.GRAY));
-            setDuration(a.getInteger(R.styleable.BaseLemniscateProgressView_duration, 1000));
-            setHasHole(a.getBoolean(R.styleable.BaseLemniscateProgressView_hasHole, false));
-            setStrokeWidth(a.getDimension(R.styleable.BaseLemniscateProgressView_strokeWidth, getResources().getDimension(R.dimen.lemniscate_stroke_width)));
-            setSizeMultiplier(a.getFloat(R.styleable.BaseLemniscateProgressView_sizeMultiplier, 1));
-            setPrecision(a.getInteger(R.styleable.BaseLemniscateProgressView_precision, mPrecision));
+            setLineMinLength(a.getFloat(R.styleable.BaseCurveProgressView_minLineLength, mLineMinLength));
+            setLineMaxLength(a.getFloat(R.styleable.BaseCurveProgressView_maxLineLength, mLineMaxLength));
+            setLineLength(a.getFloat(R.styleable.BaseCurveProgressView_lineLength, mLineLength));
+            setIsLineLengthChangeable(a.getBoolean(R.styleable.BaseCurveProgressView_lineLengthChangeable, true));
+            setColor(a.getColor(R.styleable.BaseCurveProgressView_lineColor, Color.GRAY));
+            setDuration(a.getInteger(R.styleable.BaseCurveProgressView_duration, 1000));
+            setHasHole(a.getBoolean(R.styleable.BaseCurveProgressView_hasHole, false));
+            setStrokeWidth(a.getDimension(R.styleable.BaseCurveProgressView_strokeWidth, getResources().getDimension(R.dimen.lemniscate_stroke_width)));
+            setSizeMultiplier(a.getFloat(R.styleable.BaseCurveProgressView_sizeMultiplier, 1));
+            setPrecision(a.getInteger(R.styleable.BaseCurveProgressView_precision, mPrecision));
         } finally {
             a.recycle();
         }
         init();
     }
 
-    public BaseLemniscateProgressView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public BaseCurveProgressView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }

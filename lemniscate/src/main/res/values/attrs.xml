@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="BaseLemniscateProgressView">
+    <declare-styleable name="BaseCurveProgressView">
         <attr name="minLineLength" format="float"/>
         <attr name="maxLineLength" format="float"/>
         <attr name="lineLength" format="float"/>

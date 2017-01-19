@@ -7,7 +7,7 @@ import android.util.AttributeSet;
  * Created by vladimirjovanovic on 1/18/17.
  */
 
-public class BernoullisProgressView extends BaseLemniscateProgressView {
+public class BernoullisProgressView extends BaseCurveProgressView {
 
     public BernoullisProgressView(Context context) {
         super(context);

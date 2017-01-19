@@ -10,7 +10,7 @@
     android:orientation="vertical"
     tools:context="com.vlad1m1r.lemniscate.sample.MainActivity">
 
-    <com.vlad1m1r.lemniscate.BernoullisProgressView
+    <com.vlad1m1r.lemniscate.HypotrochoidProgressView
         android:id="@+id/infinityProgressView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

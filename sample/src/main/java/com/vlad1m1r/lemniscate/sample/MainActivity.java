@@ -7,11 +7,11 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 
-import com.vlad1m1r.lemniscate.BernoullisProgressView;
+import com.vlad1m1r.lemniscate.BaseCurveProgressView;
 
 public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener, CompoundButton.OnCheckedChangeListener {
 
-    private BernoullisProgressView mInfinityProgressView;
+    private BaseCurveProgressView mInfinityProgressView;
 
     private SeekBar mSeekBarStrokeWidth;
 
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mInfinityProgressView = (BernoullisProgressView) findViewById(R.id.infinityProgressView);
+        mInfinityProgressView = (BaseCurveProgressView) findViewById(R.id.infinityProgressView);
         mSeekBarStrokeWidth = (SeekBar) findViewById(R.id.seekBarStrokeWidth);
         mSeekBarStrokeLength = (SeekBar) findViewById(R.id.seekBarStrokeLength);
         mSeekBarStrokeLengthMax = (SeekBar) findViewById(R.id.seekBarStrokeLengthMax);

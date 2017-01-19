@@ -7,29 +7,29 @@ import android.util.AttributeSet;
  * Created by vladimirjovanovic on 1/18/17.
  */
 
-public class GeronosProgressView extends BaseCurveProgressView {
+public class HeartsProgressView extends BaseCurveProgressView {
 
-    public GeronosProgressView(Context context) {
+    public HeartsProgressView(Context context) {
         super(context);
     }
 
-    public GeronosProgressView(Context context, AttributeSet attrs) {
+    public HeartsProgressView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public GeronosProgressView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public HeartsProgressView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
     @Override
     public double getGraphY(int i) {
         double t = i*2*Math.PI/mPrecision;
-        return mLemniscateParamX * Math.sin(t) * Math.cos(t);
+        return -mLemniscateParamY/17 * (13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
     }
 
     @Override
     public double getGraphX(int i) {
         double t = i*2*Math.PI/mPrecision;
-        return mLemniscateParamX * Math.sin(t);
+        return mLemniscateParamX/17 * 16 *  Math.pow(Math.sin(t), 3);
     }
 }
