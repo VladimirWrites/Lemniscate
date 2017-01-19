@@ -1,10 +1,10 @@
 package com.vlad1m1r.lemniscate.sample;
 
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +41,7 @@ public class FragmentSettings extends Fragment implements SeekBar.OnSeekBarChang
     protected float mLineLength = 0.6f;
     protected float mLineMinLength = 0.4f, mLineMaxLength = 0.8f;
     protected boolean mIsLineLengthChangeable = true;
-    protected int mColor = Color.BLUE;
+    protected int mColor;
 
     protected long mDuration = 2000;
     protected boolean mHasHole = false;
@@ -106,6 +106,8 @@ public class FragmentSettings extends Fragment implements SeekBar.OnSeekBarChang
         mSeekBarPrecision.setMax(990);
         mSeekBarPrecision.setProgress(mPrecision);
         mSeekBarPrecision.setOnSeekBarChangeListener(this);
+
+        mColor = ContextCompat.getColor(getContext(), R.color.colorPrimary);
     }
 
     public void setBaseCurveProgressView(BaseCurveProgressView baseCurveProgressView) {
@@ -165,6 +167,7 @@ public class FragmentSettings extends Fragment implements SeekBar.OnSeekBarChang
             mBaseCurveProgressView.setIsLineLengthChangeable(mIsLineLengthChangeable);
             mBaseCurveProgressView.setDuration((int) mDuration);
             mBaseCurveProgressView.setHasHole(mHasHole);
+            mBaseCurveProgressView.setColor(mColor);
         }
     }
 
