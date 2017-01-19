@@ -12,7 +12,7 @@ public class EpicycloidProgressView extends BaseCurveProgressView {
     private float a = 4f;
     private static final int b = 1;
 
-    private int numberOfCycles = 2;
+    private int numberOfCycles = 1;
 
     public EpicycloidProgressView(Context context) {
         super(context);
