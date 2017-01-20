@@ -3,21 +3,13 @@ package com.vlad1m1r.lemniscate.roulette;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.vlad1m1r.lemniscate.base.BaseCurveProgressView;
-
 /**
  * Created by vladimirjovanovic on 1/19/17.
  */
 
-public class HypotrochoidProgressView extends BaseCurveProgressView {
+public class HypotrochoidProgressView extends BaseRouletteProgressView {
 
     // a = 5, b=3, d=5, numberOfCycles = 3 to get pentagram
-
-    private float a = 5f;
-    private float d = 5f;
-    private static final int b = 3;
-
-    private int numberOfCycles = 3;
 
     public HypotrochoidProgressView(Context context) {
         super(context);

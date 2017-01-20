@@ -66,7 +66,7 @@ public abstract class BaseCurveProgressView extends View {
     /**
      * duration of one cycle of animation in milliseconds
      */
-    protected long mDuration = 10000;
+    protected long mDuration = 1000;
 
 
     /**

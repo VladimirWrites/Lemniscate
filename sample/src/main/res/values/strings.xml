@@ -9,4 +9,8 @@
     <string name="sizeMultiplier">Size multiplier</string>
     <string name="duration">Duration</string>
     <string name="precision">Precision</string>
+    <string name="paramA">Param A</string>
+    <string name="paramB">Param B</string>
+    <string name="paramD">Param D</string>
+    <string name="numberOfCycles">Number of cycles</string>
 </resources>

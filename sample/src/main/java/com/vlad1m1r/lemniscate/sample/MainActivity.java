@@ -13,7 +13,7 @@ import static com.vlad1m1r.lemniscate.sample.R.id.viewPager;
 
 public class MainActivity extends AppCompatActivity implements FragmentCurve.OnViewCreated{
 
-    private static final int NUM_PAGES = 7;
+    private static final int NUM_PAGES = 8;
 
     private FragmentSettings mFragmentSettings;
     private ViewPager mPager;

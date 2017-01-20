@@ -3,18 +3,11 @@ package com.vlad1m1r.lemniscate.roulette;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.vlad1m1r.lemniscate.base.BaseCurveProgressView;
-
 /**
  * Created by vladimirjovanovic on 1/19/17.
  */
 
-public class EpicycloidProgressView extends BaseCurveProgressView {
-
-    private float a = 4f;
-    private static final int b = 1;
-
-    private int numberOfCycles = 1;
+public class EpicycloidProgressView extends BaseRouletteProgressView {
 
     public EpicycloidProgressView(Context context) {
         super(context);

@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:clipToPadding="false">
+    android:clipToPadding="false"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,11 +14,25 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin">
 
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/strokeWidth"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
+
         <SeekBar
             android:id="@+id/seekBarStrokeWidth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textStrokeWidth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/strokeWidth"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <View
             android:layout_width="match_parent"
@@ -45,7 +59,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginBottom="@dimen/margin_normal"/>
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textLineLength"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:gravity="center"
+            android:text="@string/strokeWidth"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -58,7 +81,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginBottom="@dimen/margin_normal"/>
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textMinLineLength"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:gravity="center"
+            android:text="@string/strokeWidth"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -71,7 +103,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginBottom="@dimen/margin_normal"/>
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textMaxLineLength"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:gravity="center"
+            android:text="@string/strokeWidth"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <View
             android:layout_width="match_parent"
@@ -96,8 +137,8 @@
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sizeMultiplier"
             android:layout_marginBottom="@dimen/margin_small"
+            android:text="@string/sizeMultiplier"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <SeekBar
@@ -105,7 +146,16 @@
             style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_normal"/>
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textSizeMultiplier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:gravity="center"
+            android:text="@string/strokeWidth"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <View
             android:layout_width="match_parent"
@@ -125,7 +175,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginBottom="@dimen/margin_normal"/>
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textAnimationDuration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:gravity="center"
+            android:text="@string/strokeWidth"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <View
             android:layout_width="match_parent"
@@ -145,7 +204,90 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginBottom="@dimen/margin_normal"/>
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textPrecision"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:gravity="center"
+            android:text="@string/strokeWidth"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:background="@color/divider"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/paramA"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
+
+        <SeekBar
+            android:id="@+id/seekBarA"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_normal"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/paramB"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
+
+        <SeekBar
+            android:id="@+id/seekBarB"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_normal"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/paramD"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
+
+        <SeekBar
+            android:id="@+id/seekBarD"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_normal"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:background="@color/divider"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/numberOfCycles"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
+
+        <SeekBar
+            android:id="@+id/seekBarNumberOfCycles"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_normal"
+            />
 
     </LinearLayout>
 </ScrollView>

@@ -9,17 +9,17 @@ import com.vlad1m1r.lemniscate.base.BaseCurveProgressView;
  * Created by vladimirjovanovic on 1/18/17.
  */
 
-public class HeartsProgressView extends BaseCurveProgressView {
+public class HeartProgressView extends BaseCurveProgressView {
 
-    public HeartsProgressView(Context context) {
+    public HeartProgressView(Context context) {
         super(context);
     }
 
-    public HeartsProgressView(Context context, AttributeSet attrs) {
+    public HeartProgressView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public HeartsProgressView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public HeartProgressView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

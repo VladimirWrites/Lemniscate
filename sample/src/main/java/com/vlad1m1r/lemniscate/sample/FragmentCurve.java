@@ -8,12 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.vlad1m1r.lemniscate.BernoullisProgressView;
 import com.vlad1m1r.lemniscate.GeronosProgressView;
 import com.vlad1m1r.lemniscate.base.BaseCurveProgressView;
 import com.vlad1m1r.lemniscate.funny.CannabisProgressView;
-import com.vlad1m1r.lemniscate.funny.HeartsProgressView;
+import com.vlad1m1r.lemniscate.funny.HeartProgressView;
 import com.vlad1m1r.lemniscate.roulette.EpicycloidProgressView;
 import com.vlad1m1r.lemniscate.roulette.EpitrochoidProgressView;
 import com.vlad1m1r.lemniscate.roulette.HypocycloidProgressView;
@@ -35,6 +36,9 @@ public class FragmentCurve  extends Fragment {
     private OnViewCreated listener;
 
     private BaseCurveProgressView mBaseCurveProgressView;
+
+    private TextView mCurveName;
+    private LinearLayout mLayoutViewholder;
 
     private int mPosition;
 
@@ -60,10 +64,17 @@ public class FragmentCurve  extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_curve, container, false);
+
+        mCurveName = (TextView) root.findViewById(R.id.textCurveName);
+        mLayoutViewholder = (LinearLayout) root.findViewById(R.id.layoutViewHolder);
+
         if(mBaseCurveProgressView.getParent() != null) {
             ((ViewGroup) mBaseCurveProgressView.getParent()).removeView(mBaseCurveProgressView);
         }
-        root.addView(mBaseCurveProgressView);
+        mLayoutViewholder.addView(mBaseCurveProgressView);
+
+        mCurveName.setText(mBaseCurveProgressView.getClass().getSimpleName());
+
         return root;
     }
 
@@ -78,7 +89,7 @@ public class FragmentCurve  extends Fragment {
             case 5: return new HypotrochoidProgressView(getContext());
 
             case 6: return new CannabisProgressView(getContext());
-            case 7: return new HeartsProgressView(getContext());
+            case 7: return new HeartProgressView(getContext());
             default: return new BernoullisProgressView(getContext());
         }
     }
