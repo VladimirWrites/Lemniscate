@@ -14,12 +14,6 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin">
 
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/strokeWidth"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
-
         <SeekBar
             android:id="@+id/seekBarStrokeWidth"
             android:layout_width="match_parent"

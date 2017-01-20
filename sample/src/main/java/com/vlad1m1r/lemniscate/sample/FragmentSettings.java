@@ -118,7 +118,7 @@ public class FragmentSettings extends Fragment implements SeekBar.OnSeekBarChang
         } else {
             mCheckBoxHasHole.setEnabled(false);
         }
-        invalidateView();
+        invalidateView(mBaseCurveProgressView);
     }
 
     @Override
@@ -153,21 +153,21 @@ public class FragmentSettings extends Fragment implements SeekBar.OnSeekBarChang
                 break;
         }
 
-        invalidateView();
+        invalidateView(mBaseCurveProgressView);
     }
 
-    private void invalidateView() {
-        if(mBaseCurveProgressView != null) {
-            mBaseCurveProgressView.setPrecision(mPrecision);
-            mBaseCurveProgressView.setStrokeWidth(mStrokeWidth);
-            mBaseCurveProgressView.setSizeMultiplier(mSizeMultiplier);
-            mBaseCurveProgressView.setLineLength(mLineLength);
-            mBaseCurveProgressView.setLineMaxLength(mLineMaxLength);
-            mBaseCurveProgressView.setLineMinLength(mLineMinLength);
-            mBaseCurveProgressView.setIsLineLengthChangeable(mIsLineLengthChangeable);
-            mBaseCurveProgressView.setDuration((int) mDuration);
-            mBaseCurveProgressView.setHasHole(mHasHole);
-            mBaseCurveProgressView.setColor(mColor);
+    private void invalidateView(BaseCurveProgressView baseCurveProgressView) {
+        if(baseCurveProgressView != null) {
+            baseCurveProgressView.setPrecision(mPrecision);
+            baseCurveProgressView.setStrokeWidth(mStrokeWidth);
+            baseCurveProgressView.setSizeMultiplier(mSizeMultiplier);
+            baseCurveProgressView.setLineLength(mLineLength);
+            baseCurveProgressView.setLineMaxLength(mLineMaxLength);
+            baseCurveProgressView.setLineMinLength(mLineMinLength);
+            baseCurveProgressView.setIsLineLengthChangeable(mIsLineLengthChangeable);
+            baseCurveProgressView.setDuration((int) mDuration);
+            baseCurveProgressView.setHasHole(mHasHole);
+            baseCurveProgressView.setColor(mColor);
         }
     }
 
@@ -195,10 +195,14 @@ public class FragmentSettings extends Fragment implements SeekBar.OnSeekBarChang
                 break;
         }
 
-        invalidateView();
+        invalidateView(mBaseCurveProgressView);
     }
 
     public static float dpToPx(float dp) {
         return dp * Resources.getSystem().getDisplayMetrics().density;
+    }
+
+    public void applySettings(BaseCurveProgressView baseCurveProgressView) {
+        invalidateView(baseCurveProgressView);
     }
 }
