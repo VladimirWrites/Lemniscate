@@ -7,13 +7,13 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.vlad1m1r.lemniscate.BaseCurveProgressView;
+import com.vlad1m1r.lemniscate.base.BaseCurveProgressView;
 
 import static com.vlad1m1r.lemniscate.sample.R.id.viewPager;
 
 public class MainActivity extends AppCompatActivity implements FragmentCurve.OnViewCreated{
 
-    private static final int NUM_PAGES = 6;
+    private static final int NUM_PAGES = 7;
 
     private FragmentSettings mFragmentSettings;
     private ViewPager mPager;

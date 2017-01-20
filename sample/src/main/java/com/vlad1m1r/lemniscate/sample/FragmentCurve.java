@@ -9,13 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.vlad1m1r.lemniscate.BaseCurveProgressView;
 import com.vlad1m1r.lemniscate.BernoullisProgressView;
-import com.vlad1m1r.lemniscate.EpicycloidProgressView;
 import com.vlad1m1r.lemniscate.GeronosProgressView;
-import com.vlad1m1r.lemniscate.HeartsProgressView;
-import com.vlad1m1r.lemniscate.HypocycloidProgressView;
-import com.vlad1m1r.lemniscate.HypotrochoidProgressView;
+import com.vlad1m1r.lemniscate.base.BaseCurveProgressView;
+import com.vlad1m1r.lemniscate.funny.CannabisProgressView;
+import com.vlad1m1r.lemniscate.funny.HeartsProgressView;
+import com.vlad1m1r.lemniscate.roulette.EpicycloidProgressView;
+import com.vlad1m1r.lemniscate.roulette.EpitrochoidProgressView;
+import com.vlad1m1r.lemniscate.roulette.HypocycloidProgressView;
+import com.vlad1m1r.lemniscate.roulette.HypotrochoidProgressView;
 
 /**
  * Created by vladimirjovanovic on 1/19/17.
@@ -69,10 +71,14 @@ public class FragmentCurve  extends Fragment {
         switch (position) {
             case 0: return new BernoullisProgressView(getContext());
             case 1: return new GeronosProgressView(getContext());
-            case 2: return new HeartsProgressView(getContext());
-            case 3: return new EpicycloidProgressView(getContext());
-            case 4: return new HypotrochoidProgressView(getContext());
-            case 5: return new HypocycloidProgressView(getContext());
+
+            case 2: return new EpicycloidProgressView(getContext());
+            case 3: return new EpitrochoidProgressView(getContext());
+            case 4: return new HypocycloidProgressView(getContext());
+            case 5: return new HypotrochoidProgressView(getContext());
+
+            case 6: return new CannabisProgressView(getContext());
+            case 7: return new HeartsProgressView(getContext());
             default: return new BernoullisProgressView(getContext());
         }
     }

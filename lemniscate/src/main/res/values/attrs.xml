@@ -12,4 +12,10 @@
         <attr name="sizeMultiplier" format="float"/>
         <attr name="precision" format="integer"/>
     </declare-styleable>
+
+    <declare-styleable name="RouletteCurveProgressView">
+        <attr name="a" format="float"/>
+        <attr name="b" format="float"/>
+        <attr name="d" format="float"/>
+    </declare-styleable>
 </resources>

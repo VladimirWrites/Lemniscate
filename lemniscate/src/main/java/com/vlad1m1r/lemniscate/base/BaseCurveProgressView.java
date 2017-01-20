@@ -1,4 +1,4 @@
-package com.vlad1m1r.lemniscate;
+package com.vlad1m1r.lemniscate.base;
 
 import android.animation.Animator;
 import android.animation.TimeInterpolator;

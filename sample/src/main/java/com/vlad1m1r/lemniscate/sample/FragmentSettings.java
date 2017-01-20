@@ -12,7 +12,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 
-import com.vlad1m1r.lemniscate.BaseCurveProgressView;
+import com.vlad1m1r.lemniscate.base.BaseCurveProgressView;
 import com.vlad1m1r.lemniscate.BernoullisProgressView;
 import com.vlad1m1r.lemniscate.GeronosProgressView;
 

@@ -16,7 +16,7 @@
         android:layout_height="200dp"/>
 
 
-    <!--<com.vlad1m1r.lemniscate.HypotrochoidProgressView-->
+    <!--<com.vlad1m1r.lemniscate.roulette.HypotrochoidProgressView-->
     <!--android:id="@+id/infinityProgressView"-->
     <!--android:layout_width="wrap_content"-->
     <!--android:layout_height="wrap_content"-->

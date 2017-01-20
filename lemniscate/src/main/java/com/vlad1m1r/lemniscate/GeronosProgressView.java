@@ -3,6 +3,8 @@ package com.vlad1m1r.lemniscate;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import com.vlad1m1r.lemniscate.base.BaseCurveProgressView;
+
 /**
  * Created by vladimirjovanovic on 1/18/17.
  */
