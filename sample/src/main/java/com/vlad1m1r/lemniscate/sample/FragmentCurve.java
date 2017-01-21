@@ -15,9 +15,7 @@ import com.vlad1m1r.lemniscate.GeronosProgressView;
 import com.vlad1m1r.lemniscate.base.BaseCurveProgressView;
 import com.vlad1m1r.lemniscate.funny.CannabisProgressView;
 import com.vlad1m1r.lemniscate.funny.HeartProgressView;
-import com.vlad1m1r.lemniscate.roulette.EpicycloidProgressView;
 import com.vlad1m1r.lemniscate.roulette.EpitrochoidProgressView;
-import com.vlad1m1r.lemniscate.roulette.HypocycloidProgressView;
 import com.vlad1m1r.lemniscate.roulette.HypotrochoidProgressView;
 
 /**
@@ -83,13 +81,11 @@ public class FragmentCurve  extends Fragment {
             case 0: return new BernoullisProgressView(getContext());
             case 1: return new GeronosProgressView(getContext());
 
-            case 2: return new EpicycloidProgressView(getContext());
-            case 3: return new EpitrochoidProgressView(getContext());
-            case 4: return new HypocycloidProgressView(getContext());
-            case 5: return new HypotrochoidProgressView(getContext());
+            case 2: return new EpitrochoidProgressView(getContext());
+            case 3: return new HypotrochoidProgressView(getContext());
 
-            case 6: return new CannabisProgressView(getContext());
-            case 7: return new HeartProgressView(getContext());
+            case 4: return new CannabisProgressView(getContext());
+            case 5: return new HeartProgressView(getContext());
             default: return new BernoullisProgressView(getContext());
         }
     }

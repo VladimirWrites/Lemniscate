@@ -27,7 +27,7 @@ public class EpitrochoidProgressView extends BaseRouletteProgressView {
     public double getGraphY(int i) {
         //y = (a + b) sin(t) - d sin(((a+b)/b)*t)
         double t = i*numberOfCycles*2*Math.PI/mPrecision;
-        return mLemniscateParamY/(2*(a+d+b))*((a+b)*Math.sin(t) + d*Math.sin(((a+b)/b)*t));
+        return mLemniscateParamY/(2*(a+d+b))*((a+b)*Math.sin(t) - d*Math.sin(((a+b)/b)*t));
     }
 
     @Override
