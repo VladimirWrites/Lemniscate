@@ -227,7 +227,7 @@ public abstract class BaseCurveProgressView extends View {
 
         //finds smallest ratio for which lemniscate should be resized because of stroke width
         //it's not just 1 * mStrokeWidth because it's behavior is strange for tick lines
-        float ratio = mViewHeight/(mViewHeight + 2 * mStrokeWidth);//Math.min(DENSITY_SIZE * mSizeMultiplier, Math.min(ratioX, ratioY));
+        float ratio = mViewHeight/(mViewHeight + 2 * mStrokeWidth);
 
         //move every point for ratio
         x = x * ratio;
@@ -531,5 +531,9 @@ public abstract class BaseCurveProgressView extends View {
         mPrecision = precision;
         animateLemniscate();
         invalidate();
+    }
+
+    public double getT(int i) {
+        return i*2*Math.PI/mPrecision;
     }
 }

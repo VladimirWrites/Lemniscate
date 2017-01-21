@@ -25,13 +25,13 @@ public class GeronosProgressView extends BaseCurveProgressView {
 
     @Override
     public double getGraphY(int i) {
-        double t = i*2*Math.PI/mPrecision;
+        double t = getT(i);
         return mLemniscateParamX * Math.sin(t) * Math.cos(t);
     }
 
     @Override
     public double getGraphX(int i) {
-        double t = i*2*Math.PI/mPrecision;
+        double t = getT(i);
         return mLemniscateParamX * Math.sin(t);
     }
 }

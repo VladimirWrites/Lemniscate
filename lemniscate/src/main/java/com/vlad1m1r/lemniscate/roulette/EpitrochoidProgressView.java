@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 
 public class EpitrochoidProgressView extends BaseRouletteProgressView {
 
-    // a = 5, b=3, d=5, numberOfCycles = 3 to get pentagram
+    // mRadiusFixed = 5, mRadiusMoving=3, mDistanceFromCenter=5, numberOfCycles = 3 to get pentagram
 
     public EpitrochoidProgressView(Context context) {
         super(context);
@@ -25,16 +25,16 @@ public class EpitrochoidProgressView extends BaseRouletteProgressView {
 
     @Override
     public double getGraphY(int i) {
-        //y = (a + b) sin(t) - d sin(((a+b)/b)*t)
-        double t = i*numberOfCycles*2*Math.PI/mPrecision;
-        return mLemniscateParamY/(2*(a+d+b))*((a+b)*Math.sin(t) - d*Math.sin(((a+b)/b)*t));
+        //y = (mRadiusFixed + mRadiusMoving) sin(t) - mDistanceFromCenter sin(((mRadiusFixed+mRadiusMoving)/mRadiusMoving)*t)
+        double t = getT(i);
+        return mLemniscateParamY/(2*(mRadiusFixed + mDistanceFromCenter + mRadiusMoving))*((mRadiusFixed + mRadiusMoving)*Math.sin(t) - mDistanceFromCenter *Math.sin(((mRadiusFixed + mRadiusMoving)/ mRadiusMoving)*t));
     }
 
     @Override
     public double getGraphX(int i) {
-        //x = (a + b) cos(t) + b cos(((a+b)/b)*t),
-        double t = i*numberOfCycles*2*Math.PI/mPrecision;
-        return mLemniscateParamY/(2*(a+d+b))*((a+b)*Math.cos(t) - d*Math.cos(((a+b)/b)*t));
+        //x = (mRadiusFixed + mRadiusMoving) cos(t) + mRadiusMoving cos(((mRadiusFixed+mRadiusMoving)/mRadiusMoving)*t),
+        double t = getT(i);
+        return mLemniscateParamY/(2*(mRadiusFixed + mDistanceFromCenter + mRadiusMoving))*((mRadiusFixed + mRadiusMoving)*Math.cos(t) - mDistanceFromCenter *Math.cos(((mRadiusFixed + mRadiusMoving)/ mRadiusMoving)*t));
     }
 
     @Override

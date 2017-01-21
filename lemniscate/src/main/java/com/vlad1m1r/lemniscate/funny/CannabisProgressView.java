@@ -11,8 +11,6 @@ import com.vlad1m1r.lemniscate.base.BaseCurveProgressView;
 
 public class CannabisProgressView extends BaseCurveProgressView {
 
-    private int numberOfCycles = 1;
-
     public CannabisProgressView(Context context) {
         super(context);
     }
@@ -27,13 +25,13 @@ public class CannabisProgressView extends BaseCurveProgressView {
 
     @Override
     public double getGraphY(int i) {
-        double t = i*numberOfCycles*2*Math.PI/mPrecision;
+        double t = getT(i);
         return -mLemniscateParamY/3 * Math.sin(t) * (Math.sin(t) + 1) * (9/10f * Math.cos(8*t) + 1) * (1/10f * Math.cos(24*t) + 1) * (1/10f * Math.cos(200*t) + 9/10f) + mLemniscateParamY/3;
     }
 
     @Override
     public double getGraphX(int i) {
-        double t = i*numberOfCycles*2*Math.PI/mPrecision;
+        double t = getT(i);
         return mLemniscateParamX/3 * (Math.sin(t) + 1) * Math.cos(t) * (9/10f * Math.cos(8*t) + 1) * (1/10f * Math.cos(24*t) + 1) * (1/10f * Math.cos(200*t) + 9/10f);
     }
 }

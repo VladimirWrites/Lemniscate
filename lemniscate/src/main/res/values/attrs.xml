@@ -14,8 +14,9 @@
     </declare-styleable>
 
     <declare-styleable name="RouletteCurveProgressView">
-        <attr name="a" format="float"/>
-        <attr name="b" format="float"/>
-        <attr name="d" format="float"/>
+        <attr name="radiusFixed" format="float"/>
+        <attr name="radiusMoving" format="float"/>
+        <attr name="distanceFromCenter" format="float"/>
+        <attr name="numberOfCycles" format="float"/>
     </declare-styleable>
 </resources>

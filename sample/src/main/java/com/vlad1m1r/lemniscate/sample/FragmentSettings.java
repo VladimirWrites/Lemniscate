@@ -261,9 +261,9 @@ public class FragmentSettings extends Fragment implements SeekBar.OnSeekBarChang
 
             if(baseCurveProgressView instanceof BaseRouletteProgressView) {
                 BaseRouletteProgressView baseRouletteProgressView = (BaseRouletteProgressView) baseCurveProgressView;
-                baseRouletteProgressView.setA(a);
-                baseRouletteProgressView.setB(b);
-                baseRouletteProgressView.setD(d);
+                baseRouletteProgressView.setRadiusFixed(a);
+                baseRouletteProgressView.setRadiusMoving(b);
+                baseRouletteProgressView.setDistanceFromCenter(d);
 
                 baseRouletteProgressView.setNumberOfCycles(numberOfCycles);
             }
