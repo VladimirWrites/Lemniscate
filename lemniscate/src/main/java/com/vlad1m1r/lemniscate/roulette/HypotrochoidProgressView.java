@@ -27,14 +27,14 @@ public class HypotrochoidProgressView extends BaseRouletteProgressView {
     public double getGraphY(int i) {
         //y = (mRadiusFixed - mRadiusMoving) sin(t) - mRadiusMoving sin(((mRadiusFixed-mRadiusMoving)/mRadiusMoving)*t)
         double t = getT(i);
-        return mLemniscateParamY/(2*(mRadiusFixed + mDistanceFromCenter - mRadiusMoving))*((mRadiusFixed - mRadiusMoving)*Math.sin(t) + mDistanceFromCenter *Math.sin(((mRadiusFixed - mRadiusMoving)/ mRadiusMoving)*t));
+        return mLemniscateParamY/((mRadiusFixed + mDistanceFromCenter - mRadiusMoving))*((mRadiusFixed - mRadiusMoving)*Math.sin(t) + mDistanceFromCenter *Math.sin(((mRadiusFixed - mRadiusMoving)/ mRadiusMoving)*t));
     }
 
     @Override
     public double getGraphX(int i) {
         //x = (mRadiusFixed - mRadiusMoving) cos(t) + mRadiusMoving cos(((mRadiusFixed-mRadiusMoving)/mRadiusMoving)*t),
         double t = getT(i);
-        return mLemniscateParamY/(2*(mRadiusFixed + mDistanceFromCenter - mRadiusMoving))*((mRadiusFixed - mRadiusMoving)*Math.cos(t) - mDistanceFromCenter *Math.cos(((mRadiusFixed - mRadiusMoving)/ mRadiusMoving)*t));
+        return mLemniscateParamY/((mRadiusFixed + mDistanceFromCenter - mRadiusMoving))*((mRadiusFixed - mRadiusMoving)*Math.cos(t) - mDistanceFromCenter *Math.cos(((mRadiusFixed - mRadiusMoving)/ mRadiusMoving)*t));
     }
 
     @Override

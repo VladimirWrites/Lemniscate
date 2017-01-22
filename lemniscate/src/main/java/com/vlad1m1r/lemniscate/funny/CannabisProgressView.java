@@ -26,7 +26,7 @@ public class CannabisProgressView extends BaseCurveProgressView {
     @Override
     public double getGraphY(int i) {
         double t = getT(i);
-        return -mLemniscateParamY/3 * Math.sin(t) * (Math.sin(t) + 1) * (9/10f * Math.cos(8*t) + 1) * (1/10f * Math.cos(24*t) + 1) * (1/10f * Math.cos(200*t) + 9/10f) + mLemniscateParamY/3;
+        return -mLemniscateParamY/3 * Math.sin(t) * (Math.sin(t) + 1) * (9/10f * Math.cos(8*t) + 1) * (1/10f * Math.cos(24*t) + 1) * (1/10f * Math.cos(200*t) + 9/10f) + mLemniscateParamY/2;
     }
 
     @Override
