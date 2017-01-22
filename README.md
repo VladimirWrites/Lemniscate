@@ -11,6 +11,29 @@ Setup
 Usage
 -----
 
+    <com.vlad1m1r.lemniscate.roulette.BernoullisProgressView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        customParam:duration="1000"
+        customParam:hasHole="false"
+        customParam:lineColor="@color/colorPrimary"
+        customParam:lineLength="0.6"
+        customParam:lineLengthChangeable="true"
+        customParam:maxLineLength="0.8"
+        customParam:minLineLength="0.4"
+        customParam:sizeMultiplier="1"
+        customParam:strokeWidth="5dp"/>
+
+###### Lemniscates
+`BernoullisProgressView`, `GeronosProgressView`
+
+###### Roulettes
+`EpitrochoidProgressView`, `HypotrochoidProgressView`
+
+###### Funny
+`HeartProgressView`, `CannabisProgressView`
+
+
 
 Credits
 -------

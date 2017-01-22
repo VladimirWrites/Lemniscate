@@ -104,8 +104,8 @@ public abstract class BaseCurveProgressView extends View {
     protected boolean mIsExpanding = true;
 
 
-    Path mPath = new Path();
-    ArrayList<Pair<Float, Float>> mListOfPoints = new ArrayList<>();
+    private final Path mPath = new Path();
+    private final ArrayList<Pair<Float, Float>> mListOfPoints = new ArrayList<>();
 
     public BaseCurveProgressView(Context context) {
         super(context);
