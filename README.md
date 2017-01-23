@@ -3,6 +3,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/vlad1m1r990/Lemniscate.svg)](https://github.com/vlad1m1r990/Lemniscate/issues)
 [![GitHub forks](https://img.shields.io/github/forks/vlad1m1r990/Lemniscate.svg)](https://github.com/vlad1m1r990/Lemniscate/network)
 [![GitHub stars](https://img.shields.io/github/stars/vlad1m1r990/Lemniscate.svg)](https://github.com/vlad1m1r990/Lemniscate/stargazers)
+
 Lemniscate is a library that will help you to make your progress view nice and sleek.
 
 Setup
