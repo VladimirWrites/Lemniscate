@@ -5,8 +5,16 @@ Lemniscate is a library that will help you to make your progress view nice and s
 
 Setup
 -----
+    allprojects {
+        repositories {
+            ...
+            maven { url 'https://jitpack.io' }
+        }
+    }
 
-
+    dependencies {
+            compile 'com.github.vlad1m1r990:Lemniscate:1.0.0'
+    }
 
 Usage
 -----
