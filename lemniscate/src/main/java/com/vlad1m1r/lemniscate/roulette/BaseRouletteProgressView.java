@@ -17,20 +17,20 @@ public abstract class BaseRouletteProgressView extends BaseCurveProgressView {
     /**
      * Radius of the non-moving circle
      */
-    protected float mRadiusFixed = 5f;
+    protected float mRadiusFixed = 3f;
     /**
      * Radius of the moving circle
      */
-    protected float mRadiusMoving = 3f;
+    protected float mRadiusMoving = 1f;
     /**
      * Distance from the center of the moving circle
      */
-    protected float mDistanceFromCenter = 5f;
+    protected float mDistanceFromCenter = 1f;
 
     /**
      * Curve will be drawn on interval  [0, 2*numberOfCycles*π] before repeating
      */
-    protected int numberOfCycles = 3;
+    protected float numberOfCycles = 1;
 
 
     public BaseRouletteProgressView(Context context) {
@@ -48,7 +48,7 @@ public abstract class BaseRouletteProgressView extends BaseCurveProgressView {
             setRadiusFixed(a.getFloat(R.styleable.RouletteCurveProgressView_radiusFixed, mRadiusFixed));
             setRadiusMoving(a.getFloat(R.styleable.RouletteCurveProgressView_radiusMoving, mRadiusMoving));
             setDistanceFromCenter(a.getFloat(R.styleable.RouletteCurveProgressView_distanceFromCenter, mDistanceFromCenter));
-            setNumberOfCycles(a.getInt(R.styleable.RouletteCurveProgressView_numberOfCycles, numberOfCycles));
+            setNumberOfCycles(a.getFloat(R.styleable.RouletteCurveProgressView_numberOfCycles, numberOfCycles));
         } finally {
             a.recycle();
         }
@@ -82,11 +82,11 @@ public abstract class BaseRouletteProgressView extends BaseCurveProgressView {
         this.mDistanceFromCenter = distanceFromCenter;
     }
 
-    public int getNumberOfCycles() {
+    public float getNumberOfCycles() {
         return numberOfCycles;
     }
 
-    public void setNumberOfCycles(int numberOfCycles) {
+    public void setNumberOfCycles(float numberOfCycles) {
         this.numberOfCycles = numberOfCycles;
     }
 
