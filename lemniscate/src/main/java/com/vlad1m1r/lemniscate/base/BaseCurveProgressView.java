@@ -464,7 +464,7 @@ public abstract class BaseCurveProgressView extends View {
 
     public void setColor(int color) {
         mColor = color;
-        mPaint.setColor(color);
+        if(mPaint != null) mPaint.setColor(color);
     }
 
     public void setDuration(int duration) {

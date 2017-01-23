@@ -19,7 +19,7 @@ Setup
 Usage
 -----
 
-    <com.vlad1m1r.lemniscate.roulette.BernoullisProgressView
+    <com.vlad1m1r.lemniscate.BernoullisProgressView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         customParam:duration="1000"
