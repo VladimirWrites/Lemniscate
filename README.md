@@ -18,7 +18,7 @@ Setup
     }
 
     dependencies {
-            compile 'com.github.vlad1m1r990:Lemniscate:1.0.1'
+            compile 'com.github.vlad1m1r990:Lemniscate:1.0.2'
     }
 
 Usage
