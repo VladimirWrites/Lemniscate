@@ -159,6 +159,13 @@ public abstract class BaseCurveProgressView extends View {
 
         //TODO: mListOfPoints should be removed and everything should be done just with @param mPath
 
+        createListOfPoints();
+        addPointsToPath();
+
+        canvas.drawPath(mPath, mPaint);
+    }
+
+    private void createListOfPoints() {
         int lineLengthToDraw = Math.round(mPrecision * mLineLength);
         boolean firstPass = true;
         mListOfPoints.clear();
@@ -173,7 +180,9 @@ public abstract class BaseCurveProgressView extends View {
                 lineLengthToDraw = getPointsOnCurve(mListOfPoints, 0, lineLengthToDraw);
             }
         }
+    }
 
+    private void addPointsToPath() {
         mPath.reset();
 
         float holeSize = Math.max(mStrokeWidth, 10);
@@ -201,8 +210,6 @@ public abstract class BaseCurveProgressView extends View {
                 isDrawingHole = true;
             }
         }
-
-        canvas.drawPath(mPath, mPaint);
     }
 
     private int getPointsOnCurve(ArrayList<Pair<Float, Float>> list, @Nullable Integer start, int leftPoints) {
@@ -349,7 +356,7 @@ public abstract class BaseCurveProgressView extends View {
     @Override
     public Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
-        SavedState ss = new SavedState(superState);
+        BaseCurveSavedState ss = new BaseCurveSavedState(superState);
 
         ss.strokeWidth = this.mStrokeWidth;
         ss.sizeMultiplier = this.mSizeMultiplier;
@@ -360,18 +367,19 @@ public abstract class BaseCurveProgressView extends View {
         ss.color = this.mColor;
         ss.duration = this.mDuration;
         ss.hasHole = this.mHasHole;
+        ss.precision = this.mPrecision;
 
         return ss;
     }
 
     @Override
     public void onRestoreInstanceState(Parcelable state) {
-        if(!(state instanceof SavedState)) {
+        if(!(state instanceof BaseCurveSavedState)) {
             super.onRestoreInstanceState(state);
             return;
         }
 
-        SavedState ss = (SavedState)state;
+        BaseCurveSavedState ss = (BaseCurveSavedState)state;
         super.onRestoreInstanceState(ss.getSuperState());
         //end
 
@@ -384,9 +392,10 @@ public abstract class BaseCurveProgressView extends View {
         setColor(ss.color);
         setDuration((int)ss.duration);
         setHasHole(ss.hasHole);
+        setPrecision(ss.precision);
     }
 
-    static class SavedState extends BaseSavedState {
+    protected static class BaseCurveSavedState extends BaseSavedState {
         float strokeWidth;
         float sizeMultiplier;
         float lineLength;
@@ -396,13 +405,13 @@ public abstract class BaseCurveProgressView extends View {
         int color;
         long duration;
         boolean hasHole;
+        int precision;
 
-
-        SavedState(Parcelable superState) {
+        public BaseCurveSavedState(Parcelable superState) {
             super(superState);
         }
 
-        private SavedState(Parcel in) {
+        public BaseCurveSavedState(Parcel in) {
             super(in);
             this.strokeWidth = in.readFloat();
             this.sizeMultiplier = in.readFloat();
@@ -413,6 +422,7 @@ public abstract class BaseCurveProgressView extends View {
             this.color = in.readInt();
             this.duration = in.readLong();
             this.hasHole = in.readByte() != 0;
+            this.precision = in.readInt();
 
         }
 
@@ -428,15 +438,16 @@ public abstract class BaseCurveProgressView extends View {
             out.writeInt(this.color);
             out.writeLong(this.duration);
             out.writeByte((byte) (hasHole ? 1 : 0));
+            out.writeInt(this.precision);
         }
 
-        public static final Parcelable.Creator<SavedState> CREATOR =
-                new Parcelable.Creator<SavedState>() {
-                    public SavedState createFromParcel(Parcel in) {
-                        return new SavedState(in);
+        public static final Parcelable.Creator<BaseCurveSavedState> CREATOR =
+                new Parcelable.Creator<BaseCurveSavedState>() {
+                    public BaseCurveSavedState createFromParcel(Parcel in) {
+                        return new BaseCurveSavedState(in);
                     }
-                    public SavedState[] newArray(int size) {
-                        return new SavedState[size];
+                    public BaseCurveSavedState[] newArray(int size) {
+                        return new BaseCurveSavedState[size];
                     }
                 };
     }

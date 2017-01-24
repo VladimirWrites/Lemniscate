@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 
 public class HypotrochoidProgressView extends BaseRouletteProgressView {
 
-    // mRadiusFixed = 5, mRadiusMoving=3, mDistanceFromCenter=5, numberOfCycles = 3 to get pentagram
+    // mRadiusFixed = 5, mRadiusMoving=3, mDistanceFromCenter=5, mNumberOfCycles = 3 to get pentagram
 
     public HypotrochoidProgressView(Context context) {
         super(context);
