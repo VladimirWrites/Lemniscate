@@ -10,12 +10,17 @@ Lemniscate is a library that will help you to make your progress view nice and s
 
 Setup
 -----
+
+Add to your module's build.gradle:
+
     allprojects {
         repositories {
             ...
             maven { url 'https://jitpack.io' }
         }
     }
+
+and to your app build.gradle:
 
     dependencies {
             compile 'com.github.vlad1m1r990:Lemniscate:1.0.2'
@@ -24,28 +29,53 @@ Setup
 Usage
 -----
 
+Example of usage:
+
     <com.vlad1m1r.lemniscate.BernoullisProgressView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        customParam:duration="1000"
-        customParam:hasHole="false"
-        customParam:lineColor="@color/colorPrimary"
-        customParam:lineLength="0.6"
-        customParam:lineLengthChangeable="true"
-        customParam:maxLineLength="0.8"
-        customParam:minLineLength="0.4"
-        customParam:sizeMultiplier="1"
-        customParam:strokeWidth="5dp"/>
+        app:duration="1000"
+        app:hasHole="false"
+        app:lineColor="@color/colorPrimary"
+        app:lineLength="0.6"
+        app:lineLengthChangeable="true"
+        app:maxLineLength="0.8"
+        app:minLineLength="0.4"
+        app:sizeMultiplier="1"
+        app:strokeWidth="5dp"/>
 
-###### Lemniscates
-`BernoullisProgressView`, `GeronosProgressView`
+**Params available in all views:**
 
-###### Roulettes
-`EpitrochoidProgressView`, `HypotrochoidProgressView`
+* **duration** (int) - duration of one animation cycle in millisecondes
+* **lineColor** (color) - color of the line
+* **lineLengthChangeable** (boolean) - if true, the line length will oscillate between maxLineLength and minLineLength
+* **lineLength** (float) - length of line (in percentage; 1.0 is full length, 0.5 is half of length) if **lineLengthChangeable** is false
+* **maxLineLength** (float) - max length of line (in percentage; 1.0 is full length, 0.5 is half of length) if **lineLengthChangeable** is true
+* **minLineLength** (float) - min length of line (in percentage; 1.0 is full length, 0.5 is half of length) if **lineLengthChangeable** is true
+* **sizeMultiplier** (float) - default size of view will be multiplied with that number
+* **strokeWidth** (dimension) - width of line 
+* **precision** (int) - number of points in curve calculated in one cycle
 
-###### Funny
-`HeartProgressView`, `CannabisProgressView`
+##### Lemniscates
+* `BernoullisProgressView` - [Lemniscate of Bernoulli](https://en.wikipedia.org/wiki/Lemniscate_of_Bernoulli),
+* `GeronosProgressView` - [Lemniscate of Gerono](https://en.wikipedia.org/wiki/Lemniscate_of_Gerono)
 
+**Additional params:**
+* **hasHole** (boolean) - hole in a middle of Lemniscates
+
+##### Roulettes
+* `EpitrochoidProgressView` - [Epitrochoid](https://en.wikipedia.org/wiki/Epitrochoid),
+* `HypotrochoidProgressView` - [Hypotrochoid](https://en.wikipedia.org/wiki/Hypotrochoid)
+
+**Additional params:**
+* **radiusFixed** (float) - radius of fixed circle
+* **radiusMoving** (float) - radius of moving circle
+* **distanceFromCenter** (float) -  distance from the center of the moving circle
+* **numberOfCycles** (float) - for one **duration** curve will be drawn on interval [0, 2 \* mNumberOfCycles \* π]
+
+##### Funny
+* `HeartProgressView` - [Heart Curve](http://mathworld.wolfram.com/HeartCurve.html),
+* `CannabisProgressView` - [Cannabis Curve](http://mathworld.wolfram.com/CannabisCurve.html)
 
 
 Credits
