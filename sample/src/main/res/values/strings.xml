@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LemniscateTest</string>
+    <string name="app_name">Lemniscate Library</string>
     <string name="strokeWidth">Stroke width</string>
     <string name="hasHole">Has a hole?</string>
     <string name="isLineLengthChangeable">Is line length changeable?</string>
@@ -9,8 +9,9 @@
     <string name="sizeMultiplier">Size multiplier</string>
     <string name="duration">Duration</string>
     <string name="precision">Precision</string>
-    <string name="paramA">Param A</string>
-    <string name="paramB">Param B</string>
-    <string name="paramD">Param D</string>
+    <string name="paramA">Radius of fixed circle</string>
+    <string name="paramB">Radius of moving circle</string>
+    <string name="paramD">Distance from center of moving circle</string>
     <string name="numberOfCycles">Number of cycles</string>
+    <string name="action_github">Github</string>
 </resources>
