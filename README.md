@@ -1,4 +1,6 @@
-# Lemniscate Progress View
+![Lemniscate header](http://i.imgur.com/i9t5vUm.png)
+
+
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/vlad1m1r990/Lemniscate/blob/master/LICENSE)
 [![](https://jitpack.io/v/vlad1m1r990/Lemniscate.svg)](https://jitpack.io/#vlad1m1r990/Lemniscate)
 [![API](https://img.shields.io/badge/API-11%2B-green.svg?style=flat)](https://android-arsenal.com/api?level-11)
