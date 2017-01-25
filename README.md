@@ -44,7 +44,7 @@ Example of usage:
         app:sizeMultiplier="1"
         app:strokeWidth="5dp"/>
 
-**Params available in all views:**
+###### Params available in all views:
 
 * **duration** (int) - duration of one animation cycle in millisecondes
 * **lineColor** (color) - color of the line
@@ -56,24 +56,24 @@ Example of usage:
 * **strokeWidth** (dimension) - width of line 
 * **precision** (int) - number of points in curve calculated in one cycle
 
-##### Lemniscates
+#### Lemniscates
 * `BernoullisProgressView` - [Lemniscate of Bernoulli](https://en.wikipedia.org/wiki/Lemniscate_of_Bernoulli),
 * `GeronosProgressView` - [Lemniscate of Gerono](https://en.wikipedia.org/wiki/Lemniscate_of_Gerono)
 
-**Additional params:**
+###### Additional params:
 * **hasHole** (boolean) - hole in a middle of Lemniscates
 
-##### Roulettes
+#### Roulettes
 * `EpitrochoidProgressView` - [Epitrochoid](https://en.wikipedia.org/wiki/Epitrochoid),
 * `HypotrochoidProgressView` - [Hypotrochoid](https://en.wikipedia.org/wiki/Hypotrochoid)
 
-**Additional params:**
+###### Additional params:
 * **radiusFixed** (float) - radius of fixed circle
 * **radiusMoving** (float) - radius of moving circle
 * **distanceFromCenter** (float) -  distance from the center of the moving circle
 * **numberOfCycles** (float) - for one **duration** curve will be drawn on interval [0, 2 \* mNumberOfCycles \* π]
 
-##### Funny
+#### Funny
 * `HeartProgressView` - [Heart Curve](http://mathworld.wolfram.com/HeartCurve.html),
 * `CannabisProgressView` - [Cannabis Curve](http://mathworld.wolfram.com/CannabisCurve.html)
 
