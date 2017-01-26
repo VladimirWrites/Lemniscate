@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+Version 1.1.0 *(2017-01-26)*
+----------------------------
+
+ * Abstract functions getGraphX() and getGraphY() now receive value of getT()
 
 Version 1.0.2 *(2017-01-24)*
 ----------------------------
@@ -19,3 +23,5 @@ Version 1.0.0 *(2017-01-23)*
 ----------------------------
 
 Initial release.
+
+
