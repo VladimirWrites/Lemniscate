@@ -23,14 +23,11 @@ public class BernoullisProgressView extends BaseCurveProgressView {
         super(context, attrs, defStyleAttr);
     }
 
-    public double getGraphY(int i){
-        double t = getT(i);
+    public double getGraphY(double t){
         return (mLemniscateParamY * Math.sin(t) * Math.cos(t)) / (1 + Math.pow(Math.sin(t), 2));
     }
 
-    public double getGraphX(int i){
-        // function is repeating every 2π and is defined from [0, 2π] so this is putting i∈[0, mPrecision) points between these two values
-        double t = getT(i);
+    public double getGraphX(double t){
         // trigonometric function for value of x for t∈[0, 2π)
         return (mLemniscateParamX * Math.cos(t)) / (1 + Math.pow(Math.sin(t), 2));
     }

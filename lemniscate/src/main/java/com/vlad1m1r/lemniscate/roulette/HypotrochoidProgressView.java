@@ -24,16 +24,14 @@ public class HypotrochoidProgressView extends BaseRouletteProgressView {
     }
 
     @Override
-    public double getGraphY(int i) {
+    public double getGraphY(double t) {
         //y = (mRadiusFixed - mRadiusMoving) sin(t) - mRadiusMoving sin(((mRadiusFixed-mRadiusMoving)/mRadiusMoving)*t)
-        double t = getT(i);
         return mLemniscateParamY/((mRadiusFixed + mDistanceFromCenter - mRadiusMoving))*((mRadiusFixed - mRadiusMoving)*Math.sin(t) + mDistanceFromCenter *Math.sin(((mRadiusFixed - mRadiusMoving)/ mRadiusMoving)*t));
     }
 
     @Override
-    public double getGraphX(int i) {
+    public double getGraphX(double t) {
         //x = (mRadiusFixed - mRadiusMoving) cos(t) + mRadiusMoving cos(((mRadiusFixed-mRadiusMoving)/mRadiusMoving)*t),
-        double t = getT(i);
         return mLemniscateParamY/((mRadiusFixed + mDistanceFromCenter - mRadiusMoving))*((mRadiusFixed - mRadiusMoving)*Math.cos(t) - mDistanceFromCenter *Math.cos(((mRadiusFixed - mRadiusMoving)/ mRadiusMoving)*t));
     }
 

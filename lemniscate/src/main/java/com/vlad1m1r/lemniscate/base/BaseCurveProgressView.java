@@ -41,6 +41,9 @@ public abstract class BaseCurveProgressView extends View {
 
     protected float mStrokeWidth = getResources().getDimension(R.dimen.lemniscate_stroke_width);
 
+    /**
+     * Default size of view will be multiplied with this number
+     */
     protected float mSizeMultiplier = 1;
 
     protected double mLemniscateParamX, mLemniscateParamY;
@@ -56,6 +59,9 @@ public abstract class BaseCurveProgressView extends View {
      */
     protected float mLineMinLength = 0.4f, mLineMaxLength = 0.8f;
 
+    /**
+     * If true, the line length will oscillate between mLineMinLength and mLineMaxLength
+     */
     protected boolean mIsLineLengthChangeable = true;
 
     /**
@@ -149,9 +155,21 @@ public abstract class BaseCurveProgressView extends View {
         mPaint.setStrokeCap(Paint.Cap.ROUND);
     }
 
-    public abstract double getGraphY(int i);
+    /**
+     * This method should return values of y for t∈[0, upper limit of getT() function].
+     * We should use parametric representation of curve for y.
+     * Curve should be closed and periodic on interval that returns getT().
+     * Resulting value should satisfy y∈[-mLemniscateParamY, mLemniscateParamY].
+     */
+    public abstract double getGraphY(double t);
 
-    public abstract double getGraphX(int i);
+    /**
+     * This method should return values of x for t∈[0, upper limit of getT() function].
+     * We should use parametric representation of curve for x.
+     * Curve should be closed and periodic on interval that returns getT().
+     * Resulting value should satisfy x∈[-mLemniscateParamX, upper limit of getT() function].
+     */
+    public abstract double getGraphX(double t);
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -216,8 +234,8 @@ public abstract class BaseCurveProgressView extends View {
         for (int i = start != null ? start : 0; i < mPrecision; i++) {
 
             // translates points to positive coordinates
-            double x = getGraphX(i) + mLemniscateParamX;
-            double y = getGraphY(i) + mLemniscateParamY;
+            double x = getGraphX(getT(i)) + mLemniscateParamX;
+            double y = getGraphY(getT(i)) + mLemniscateParamY;
 
             addPointToList(list, x, y);
 
@@ -232,15 +250,14 @@ public abstract class BaseCurveProgressView extends View {
 
     private void addPointToList(ArrayList<Pair<Float, Float>> list, double x, double y) {
 
-        //finds smallest ratio for which lemniscate should be resized because of stroke width
-        //it's not just 1 * mStrokeWidth because it's behavior is strange for tick lines
+        //finds smallest ratio for which curve should be resized because of stroke width
         float ratio = mViewHeight/(mViewHeight + 2 * mStrokeWidth);
 
         //move every point for ratio
         x = x * ratio;
         y = y * ratio;
 
-        //moves points so that lemniscate is centered
+        //moves points so that curve is centered
         x = x + mStrokeWidth * ratio;
         y = y + mStrokeWidth * ratio;
 
@@ -544,7 +561,12 @@ public abstract class BaseCurveProgressView extends View {
         invalidate();
     }
 
-    public double getT(int i) {
+
+    /**
+     * @param i ∈ [0, mPrecision)
+     * @return function is putting i∈[0, mPrecision) points between [0, 2π]
+     */
+    protected double getT(int i) {
         return i*2*Math.PI/mPrecision;
     }
 }

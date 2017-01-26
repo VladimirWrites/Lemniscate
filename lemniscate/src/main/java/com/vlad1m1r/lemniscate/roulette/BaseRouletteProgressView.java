@@ -94,7 +94,7 @@ public abstract class BaseRouletteProgressView extends BaseCurveProgressView {
 
     @Override
     public double getT(int i) {
-        return i* mNumberOfCycles *2*Math.PI/mPrecision;
+        return i * mNumberOfCycles * 2 * Math.PI / mPrecision;
     }
 
     @Override
