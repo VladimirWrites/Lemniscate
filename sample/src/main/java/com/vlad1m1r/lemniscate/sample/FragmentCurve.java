@@ -25,6 +25,7 @@ import com.vlad1m1r.lemniscate.roulette.HypotrochoidProgressView;
 public class FragmentCurve  extends Fragment {
 
 
+    private static final String KEY_POSITION = "position";
 
     public interface OnViewCreated {
         void onViewShown(int position, BaseCurveProgressView baseCurveProgressView);
@@ -36,7 +37,7 @@ public class FragmentCurve  extends Fragment {
     private BaseCurveProgressView mBaseCurveProgressView;
 
     private TextView mCurveName;
-    private LinearLayout mLayoutViewholder;
+    private LinearLayout mLayoutViewHolder;
 
     private int mPosition;
 
@@ -50,6 +51,10 @@ public class FragmentCurve  extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(savedInstanceState != null && savedInstanceState.containsKey(KEY_POSITION))
+            mPosition = savedInstanceState.getInt(KEY_POSITION);
+
         if(mBaseCurveProgressView == null) {
             mBaseCurveProgressView = getViewForPosition(mPosition);
             mBaseCurveProgressView.setLayoutParams(new LinearLayout.LayoutParams(
@@ -64,12 +69,12 @@ public class FragmentCurve  extends Fragment {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_curve, container, false);
 
         mCurveName = (TextView) root.findViewById(R.id.textCurveName);
-        mLayoutViewholder = (LinearLayout) root.findViewById(R.id.layoutViewHolder);
+        mLayoutViewHolder = (LinearLayout) root.findViewById(R.id.layoutViewHolder);
 
         if(mBaseCurveProgressView.getParent() != null) {
             ((ViewGroup) mBaseCurveProgressView.getParent()).removeView(mBaseCurveProgressView);
         }
-        mLayoutViewholder.addView(mBaseCurveProgressView);
+        mLayoutViewHolder.addView(mBaseCurveProgressView);
 
         mCurveName.setText(mBaseCurveProgressView.getClass().getSimpleName());
 
@@ -120,5 +125,12 @@ public class FragmentCurve  extends Fragment {
 
     public void setPosition(int position) {
         this.mPosition = position;
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt(KEY_POSITION, mPosition);
+        super.onSaveInstanceState(outState);
     }
 }
