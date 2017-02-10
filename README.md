@@ -6,7 +6,7 @@
 
 Lemniscate is a library that will help you to make your progress view nice and sleek.
 
-![Lemniscate gif](http://i.imgur.com/o3rjwXa.gif)
+![Lemniscate gif](http://i.imgur.com/xPRHWdv.gif)
 
 Setup
 -----
