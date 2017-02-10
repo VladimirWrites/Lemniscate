@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 1.1.1 *(2017-01-26)*
+----------------------------
+
+ * Optimization of function that is doing sampling of curve
+
 Version 1.1.0 *(2017-01-26)*
 ----------------------------
 

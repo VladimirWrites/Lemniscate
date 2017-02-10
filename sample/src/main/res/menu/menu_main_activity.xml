@@ -4,11 +4,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
+
+    <item
+        android:id="@+id/action_presentation"
+        android:orderInCategory="200"
+        android:title="@string/action_presentation"
+        android:icon="@drawable/ic_action_presentation"
+        app:showAsAction="always" />
+
     <item
         android:id="@+id/action_github"
         android:orderInCategory="100"
         android:title="@string/action_github"
-        android:icon="@drawable/ic_github"
+        android:icon="@drawable/ic_action_github"
         app:showAsAction="always" />
+
 
 </menu>

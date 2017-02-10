@@ -18,4 +18,5 @@
     <string name="format_percentage">%d%%</string>
     <string name="format_ms">%d ms</string>
     <string name="format_points">%d points</string>
+    <string name="action_presentation">Open presentation screen</string>
 </resources>

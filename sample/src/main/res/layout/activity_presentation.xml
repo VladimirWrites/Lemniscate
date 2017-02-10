@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <com.vlad1m1r.lemniscate.BernoullisProgressView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_normal"
+                app:duration="1000"
+                app:hasHole="true"
+                app:lineColor="@color/color_primary"
+                app:lineLength="0.8"
+                app:lineLengthChangeable="false"
+                app:sizeMultiplier="1"
+                app:strokeWidth="5dp"
+                app:precision="600"/>
+
+            <com.vlad1m1r.lemniscate.roulette.EpitrochoidProgressView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_normal"
+                app:duration="1000"
+                app:hasHole="true"
+                app:lineColor="@color/color_primary"
+                app:lineLength="0.8"
+                app:lineLengthChangeable="false"
+                app:sizeMultiplier="1"
+                app:strokeWidth="5dp"
+                app:precision="600"
+                app:radiusFixed="3"
+                app:radiusMoving="1"
+                app:distanceFromCenter="1"
+                app:numberOfCycles="1"/>
+
+            <com.vlad1m1r.lemniscate.funny.HeartProgressView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_normal"
+                app:duration="1000"
+                app:lineColor="@color/color_primary"
+                app:lineLength="0.8"
+                app:lineLengthChangeable="false"
+                app:sizeMultiplier="1"
+                app:strokeWidth="5dp"
+                app:precision="600"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <com.vlad1m1r.lemniscate.GeronosProgressView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_normal"
+                app:duration="1000"
+                app:hasHole="true"
+                app:lineColor="@color/color_primary"
+                app:lineLength="0.8"
+                app:lineLengthChangeable="false"
+                app:sizeMultiplier="1"
+                app:strokeWidth="5dp"
+                app:precision="600"/>
+
+            <com.vlad1m1r.lemniscate.roulette.HypotrochoidProgressView
+                android:id="@+id/test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_normal"
+                app:duration="1000"
+                app:hasHole="true"
+                app:lineColor="@color/color_primary"
+                app:lineLength="0.8"
+                app:lineLengthChangeable="false"
+                app:sizeMultiplier="1"
+                app:strokeWidth="5dp"
+                app:precision="600"
+                app:radiusFixed="5"
+                app:radiusMoving="3"
+                app:distanceFromCenter="5"
+                app:numberOfCycles="3"/>
+
+            <com.vlad1m1r.lemniscate.roulette.HypotrochoidProgressView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_normal"
+                app:duration="1000"
+                app:hasHole="true"
+                app:lineColor="@color/color_primary"
+                app:lineLength="0.8"
+                app:lineLengthChangeable="false"
+                app:sizeMultiplier="1"
+                app:strokeWidth="5dp"
+                app:precision="600"
+                app:radiusFixed="7"
+                app:radiusMoving="4"
+                app:distanceFromCenter="8"
+                app:numberOfCycles="4"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <include
+        layout="@layout/toolbar"/>
+
+</FrameLayout>
