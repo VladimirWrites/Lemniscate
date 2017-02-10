@@ -215,31 +215,57 @@ public abstract class BaseCurveProgressView extends View {
     private void addPointsToPath() {
         mPath.reset();
 
-        float holeSize = Math.max(mStrokeWidth, 10);
-
-        boolean isDrawingHole = false;
+        float holeSize = mStrokeWidth; //Math.max(mStrokeWidth, 10);
 
         //adds points to path and creates hole if mHasHole
-        for (int i = 0; i < mListOfPoints.size() - 2; i += 1) {
+        for (int i = 0; i < mListOfPoints.size(); i += 2) {
             Pair<Float, Float> start = mListOfPoints.get(i);
-            Pair<Float, Float> middle = mListOfPoints.get(i + 1);
-            Pair<Float, Float> end = mListOfPoints.get(i + 2);
+            Pair<Float, Float> middle = null;
+            Pair<Float, Float> end = null;
 
-            if (!(mHasHole &&
-                    Math.abs(start.second - mViewHeight / 2) < holeSize &&
-                    Math.abs(end.second - mViewHeight / 2) < holeSize &&
-                    Math.abs(start.first - mViewWidth / 2) < holeSize &&
-                    Math.abs(end.first - mViewWidth / 2) < holeSize &&
-                    start.first > end.first)) {
-                if(i == 0 || isDrawingHole)  {
-                    mPath.moveTo(start.first, start.second);
-                    isDrawingHole = false;
+            if(mListOfPoints.size() > i + 2) {
+                end = mListOfPoints.get(i + 2);
+                middle = mListOfPoints.get(i + 1);
+            } else if(mListOfPoints.size() > i + 1)
+                middle = mListOfPoints.get(i + 1);
+
+            if(mHasHole) {
+                if(start!= null && middle != null && start.first > middle.first ||
+                        middle!= null && end != null && middle.first > end.first) {
+                    start = checkPointForHole(start, holeSize);
+                    middle = checkPointForHole(middle, holeSize);
+                    end = checkPointForHole(end, holeSize);
                 }
-                mPath.quadTo(middle.first, middle.second, end.first, end.second);
-            } else {
-                isDrawingHole = true;
+            }
+
+            if(start != null && middle != null && end != null) {
+                mPath.moveTo(start.first, start.second);
+                mPath.cubicTo(start.first, start.second, middle.first, middle.second, end.first, end.second);
+            }
+            else if(start != null && middle != null) {
+                mPath.moveTo(start.first, start.second);
+                mPath.quadTo(start.first, start.second, middle.first, middle.second);
+            }
+            else if(middle != null && end != null) {
+                mPath.moveTo(middle.first, middle.second);
+                mPath.lineTo(end.first, end.second);
+            }
+            else if (start != null) {
+                mPath.moveTo(start.first, start.second);
+                mPath.lineTo(start.first, start.second);
+            } else if(end != null) {
+                mPath.moveTo(end.first, end.second);
             }
         }
+    }
+
+    private Pair<Float, Float> checkPointForHole(Pair<Float, Float> point, float holeSize) {
+        if(point != null &&
+                Math.abs(point.first - mViewWidth / 2) < holeSize &&
+                Math.abs(point.second - mViewHeight / 2) < holeSize) {
+            return null;
+        }
+        return point;
     }
 
     private int getPointsOnCurve(ArrayList<Pair<Float, Float>> list, @Nullable Integer start, int leftPoints) {
@@ -337,19 +363,7 @@ public abstract class BaseCurveProgressView extends View {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 mStart = (Integer) animation.getAnimatedValue();
-                if (mLineMinLength < mLineMaxLength && mIsLineLengthChangeable) {
-                    if (mLineLength < mLineMinLength) mLineLength = mLineMinLength;
-                    if (mLineLength > mLineMaxLength) mLineLength = mLineMaxLength;
-                    if (mLineLength < mLineMaxLength && mIsExpanding) {
-                        mLineLength+=STEP_SIZE;
-                    } else if (mLineLength > mLineMinLength && !mIsExpanding) {
-                        mLineLength-=STEP_SIZE;
-                    } else if (mLineLength >= mLineMaxLength) {
-                        mIsExpanding = false;
-                    } else if (mLineLength <= mLineMinLength) {
-                        mIsExpanding = true;
-                    }
-                }
+                recalculateLineLength();
                 invalidate();
             }
         });
@@ -374,6 +388,22 @@ public abstract class BaseCurveProgressView extends View {
             public void onAnimationRepeat(Animator animator) {
             }
         });
+    }
+
+    private void recalculateLineLength() {
+        if (mIsLineLengthChangeable && mLineMinLength < mLineMaxLength) {
+            if (mLineLength < mLineMinLength) mLineLength = mLineMinLength;
+            if (mLineLength > mLineMaxLength) mLineLength = mLineMaxLength;
+            if (mLineLength < mLineMaxLength && mIsExpanding) {
+                mLineLength+=STEP_SIZE;
+            } else if (mLineLength > mLineMinLength && !mIsExpanding) {
+                mLineLength-=STEP_SIZE;
+            } else if (mLineLength >= mLineMaxLength) {
+                mIsExpanding = false;
+            } else if (mLineLength <= mLineMinLength) {
+                mIsExpanding = true;
+            }
+        }
     }
 
     @Override
