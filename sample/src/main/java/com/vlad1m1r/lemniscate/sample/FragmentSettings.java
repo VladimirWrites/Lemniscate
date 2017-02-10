@@ -135,7 +135,7 @@ public class FragmentSettings extends Fragment implements SeekBar.OnSeekBarChang
         mSeekBarStrokeLengthMin.setProgress(Math.round(100 * mLineMinLength) - 1);
         mSeekBarStrokeLengthMin.setOnSeekBarChangeListener(this);
 
-        mSeekBarAnimationDuration.setMax(200);
+        mSeekBarAnimationDuration.setMax(199);
         mSeekBarAnimationDuration.setProgress(((int) mDuration) / 10 - 1);
         mSeekBarAnimationDuration.setOnSeekBarChangeListener(this);
 

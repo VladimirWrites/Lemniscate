@@ -22,6 +22,12 @@ import android.util.Pair;
 
 public class CurveUtils {
 
+    /**
+     * @param start point from which line is drawn
+     * @param end point to which line is drawn
+     * @param path path on which line is drawn
+     * @return  path with line between two points drawn on it
+     */
     public static Path addPointsToPath(Pair<Float, Float> start, Pair<Float, Float> end, Path path) {
 
         if(start != null && end != null) {
@@ -37,6 +43,13 @@ public class CurveUtils {
         return path;
     }
 
+    /**
+     * @param point is being checked if it's inside hole
+     * @param holeSize size of hole
+     * @param viewHeight height of view
+     * @param viewWidth width of view
+     * @return if point is in hole returns null, otherwise returns point
+     */
     public static Pair<Float, Float> checkPointForHole(Pair<Float, Float> point, float holeSize, float viewHeight, float viewWidth) {
         if(point != null &&
                 Math.abs(point.first - viewWidth / 2) < holeSize &&
