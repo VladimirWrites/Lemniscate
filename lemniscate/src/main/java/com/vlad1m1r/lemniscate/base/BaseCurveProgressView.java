@@ -34,6 +34,7 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 
 import com.vlad1m1r.lemniscate.sample.lemniscate.R;
+import com.vlad1m1r.lemniscate.utils.CurveUtils;
 
 import java.util.ArrayList;
 
@@ -232,41 +233,19 @@ public abstract class BaseCurveProgressView extends View {
             if(mHasHole) {
                 if(start!= null && middle != null && start.first > middle.first ||
                         middle!= null && end != null && middle.first > end.first) {
-                    start = checkPointForHole(start, holeSize);
-                    middle = checkPointForHole(middle, holeSize);
-                    end = checkPointForHole(end, holeSize);
+                    start = CurveUtils.checkPointForHole(start, holeSize, mViewHeight, mViewWidth);
+                    middle = CurveUtils.checkPointForHole(middle, holeSize, mViewHeight, mViewWidth);
+                    end = CurveUtils.checkPointForHole(end, holeSize, mViewHeight, mViewWidth);
                 }
             }
-
-            if(start != null && middle != null && end != null) {
-                mPath.moveTo(start.first, start.second);
-                mPath.cubicTo(start.first, start.second, middle.first, middle.second, end.first, end.second);
-            }
-            else if(start != null && middle != null) {
-                mPath.moveTo(start.first, start.second);
-                mPath.quadTo(start.first, start.second, middle.first, middle.second);
-            }
-            else if(middle != null && end != null) {
-                mPath.moveTo(middle.first, middle.second);
-                mPath.lineTo(end.first, end.second);
-            }
-            else if (start != null) {
-                mPath.moveTo(start.first, start.second);
-                mPath.lineTo(start.first, start.second);
-            } else if(end != null) {
-                mPath.moveTo(end.first, end.second);
-            }
+            CurveUtils.addPointsToPath(start, middle, end, mPath, shouldUseCubicInterpolation());
         }
     }
 
-    private Pair<Float, Float> checkPointForHole(Pair<Float, Float> point, float holeSize) {
-        if(point != null &&
-                Math.abs(point.first - mViewWidth / 2) < holeSize &&
-                Math.abs(point.second - mViewHeight / 2) < holeSize) {
-            return null;
-        }
-        return point;
+    protected boolean shouldUseCubicInterpolation(){
+        return true;
     }
+
 
     private int getPointsOnCurve(ArrayList<Pair<Float, Float>> list, @Nullable Integer start, int leftPoints) {
         for (int i = start != null ? start : 0; i < mPrecision; i++) {
@@ -602,7 +581,6 @@ public abstract class BaseCurveProgressView extends View {
         animateLemniscate();
         invalidate();
     }
-
 
     /**
      * @param i ∈ [0, mPrecision)
