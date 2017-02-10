@@ -18,6 +18,4 @@
         android:title="@string/action_github"
         android:icon="@drawable/ic_action_github"
         app:showAsAction="always" />
-
-
 </menu>

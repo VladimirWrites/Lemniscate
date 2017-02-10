@@ -20,8 +20,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.vlad1m1r.lemniscate.roulette.HypotrochoidProgressView;
-
 /**
  * Created by vladimirjovanovic on 1/23/17.
  */
@@ -36,6 +34,7 @@ public class PresentationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_presentation);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle(R.string.screen_presentation);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Lemniscate Library</string>
+
     <string name="stroke_width">Stroke width</string>
     <string name="has_hole">Has a hole?</string>
     <string name="line_length_changeable">Is line length changeable?</string>
@@ -13,10 +14,14 @@
     <string name="param_b">Radius of moving circle</string>
     <string name="param_d">Distance from center of moving circle</string>
     <string name="number_of_cycles">Number of cycles</string>
+
     <string name="action_github">Github</string>
+    <string name="action_presentation">Open presentation screen</string>
+
+    <string name="screen_presentation">Presentation</string>
 
     <string name="format_percentage">%d%%</string>
     <string name="format_ms">%d ms</string>
     <string name="format_points">%d points</string>
-    <string name="action_presentation">Open presentation screen</string>
+
 </resources>

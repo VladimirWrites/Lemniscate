@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCurve.OnV
 
         switch (item.getItemId()) {
             case R.id.action_github:
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/vlad1m1r990/Lemniscate"));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_github)));
                 startActivity(browserIntent);
                 return true;
             case R.id.action_presentation:
