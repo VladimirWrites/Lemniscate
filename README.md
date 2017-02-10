@@ -23,7 +23,7 @@ Add to your module's build.gradle:
 and to your app build.gradle:
 
     dependencies {
-            compile 'com.github.vlad1m1r990:Lemniscate:1.1.0'
+            compile 'com.github.vlad1m1r990:Lemniscate:1.1.1'
     }
 
 Usage
