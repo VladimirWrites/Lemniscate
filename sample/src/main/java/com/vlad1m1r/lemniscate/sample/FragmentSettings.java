@@ -167,7 +167,7 @@ public class FragmentSettings extends Fragment implements SeekBar.OnSeekBarChang
         mSeekBarNumberOfCycles.setOnSeekBarChangeListener(this);
 
 
-        mColor = ContextCompat.getColor(getContext(), R.color.colorPrimary);
+        mColor = ContextCompat.getColor(getContext(), R.color.color_primary);
     }
 
     public void setBaseCurveProgressView(BaseCurveProgressView baseCurveProgressView) {
@@ -248,14 +248,13 @@ public class FragmentSettings extends Fragment implements SeekBar.OnSeekBarChang
     }
 
     private void updateValues() {
-        //TODO: Move to strings
         mTextViewStrokeWidth.setText(String.valueOf(mStrokeWidth));
-        mTextViewLineLength.setText(String.valueOf((int)(mLineLength * 100))+"%");
-        mTextViewLineLengthMax.setText(String.valueOf((int)(mLineMaxLength*100))+"%");
-        mTextViewLineLengthMin.setText(String.valueOf((int)(mLineMinLength*100))+"%");
+        mTextViewLineLength.setText(String.format(getResources().getString(R.string.format_percentage), (int)(mLineLength * 100)));
+        mTextViewLineLengthMax.setText(String.format(getResources().getString(R.string.format_percentage), (int)(mLineMaxLength * 100)));
+        mTextViewLineLengthMin.setText(String.format(getResources().getString(R.string.format_percentage), (int)(mLineMinLength * 100)));
         mTextViewSizeMultiplier.setText(String.valueOf(mSizeMultiplier));
-        mTextViewAnimationDuration.setText(String.valueOf(mDuration)+" ms");
-        mTextViewPrecision.setText(String.valueOf(mPrecision)+" points");
+        mTextViewAnimationDuration.setText(String.format(getResources().getString(R.string.format_ms), mDuration));
+        mTextViewPrecision.setText(String.format(getResources().getString(R.string.format_points), mPrecision));
     }
 
     private void invalidateView(BaseCurveProgressView baseCurveProgressView) {
@@ -279,7 +278,6 @@ public class FragmentSettings extends Fragment implements SeekBar.OnSeekBarChang
 
                 baseRouletteProgressView.setNumberOfCycles(numberOfCycles);
             }
-
         }
     }
 

@@ -1,17 +1,21 @@
 <resources>
     <string name="app_name">Lemniscate Library</string>
-    <string name="strokeWidth">Stroke width</string>
-    <string name="hasHole">Has a hole?</string>
-    <string name="isLineLengthChangeable">Is line length changeable?</string>
-    <string name="lineLength">Line length</string>
-    <string name="lineMaxLength">Max length of line</string>
-    <string name="lineMinLength">Min length of line</string>
-    <string name="sizeMultiplier">Size multiplier</string>
+    <string name="stroke_width">Stroke width</string>
+    <string name="has_hole">Has a hole?</string>
+    <string name="line_length_changeable">Is line length changeable?</string>
+    <string name="line_length">Line length</string>
+    <string name="line_max_length">Max length of line</string>
+    <string name="line_min_length">Min length of line</string>
+    <string name="size_multiplier">Size multiplier</string>
     <string name="duration">Duration</string>
     <string name="precision">Precision</string>
-    <string name="paramA">Radius of fixed circle</string>
-    <string name="paramB">Radius of moving circle</string>
-    <string name="paramD">Distance from center of moving circle</string>
-    <string name="numberOfCycles">Number of cycles</string>
+    <string name="param_a">Radius of fixed circle</string>
+    <string name="param_b">Radius of moving circle</string>
+    <string name="param_d">Distance from center of moving circle</string>
+    <string name="number_of_cycles">Number of cycles</string>
     <string name="action_github">Github</string>
+
+    <string name="format_percentage">%d%%</string>
+    <string name="format_ms">%d ms</string>
+    <string name="format_points">%d points</string>
 </resources>

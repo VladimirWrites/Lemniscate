@@ -17,7 +17,7 @@
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/strokeWidth"
+            android:text="@string/stroke_width"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <SeekBar
@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/strokeWidth"
+            android:text="@string/stroke_width"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <View
@@ -46,12 +46,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_normal"
-            android:text="@string/isLineLengthChangeable"/>
+            android:text="@string/line_length_changeable"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/lineLength"
+            android:text="@string/line_length"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <SeekBar
@@ -67,13 +67,13 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_normal"
             android:gravity="center"
-            android:text="@string/strokeWidth"
+            android:text="@string/stroke_width"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/lineMinLength"
+            android:text="@string/line_min_length"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <SeekBar
@@ -89,13 +89,13 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_normal"
             android:gravity="center"
-            android:text="@string/strokeWidth"
+            android:text="@string/stroke_width"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/lineMaxLength"
+            android:text="@string/line_max_length"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <SeekBar
@@ -111,7 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_normal"
             android:gravity="center"
-            android:text="@string/strokeWidth"
+            android:text="@string/stroke_width"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <View
@@ -125,7 +125,7 @@
             android:id="@+id/checkBoxHasHole"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/hasHole"/>
+            android:text="@string/has_hole"/>
 
         <View
             android:layout_width="match_parent"
@@ -138,7 +138,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_small"
-            android:text="@string/sizeMultiplier"
+            android:text="@string/size_multiplier"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <SeekBar
@@ -154,7 +154,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_normal"
             android:gravity="center"
-            android:text="@string/strokeWidth"
+            android:text="@string/stroke_width"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <View
@@ -183,7 +183,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_normal"
             android:gravity="center"
-            android:text="@string/strokeWidth"
+            android:text="@string/stroke_width"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <View
@@ -212,7 +212,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_normal"
             android:gravity="center"
-            android:text="@string/strokeWidth"
+            android:text="@string/stroke_width"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <View
@@ -225,7 +225,7 @@
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/paramA"
+            android:text="@string/param_a"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <SeekBar
@@ -240,7 +240,7 @@
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/paramB"
+            android:text="@string/param_b"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <SeekBar
@@ -255,7 +255,7 @@
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/paramD"
+            android:text="@string/param_d"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <SeekBar
@@ -277,7 +277,7 @@
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/numberOfCycles"
+            android:text="@string/number_of_cycles"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <SeekBar
