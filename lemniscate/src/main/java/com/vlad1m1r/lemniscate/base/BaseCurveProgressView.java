@@ -219,33 +219,23 @@ public abstract class BaseCurveProgressView extends View {
         float holeSize = mStrokeWidth; //Math.max(mStrokeWidth, 10);
 
         //adds points to path and creates hole if mHasHole
-        for (int i = 0; i < mListOfPoints.size(); i += 2) {
+        for (int i = 0; i < mListOfPoints.size(); i++) {
             Pair<Float, Float> start = mListOfPoints.get(i);
-            Pair<Float, Float> middle = null;
             Pair<Float, Float> end = null;
 
-            if(mListOfPoints.size() > i + 2) {
-                end = mListOfPoints.get(i + 2);
-                middle = mListOfPoints.get(i + 1);
-            } else if(mListOfPoints.size() > i + 1)
-                middle = mListOfPoints.get(i + 1);
+
+            if(mListOfPoints.size() > i + 1)
+                end = mListOfPoints.get(i + 1);
 
             if(mHasHole) {
-                if(start!= null && middle != null && start.first > middle.first ||
-                        middle!= null && end != null && middle.first > end.first) {
+                if(start!= null && end != null && start.first > end.first) {
                     start = CurveUtils.checkPointForHole(start, holeSize, mViewHeight, mViewWidth);
-                    middle = CurveUtils.checkPointForHole(middle, holeSize, mViewHeight, mViewWidth);
                     end = CurveUtils.checkPointForHole(end, holeSize, mViewHeight, mViewWidth);
                 }
             }
-            CurveUtils.addPointsToPath(start, middle, end, mPath, shouldUseCubicInterpolation());
+            CurveUtils.addPointsToPath(start, end, mPath);
         }
     }
-
-    protected boolean shouldUseCubicInterpolation(){
-        return true;
-    }
-
 
     private int getPointsOnCurve(ArrayList<Pair<Float, Float>> list, @Nullable Integer start, int leftPoints) {
         for (int i = start != null ? start : 0; i < mPrecision; i++) {

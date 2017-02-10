@@ -179,9 +179,4 @@ public abstract class BaseRouletteProgressView extends BaseCurveProgressView {
                     }
                 };
     }
-
-    @Override
-    protected boolean shouldUseCubicInterpolation() {
-        return false;
-    }
 }
