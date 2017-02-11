@@ -14,8 +14,7 @@ Demo
 Demo application is available on Google Play.
 
 <a href='https://play.google.com/store/apps/details?id=com.vlad1m1r.lemniscate.sample'>
-    <img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'
-    style="height:96px;"/>
+    <img alt='Get it on Google Play' src='http://i.imgur.com/tka3Exw.png'/>
 </a>
 
 Setup
