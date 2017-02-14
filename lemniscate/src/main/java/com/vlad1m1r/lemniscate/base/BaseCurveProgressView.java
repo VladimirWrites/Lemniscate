@@ -509,7 +509,7 @@ public abstract class BaseCurveProgressView extends View {
 
     public void setColor(int color) {
         mColor = color;
-        if(mPaint != null) mPaint.setColor(color);
+        if(mPaint != null) mPaint.setColor(mColor);
     }
 
     public void setDuration(int duration) {
@@ -525,8 +525,6 @@ public abstract class BaseCurveProgressView extends View {
         if(strokeWidth > 0) {
             mStrokeWidth = strokeWidth;
             if (mPaint != null) mPaint.setStrokeWidth(mStrokeWidth);
-            requestLayout();
-            invalidate();
         }
     }
 
