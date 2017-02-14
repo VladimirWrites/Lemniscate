@@ -138,12 +138,16 @@ public abstract class BaseCurveProgressView extends View {
                 R.styleable.BaseCurveProgressView,
                 0, 0);
 
+        TypedArray b = context.obtainStyledAttributes(attrs, new int[] { R.attr.colorAccent });
+
         try {
+            int colorAccent = b.getColor(0, 0);
+
             setLineMinLength(a.getFloat(R.styleable.BaseCurveProgressView_minLineLength, mLineMinLength));
             setLineMaxLength(a.getFloat(R.styleable.BaseCurveProgressView_maxLineLength, mLineMaxLength));
             setLineLength(a.getFloat(R.styleable.BaseCurveProgressView_lineLength, mLineLength));
             setIsLineLengthChangeable(a.getBoolean(R.styleable.BaseCurveProgressView_lineLengthChangeable, true));
-            setColor(a.getColor(R.styleable.BaseCurveProgressView_lineColor, Color.GRAY));
+            setColor(a.getColor(R.styleable.BaseCurveProgressView_lineColor, colorAccent));
             setDuration(a.getInteger(R.styleable.BaseCurveProgressView_duration, 1000));
             setHasHole(a.getBoolean(R.styleable.BaseCurveProgressView_hasHole, false));
             setStrokeWidth(a.getDimension(R.styleable.BaseCurveProgressView_strokeWidth, getResources().getDimension(R.dimen.lemniscate_stroke_width)));
@@ -151,7 +155,9 @@ public abstract class BaseCurveProgressView extends View {
             setPrecision(a.getInteger(R.styleable.BaseCurveProgressView_precision, mPrecision));
         } finally {
             a.recycle();
+            b.recycle();
         }
+
         init();
     }
 
