@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.vlad1m1r.lemniscate;
+package com.vlad1m1r.lemniscate.other;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -22,26 +22,30 @@ import android.util.AttributeSet;
 import com.vlad1m1r.lemniscate.base.BaseCurveProgressView;
 
 
+public class XProgressView extends BaseCurveProgressView {
 
-public class BernoullisProgressView extends BaseCurveProgressView {
-
-    public BernoullisProgressView(Context context) {
+    public XProgressView(Context context) {
         super(context);
     }
 
-    public BernoullisProgressView(Context context, AttributeSet attrs) {
+    public XProgressView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public BernoullisProgressView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public XProgressView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
     public double getGraphY(double t){
-        return (mLemniscateParamY * Math.sin(t) * Math.cos(t)) / (1 + Math.pow(Math.sin(t), 2));
+        return (mLemniscateParamY * 2 * Math.sin(t) * Math.cos(t));
     }
 
     public double getGraphX(double t){
-        return (mLemniscateParamX * Math.cos(t)) / (1 + Math.pow(Math.sin(t), 2));
+        return (mLemniscateParamX * 2 * Math.abs(Math.sin(t)) * Math.cos(t));
+    }
+
+    @Override
+    public void setHasHole(boolean hasHole) {
+        super.setHasHole(false);
     }
 }

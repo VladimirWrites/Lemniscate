@@ -22,26 +22,25 @@ import android.util.AttributeSet;
 import com.vlad1m1r.lemniscate.base.BaseCurveProgressView;
 
 
+public class BernoullisSharpProgressView extends BaseCurveProgressView {
 
-public class BernoullisProgressView extends BaseCurveProgressView {
-
-    public BernoullisProgressView(Context context) {
+    public BernoullisSharpProgressView(Context context) {
         super(context);
     }
 
-    public BernoullisProgressView(Context context, AttributeSet attrs) {
+    public BernoullisSharpProgressView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public BernoullisProgressView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public BernoullisSharpProgressView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
     public double getGraphY(double t){
-        return (mLemniscateParamY * Math.sin(t) * Math.cos(t)) / (1 + Math.pow(Math.sin(t), 2));
+        return (mLemniscateParamY * 2 * Math.sin(t) * Math.cos(t)) / (1 + Math.pow(Math.cos(t), 2));
     }
 
     public double getGraphX(double t){
-        return (mLemniscateParamX * Math.cos(t)) / (1 + Math.pow(Math.sin(t), 2));
+        return (mLemniscateParamX * 2 * Math.cos(t)) / (1 + Math.pow(Math.cos(t), 2));
     }
 }

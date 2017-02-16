@@ -1,5 +1,10 @@
 Change Log
 ==========
+Version 1.2.0 *(2017-02-16)*
+----------------------------
+
+ * New curves added: BernoullisBowProgressView, BernoullisSharpProgressView, XProgressView, RoundScribbleProgressView, ScribbleProgressView
+ * colorAccent is now being used as default line color
 
 Version 1.1.1 *(2017-01-26)*
 ----------------------------

@@ -105,6 +105,11 @@ public abstract class BaseRouletteProgressView extends BaseCurveProgressView {
     }
 
     @Override
+    public void setHasHole(boolean hasHole) {
+        super.setHasHole(false);
+    }
+
+    @Override
     public double getT(int i) {
         return i * mNumberOfCycles * 2 * Math.PI / mPrecision;
     }

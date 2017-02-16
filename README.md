@@ -17,6 +17,8 @@ Demo application is available on Google Play.
     <img alt='Get it on Google Play' src='http://i.imgur.com/tka3Exw.png'/>
 </a>
 
+The application is intentionally simple, without any libraries, to be understandable to more developers.
+
 Setup
 -----
 
@@ -68,6 +70,8 @@ Example of usage:
 #### Lemniscates
 * `BernoullisProgressView` - [Lemniscate of Bernoulli](https://en.wikipedia.org/wiki/Lemniscate_of_Bernoulli),
 * `GeronosProgressView` - [Lemniscate of Gerono](https://en.wikipedia.org/wiki/Lemniscate_of_Gerono)
+* `BernoullisBowProgressView`
+* `BernoullisSharpProgressView`
 
 ###### Additional params:
 * **hasHole** (boolean) - hole in a middle of Lemniscates
@@ -82,10 +86,16 @@ Example of usage:
 * **distanceFromCenter** (float) -  distance from the center of the moving circle
 * **numberOfCycles** (float) - for one **duration** curve will be drawn on interval [0, 2 \* mNumberOfCycles \* π]
 
+#### Scribble
+* `RoundScribbleProgressView`
+* `ScribbleProgressView`
+
 #### Funny
 * `HeartProgressView` - [Heart Curve](http://mathworld.wolfram.com/HeartCurve.html),
 * `CannabisProgressView` - [Cannabis Curve](http://mathworld.wolfram.com/CannabisCurve.html)
 
+#### Other
+* `XProgressView`
 
 Credits
 -------
