@@ -29,12 +29,14 @@ import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.vlad1m1r.lemniscate.BernoullisBowProgressView;
+import com.vlad1m1r.lemniscate.BernoullisSharpProgressView;
 import com.vlad1m1r.lemniscate.base.BaseCurveProgressView;
 import com.vlad1m1r.lemniscate.BernoullisProgressView;
 import com.vlad1m1r.lemniscate.GeronosProgressView;
 import com.vlad1m1r.lemniscate.roulette.BaseRouletteProgressView;
 
-public class FragmentSettings extends Fragment implements SeekBar.OnSeekBarChangeListener, CompoundButton.OnCheckedChangeListener {
+public class FragmentSettings extends Fragment implements SeekBar.OnSeekBarChangeListener, CompoundButton.OnCheckedChangeListener, View.OnClickListener {
 
     private BaseCurveProgressView mBaseCurveProgressView;
 
@@ -75,6 +77,7 @@ public class FragmentSettings extends Fragment implements SeekBar.OnSeekBarChang
     protected float d = 3f;
 
     protected int numberOfCycles = 1;
+    private View mViewColor1, mViewColor2, mViewColor3, mViewColor4, mViewColor5, mViewColor6;
 
     public static FragmentSettings getInstance(BaseCurveProgressView baseCurveProgressView) {
         FragmentSettings fragmentSettings = new FragmentSettings();
@@ -95,6 +98,13 @@ public class FragmentSettings extends Fragment implements SeekBar.OnSeekBarChang
         mSeekBarSizeMultiplier = (SeekBar) root.findViewById(R.id.seekBarSizeMultiplier);
         mSeekBarAnimationDuration = (SeekBar) root.findViewById(R.id.seekBarAnimationDuration);
         mSeekBarPrecision = (SeekBar) root.findViewById(R.id.seekBarPrecision);
+
+        mViewColor1 = root.findViewById(R.id.viewColor1);
+        mViewColor2 = root.findViewById(R.id.viewColor2);
+        mViewColor3 = root.findViewById(R.id.viewColor3);
+        mViewColor4 = root.findViewById(R.id.viewColor4);
+        mViewColor5 = root.findViewById(R.id.viewColor5);
+        mViewColor6 = root.findViewById(R.id.viewColor6);
 
         mSeekBarA = (SeekBar) root.findViewById(R.id.seekBarA);
         mSeekBarB = (SeekBar) root.findViewById(R.id.seekBarB);
@@ -166,8 +176,15 @@ public class FragmentSettings extends Fragment implements SeekBar.OnSeekBarChang
         mSeekBarNumberOfCycles.setProgress(numberOfCycles-1);
         mSeekBarNumberOfCycles.setOnSeekBarChangeListener(this);
 
+        mColor = ContextCompat.getColor(getContext(), R.color.picker_color_1);
 
-        mColor = ContextCompat.getColor(getContext(), R.color.color_primary);
+        mViewColor1.setOnClickListener(this);
+        mViewColor2.setOnClickListener(this);
+        mViewColor3.setOnClickListener(this);
+        mViewColor4.setOnClickListener(this);
+        mViewColor5.setOnClickListener(this);
+        mViewColor6.setOnClickListener(this);
+
     }
 
     public void setBaseCurveProgressView(BaseCurveProgressView baseCurveProgressView) {
@@ -175,7 +192,9 @@ public class FragmentSettings extends Fragment implements SeekBar.OnSeekBarChang
 
         //Checkbox
         if (mBaseCurveProgressView instanceof BernoullisProgressView ||
-                mBaseCurveProgressView instanceof GeronosProgressView) {
+                mBaseCurveProgressView instanceof GeronosProgressView ||
+                mBaseCurveProgressView instanceof BernoullisBowProgressView ||
+                mBaseCurveProgressView instanceof BernoullisSharpProgressView) {
             mCheckBoxHasHole.setEnabled(true);
         } else {
             mCheckBoxHasHole.setEnabled(false);
@@ -314,5 +333,31 @@ public class FragmentSettings extends Fragment implements SeekBar.OnSeekBarChang
 
     public void applySettings(BaseCurveProgressView baseCurveProgressView) {
         invalidateView(baseCurveProgressView);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.viewColor1:
+                mColor = ContextCompat.getColor(getContext(), R.color.picker_color_1);
+                break;
+            case R.id.viewColor2:
+                mColor = ContextCompat.getColor(getContext(), R.color.picker_color_2);
+                break;
+            case R.id.viewColor3:
+                mColor = ContextCompat.getColor(getContext(), R.color.picker_color_3);
+                break;
+            case R.id.viewColor4:
+                mColor = ContextCompat.getColor(getContext(), R.color.picker_color_4);
+                break;
+            case R.id.viewColor5:
+                mColor = ContextCompat.getColor(getContext(), R.color.picker_color_5);
+                break;
+            case R.id.viewColor6:
+                mColor = ContextCompat.getColor(getContext(), R.color.picker_color_6);
+                break;
+        }
+
+        invalidateView(mBaseCurveProgressView);
     }
 }

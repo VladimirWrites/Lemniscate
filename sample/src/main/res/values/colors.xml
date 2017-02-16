@@ -8,4 +8,11 @@
     <color name="secondary_text">#757575</color>
     <color name="divider">#BDBDBD</color>
 
+    <color name="picker_color_1">#4A148C</color>
+    <color name="picker_color_2">#E91E63</color>
+    <color name="picker_color_3">#f44336</color>
+    <color name="picker_color_4">#4CAF50</color>
+    <color name="picker_color_5">#3F51B5</color>
+    <color name="picker_color_6">#9C27B0</color>
+
 </resources>

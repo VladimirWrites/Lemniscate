@@ -26,13 +26,18 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.vlad1m1r.lemniscate.BernoullisBowProgressView;
+import com.vlad1m1r.lemniscate.BernoullisSharpProgressView;
 import com.vlad1m1r.lemniscate.BernoullisProgressView;
 import com.vlad1m1r.lemniscate.GeronosProgressView;
 import com.vlad1m1r.lemniscate.base.BaseCurveProgressView;
 import com.vlad1m1r.lemniscate.funny.CannabisProgressView;
 import com.vlad1m1r.lemniscate.funny.HeartProgressView;
+import com.vlad1m1r.lemniscate.other.XProgressView;
 import com.vlad1m1r.lemniscate.roulette.EpitrochoidProgressView;
 import com.vlad1m1r.lemniscate.roulette.HypotrochoidProgressView;
+import com.vlad1m1r.lemniscate.scribble.RoundScribbleProgressView;
+import com.vlad1m1r.lemniscate.scribble.ScribbleProgressView;
 
 public class FragmentCurve  extends Fragment {
 
@@ -97,12 +102,19 @@ public class FragmentCurve  extends Fragment {
         switch (position) {
             case 0: return new BernoullisProgressView(getContext());
             case 1: return new GeronosProgressView(getContext());
+            case 2: return new BernoullisBowProgressView(getContext());
+            case 3: return new BernoullisSharpProgressView(getContext());
 
-            case 2: return new EpitrochoidProgressView(getContext());
-            case 3: return new HypotrochoidProgressView(getContext());
+            case 4: return new EpitrochoidProgressView(getContext());
+            case 5: return new HypotrochoidProgressView(getContext());
 
-            case 4: return new CannabisProgressView(getContext());
-            case 5: return new HeartProgressView(getContext());
+            case 6: return new XProgressView(getContext());
+
+            case 7: return new RoundScribbleProgressView(getContext());
+            case 8: return new ScribbleProgressView(getContext());
+
+            case 9: return new CannabisProgressView(getContext());
+            case 10: return new HeartProgressView(getContext());
             default: return new BernoullisProgressView(getContext());
         }
     }

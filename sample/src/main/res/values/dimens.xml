@@ -9,4 +9,5 @@
     <dimen name="margin_normal">16dp</dimen>
     <dimen name="margin_large">24dp</dimen>
     <dimen name="margin_huge">32dp</dimen>
+    <dimen name="view_color_picker">36dp</dimen>
 </resources>

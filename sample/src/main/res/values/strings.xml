@@ -23,5 +23,6 @@
     <string name="format_percentage">%d%%</string>
     <string name="format_ms">%d ms</string>
     <string name="format_points">%d points</string>
+    <string name="stroke_color">Stroke color</string>
 
 </resources>
