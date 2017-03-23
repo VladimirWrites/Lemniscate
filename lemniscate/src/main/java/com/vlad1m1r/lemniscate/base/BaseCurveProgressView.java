@@ -45,7 +45,7 @@ public abstract class BaseCurveProgressView extends View {
      * This means that on every animation step curve will become shorter (or longer depending on mIsExpanding)
      * for mPrecision * STEP_SIZE
      */
-    protected static final float STEP_SIZE = 0.001f;
+    protected static float STEP_SIZE = 0.001f;
 
     /**
      * Number of points drawn in one full cycle
