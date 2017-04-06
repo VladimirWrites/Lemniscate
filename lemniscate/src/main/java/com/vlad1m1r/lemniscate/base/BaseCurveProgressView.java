@@ -16,7 +16,6 @@
 
 package com.vlad1m1r.lemniscate.base;
 
-import android.animation.Animator;
 import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -343,26 +342,6 @@ public abstract class BaseCurveProgressView extends View {
             }
         });
         mValueAnimator.start();
-        mValueAnimator.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animator) {
-            }
-        });
     }
 
     private void recalculateLineLength() {
@@ -457,7 +436,6 @@ public abstract class BaseCurveProgressView extends View {
             this.duration = in.readLong();
             this.hasHole = in.readByte() != 0;
             this.precision = in.readInt();
-
         }
 
         @Override

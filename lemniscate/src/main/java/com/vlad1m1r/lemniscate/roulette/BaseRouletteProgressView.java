@@ -27,7 +27,6 @@ import com.vlad1m1r.lemniscate.sample.lemniscate.R;
 
 public abstract class BaseRouletteProgressView extends BaseCurveProgressView {
 
-
     /**
      * Radius of the non-moving circle
      */
@@ -143,8 +142,6 @@ public abstract class BaseRouletteProgressView extends BaseCurveProgressView {
         setDistanceFromCenter(ss.distanceFromCenter);
         setNumberOfCycles(ss.numberOfCycles);
     }
-
-
 
     static class RouletteCurveSavedState extends BaseCurveProgressView.BaseCurveSavedState {
 
