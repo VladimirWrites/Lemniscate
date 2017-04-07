@@ -97,6 +97,12 @@ Example of usage:
 #### Other
 * `XProgressView`
 
+Contributing
+-------
+
+Want to contribute? You are welcome! 
+Note that all pull request should go to [`development`](https://github.com/vlad1m1r990/Lemniscate/tree/development) branch.
+
 Credits
 -------
 
