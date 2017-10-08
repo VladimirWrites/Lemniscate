@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="false"
@@ -54,45 +54,45 @@
             android:orientation="horizontal">
 
             <View
+                android:id="@+id/viewColor1"
                 android:layout_width="@dimen/view_color_picker"
                 android:layout_height="@dimen/view_color_picker"
                 android:layout_margin="@dimen/margin_small"
-                android:id="@+id/viewColor1"
                 android:background="@color/picker_color_1"/>
 
             <View
+                android:id="@+id/viewColor2"
                 android:layout_width="@dimen/view_color_picker"
                 android:layout_height="@dimen/view_color_picker"
                 android:layout_margin="@dimen/margin_small"
-                android:id="@+id/viewColor2"
                 android:background="@color/picker_color_2"/>
 
             <View
+                android:id="@+id/viewColor3"
                 android:layout_width="@dimen/view_color_picker"
                 android:layout_height="@dimen/view_color_picker"
                 android:layout_margin="@dimen/margin_small"
-                android:id="@+id/viewColor3"
                 android:background="@color/picker_color_3"/>
 
             <View
+                android:id="@+id/viewColor4"
                 android:layout_width="@dimen/view_color_picker"
                 android:layout_height="@dimen/view_color_picker"
                 android:layout_margin="@dimen/margin_small"
-                android:id="@+id/viewColor4"
                 android:background="@color/picker_color_4"/>
 
             <View
+                android:id="@+id/viewColor5"
                 android:layout_width="@dimen/view_color_picker"
                 android:layout_height="@dimen/view_color_picker"
                 android:layout_margin="@dimen/margin_small"
-                android:id="@+id/viewColor5"
                 android:background="@color/picker_color_5"/>
 
             <View
+                android:id="@+id/viewColor6"
                 android:layout_width="@dimen/view_color_picker"
                 android:layout_height="@dimen/view_color_picker"
                 android:layout_margin="@dimen/margin_small"
-                android:id="@+id/viewColor6"
                 android:background="@color/picker_color_6"/>
 
         </LinearLayout>
@@ -104,35 +104,6 @@
             android:layout_marginBottom="@dimen/margin_normal"
             android:layout_marginTop="@dimen/margin_normal"
             android:background="@color/divider"/>
-
-        <CheckBox
-            android:id="@+id/checkBoxChangeableLength"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_normal"
-            android:text="@string/line_length_changeable"/>
-
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/line_length"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
-
-        <SeekBar
-            android:id="@+id/seekBarLineLength"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            />
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/textLineLength"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_normal"
-            android:gravity="center"
-            android:text="@string/stroke_width"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -153,8 +124,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_normal"
             android:gravity="center"
-            android:text="@string/stroke_width"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+            tools:text="0.4" />
 
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -175,8 +146,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_normal"
             android:gravity="center"
-            android:text="@string/stroke_width"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+            tools:text="0.8" />
 
         <View
             android:layout_width="match_parent"
@@ -218,8 +189,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_normal"
             android:gravity="center"
-            android:text="@string/stroke_width"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+            tools:text="1.0" />
 
         <View
             android:layout_width="match_parent"
@@ -247,8 +218,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_normal"
             android:gravity="center"
-            android:text="@string/stroke_width"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+            tools:text="1000ms" />
 
         <View
             android:layout_width="match_parent"
@@ -297,8 +268,8 @@
             style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
             android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_small"
             />
 
         <android.support.v7.widget.AppCompatTextView
@@ -312,8 +283,8 @@
             style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
             android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_small"
             />
 
         <android.support.v7.widget.AppCompatTextView
@@ -327,8 +298,8 @@
             style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
             android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_small"
             />
 
         <View
@@ -349,8 +320,8 @@
             style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
             android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_small"
             />
 
     </LinearLayout>

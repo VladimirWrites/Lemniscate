@@ -21,109 +21,30 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Pair;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
+import com.vlad1m1r.lemniscate.base.models.AnimationSettings;
+import com.vlad1m1r.lemniscate.base.models.CurveSettings;
+import com.vlad1m1r.lemniscate.base.models.DrawState;
+import com.vlad1m1r.lemniscate.base.models.Point;
+import com.vlad1m1r.lemniscate.base.models.Points;
+import com.vlad1m1r.lemniscate.base.models.ViewSize;
 import com.vlad1m1r.lemniscate.sample.lemniscate.R;
-import com.vlad1m1r.lemniscate.utils.CurveUtils;
 
-import java.util.ArrayList;
+public abstract class BaseCurveProgressView<T extends CurveSettings & Parcelable> extends View {
 
-public abstract class BaseCurveProgressView extends View {
+    protected T curveSettings;
+    protected AnimationSettings animationSettings = new AnimationSettings();
+    protected DrawState drawState = new DrawState();
+    protected ViewSize viewSize = new ViewSize();
+    protected Points points = new Points();
 
-
-    /**
-     * This means that on every animation step curve will become shorter (or longer depending on mIsExpanding)
-     * for mPrecision * STEP_SIZE
-     */
-    protected static float STEP_SIZE = 0.001f;
-
-    /**
-     * Number of points drawn in one full cycle
-     */
-    protected int mPrecision = 200;
-
-    protected float mStrokeWidth = getResources().getDimension(R.dimen.lemniscate_stroke_width);
-
-    /**
-     * Default size of view will be multiplied with this number
-     */
-    protected float mSizeMultiplier = 1;
-
-    protected double mLemniscateParamX, mLemniscateParamY;
-
-    /**
-     * If length is fixed (mIsLineLengthChangeable == false) than line length will always be
-     * equal to this value
-     */
-    protected float mLineLength = 0.6f;
-
-    /**
-     * If length is not fixed than it will be changing between these values
-     */
-    protected float mLineMinLength = 0.4f, mLineMaxLength = 0.8f;
-
-    /**
-     * If true, the line length will oscillate between mLineMinLength and mLineMaxLength
-     */
-    protected boolean mIsLineLengthChangeable = true;
-
-    /**
-     * Line color
-     */
-    protected int mColor = Color.GRAY;
-
-    /**
-     * duration of one cycle of animation in milliseconds
-     */
-    protected long mDuration = 1000;
-
-
-    /**
-     * creates illusion that line is going under itself
-     * should be used when line is longer than 600
-     */
-    protected boolean mHasHole = false;
-
-    /**
-     * point from which animation will start
-     */
-    protected int mStart = 0;
-
-
-    protected Paint mPaint;
-
-    /**
-     * Width of full view without padding
-     */
-    protected float mViewWidth;
-    /**
-     * Height of full view without padding
-     */
-    protected float mViewHeight;
-    protected ValueAnimator mValueAnimator;
-
-    /**
-     * interpolator of animation
-     */
-    protected TimeInterpolator mInterpolator = new LinearInterpolator();
-
-    /**
-     * is line in shrinking or expanding phase
-     */
-    protected boolean mIsExpanding = true;
-
-
-    private final Path mPath = new Path();
-    private final ArrayList<Pair<Float, Float>> mListOfPoints = new ArrayList<>();
+    private ValueAnimator valueAnimator;
+    private TimeInterpolator interpolator = new LinearInterpolator();
 
     public BaseCurveProgressView(Context context) {
         super(context);
@@ -132,32 +53,30 @@ public abstract class BaseCurveProgressView extends View {
 
     public BaseCurveProgressView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        TypedArray a = context.getTheme().obtainStyledAttributes(
+
+        init();
+
+        TypedArray curveAttributes = context.getTheme().obtainStyledAttributes(
                 attrs,
                 R.styleable.BaseCurveProgressView,
                 0, 0);
 
-        TypedArray b = context.obtainStyledAttributes(attrs, new int[] { R.attr.colorAccent });
+        TypedArray colorAccentAttributes = context.obtainStyledAttributes(attrs, new int[] { R.attr.colorAccent });
 
         try {
-            int colorAccent = b.getColor(0, 0);
+            int colorAccent = colorAccentAttributes.getColor(0, 0);
 
-            setLineMinLength(a.getFloat(R.styleable.BaseCurveProgressView_minLineLength, mLineMinLength));
-            setLineMaxLength(a.getFloat(R.styleable.BaseCurveProgressView_maxLineLength, mLineMaxLength));
-            setLineLength(a.getFloat(R.styleable.BaseCurveProgressView_lineLength, mLineLength));
-            setIsLineLengthChangeable(a.getBoolean(R.styleable.BaseCurveProgressView_lineLengthChangeable, true));
-            setColor(a.getColor(R.styleable.BaseCurveProgressView_lineColor, colorAccent));
-            setDuration(a.getInteger(R.styleable.BaseCurveProgressView_duration, 1000));
-            setHasHole(a.getBoolean(R.styleable.BaseCurveProgressView_hasHole, false));
-            setStrokeWidth(a.getDimension(R.styleable.BaseCurveProgressView_strokeWidth, getResources().getDimension(R.dimen.lemniscate_stroke_width)));
-            setSizeMultiplier(a.getFloat(R.styleable.BaseCurveProgressView_sizeMultiplier, 1));
-            setPrecision(a.getInteger(R.styleable.BaseCurveProgressView_precision, mPrecision));
+            setLineMinLength(curveAttributes.getFloat(R.styleable.BaseCurveProgressView_minLineLength, 0.4f));
+            setLineMaxLength(curveAttributes.getFloat(R.styleable.BaseCurveProgressView_maxLineLength, 0.8f));
+            setColor(curveAttributes.getColor(R.styleable.BaseCurveProgressView_lineColor, colorAccent));
+            setDuration(curveAttributes.getInteger(R.styleable.BaseCurveProgressView_duration, 1000));
+            setHasHole(curveAttributes.getBoolean(R.styleable.BaseCurveProgressView_hasHole, false));
+            setStrokeWidth(curveAttributes.getDimension(R.styleable.BaseCurveProgressView_strokeWidth, getResources().getDimension(R.dimen.lemniscate_stroke_width)));
+            setPrecision(curveAttributes.getInteger(R.styleable.BaseCurveProgressView_precision, 200));
         } finally {
-            a.recycle();
-            b.recycle();
+            curveAttributes.recycle();
+            colorAccentAttributes.recycle();
         }
-
-        init();
     }
 
     public BaseCurveProgressView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -165,155 +84,122 @@ public abstract class BaseCurveProgressView extends View {
         init();
     }
 
-    private void init() {
-        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaint.setColor(mColor);
-        mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setStrokeWidth(mStrokeWidth);
-        mPaint.setStrokeCap(Paint.Cap.ROUND);
+    protected void init() {
+        curveSettings = getCurveSettings();
+    }
+
+    protected T getCurveSettings() {
+        return (T) new CurveSettings();
     }
 
     /**
      * This method should return values of y for t∈[0, upper limit of getT() function].
      * We should use parametric representation of curve for y.
      * Curve should be closed and periodic on interval that returns getT().
-     * Resulting value should satisfy y∈[-mLemniscateParamY, mLemniscateParamY].
+     * Resulting value should satisfy y∈[-viewSize.getHeight()/2, viewSize.getHeight()/2].
      */
-    public abstract double getGraphY(double t);
+    public abstract float getGraphY(double t);
 
     /**
      * This method should return values of x for t∈[0, upper limit of getT() function].
      * We should use parametric representation of curve for x.
      * Curve should be closed and periodic on interval that returns getT().
-     * Resulting value should satisfy x∈[-mLemniscateParamX, upper limit of getT() function].
+     * Resulting value should satisfy x∈[-viewSize.getWidth()/2, viewSize.getWidth()/2].
      */
-    public abstract double getGraphX(double t);
+    public abstract float getGraphX(double t);
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        //TODO: mListOfPoints should be removed and everything should be done just with @param mPath
-
-        createListOfPoints();
-        addPointsToPath();
-
-        canvas.drawPath(mPath, mPaint);
+        recreatePoints();
+        drawState.addPointsToPath(points.getPoints(), curveSettings, viewSize);
+        canvas.drawPath(drawState.getPath(), curveSettings.getPaint());
     }
 
-    private void createListOfPoints() {
-        int lineLengthToDraw = Math.round(mPrecision * mLineLength);
-        boolean firstPass = true;
-        mListOfPoints.clear();
+    private void recreatePoints() {
+        points.clear();
+        createNewPoints();
+    }
+
+    private void createNewPoints() {
+        int lineLengthToDraw = getLineLengthToDraw();
 
         // creates points from mStart till mLineLength points is created, or till mPrecision is reached in first pass
         // if there is more points to be created goes to second pass
         while (lineLengthToDraw > 0) {
-            if(firstPass) {
-                lineLengthToDraw = getPointsOnCurve(mListOfPoints, mStart, lineLengthToDraw);
-                firstPass = false;
-            } else {
-                lineLengthToDraw = getPointsOnCurve(mListOfPoints, 0, lineLengthToDraw);
-            }
+            lineLengthToDraw = addPointsToCurve(
+                    points.isEmpty() ? animationSettings.getStartingPointOnCurve() : 0,
+                    lineLengthToDraw
+            );
         }
     }
 
-    private void addPointsToPath() {
-        mPath.reset();
-
-        float holeSize = mStrokeWidth; //Math.max(mStrokeWidth, 10);
-
-        //adds points to path and creates hole if mHasHole
-        for (int i = 0; i < mListOfPoints.size(); i++) {
-            Pair<Float, Float> start = mListOfPoints.get(i);
-            Pair<Float, Float> end = null;
-
-
-            if(mListOfPoints.size() > i + 1)
-                end = mListOfPoints.get(i + 1);
-
-            if(mHasHole) {
-                if(start!= null && end != null && start.first > end.first) {
-                    start = CurveUtils.checkPointForHole(start, holeSize, mViewHeight, mViewWidth);
-                    end = CurveUtils.checkPointForHole(end, holeSize, mViewHeight, mViewWidth);
-                }
-            }
-            CurveUtils.addPointsToPath(start, end, mPath);
-        }
+    private int getLineLengthToDraw() {
+        return Math.round(curveSettings.getPrecision() * drawState.getCurrentLineLength());
     }
 
-    private int getPointsOnCurve(ArrayList<Pair<Float, Float>> list, @Nullable Integer start, int leftPoints) {
-        for (int i = start != null ? start : 0; i < mPrecision; i++) {
+    private int addPointsToCurve(Integer start, int remainingPoints) {
+        for (int i = start; i < curveSettings.getPrecision(); i++) {
 
-            // translates points to positive coordinates
-            double x = getGraphX(getT(i)) + mLemniscateParamX;
-            double y = getGraphY(getT(i)) + mLemniscateParamY;
+            points.addPoint(getPoint(i));
 
-            addPointToList(list, x, y);
-
-            //removes number of points left to draw and checks is there any to be drawn
-            leftPoints--;
-            if (leftPoints == 0) {
-                return leftPoints;
+            if (--remainingPoints == 0) {
+                return remainingPoints;
             }
         }
-        return leftPoints;
+        return remainingPoints;
     }
 
-    private void addPointToList(ArrayList<Pair<Float, Float>> list, double x, double y) {
-
-        //finds smallest ratio for which curve should be resized because of stroke width
-        float ratio = mViewHeight/(mViewHeight + 2 * mStrokeWidth);
-
-        //move every point for ratio
-        x = x * ratio;
-        y = y * ratio;
-
-        //moves points so that curve is centered
-        x = x + mStrokeWidth * ratio;
-        y = y + mStrokeWidth * ratio;
-
-        list.add(new Pair<>((float) x, (float) y));
+    private Point getPoint(int i) {
+        return new Point(
+                getGraphX(getT(i)),
+                getGraphY(getT(i)),
+                curveSettings.getStrokeWidth(),
+                viewSize.getSize()
+        );
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        float desiredWidth = getResources().getDimension(R.dimen.lemniscate_preferred_width) * mSizeMultiplier;
-        float desiredHeight = getResources().getDimension(R.dimen.lemniscate_preferred_height) * mSizeMultiplier;
+        float defaultSize = getResources().getDimension(R.dimen.lemniscate_preferred_height) * viewSize.getSizeMultiplier();
 
-        int xPad = getPaddingLeft() + getPaddingRight();
-        int yPad = getPaddingTop() + getPaddingBottom();
+        int xPadding = getPaddingLeft() + getPaddingRight();
+        int yPadding = getPaddingTop() + getPaddingBottom();
 
-        int viewSize = Math.min(getMeasuredHeight() - yPad, getMeasuredWidth() - xPad);
+        int viewSize = getMaxViewSquareSize(
+                getMeasuredHeight(),
+                getMeasuredWidth(),
+                xPadding,
+                yPadding
+        );
 
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        this.viewSize.setSize(
+               getViewDimension(
+                       MeasureSpec.getMode(widthMeasureSpec),
+                       viewSize,
+                       defaultSize
+               )
+        );
 
-        if (widthMode == MeasureSpec.EXACTLY) {
-            mViewWidth = viewSize;
-        } else if (widthMode == MeasureSpec.AT_MOST) {
-            mViewWidth = Math.min(desiredWidth, viewSize);
-        } else {
-            mViewWidth = desiredWidth;
-        }
-
-        if (heightMode == MeasureSpec.EXACTLY) {
-            mViewHeight = viewSize;
-        } else if (heightMode == MeasureSpec.AT_MOST) {
-            //Can't be bigger than...
-            mViewHeight = Math.min(desiredHeight, viewSize);
-        } else {
-            mViewHeight = desiredHeight;
-        }
-
-        mLemniscateParamX = mViewWidth/2;
-        mLemniscateParamY = mViewHeight/2;
-
-        setMeasuredDimension(Math.round(mViewWidth + xPad), Math.round(mViewHeight + yPad));
+        setMeasuredDimension(Math.round(this.viewSize.getSize() + xPadding), Math.round(this.viewSize.getSize() + yPadding));
     }
 
+    private static  int getMaxViewSquareSize(int height, int width, int xPadding, int yPadding) {
+        return Math.min(height - yPadding, width - xPadding);
+    }
+
+    private static float getViewDimension(int mode, float viewSize, float defaultSize) {
+        if (mode == MeasureSpec.EXACTLY) {
+            return viewSize;
+        } else if (mode == MeasureSpec.AT_MOST) {
+            return Math.min(defaultSize, viewSize);
+        } else {
+            return defaultSize;
+        }
+    }
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
@@ -327,61 +213,35 @@ public abstract class BaseCurveProgressView extends View {
     }
 
     private void animateLemniscate() {
-        if(mValueAnimator != null) mValueAnimator.end();
-        mValueAnimator = ValueAnimator.ofInt(mPrecision, 0);
-        mValueAnimator.setDuration(mDuration);
-        mValueAnimator.setRepeatCount(-1);
-        mValueAnimator.setRepeatMode(ValueAnimator.RESTART);
-        mValueAnimator.setInterpolator(mInterpolator);
-        mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        if(valueAnimator != null) valueAnimator.end();
+        valueAnimator = ValueAnimator.ofInt(curveSettings.getPrecision() - 1, 0);
+        valueAnimator.setDuration(animationSettings.getDuration());
+        valueAnimator.setRepeatCount(-1);
+        valueAnimator.setRepeatMode(ValueAnimator.RESTART);
+        valueAnimator.setInterpolator(interpolator);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                mStart = (Integer) animation.getAnimatedValue();
-                recalculateLineLength();
+                animationSettings.setStartingPointOnCurve((Integer) animation.getAnimatedValue());
+                drawState.recalculateLineLength(curveSettings.getLineLength());
                 invalidate();
             }
         });
-        mValueAnimator.start();
-    }
-
-    private void recalculateLineLength() {
-        if (mIsLineLengthChangeable && mLineMinLength < mLineMaxLength) {
-            if (mLineLength < mLineMinLength) mLineLength = mLineMinLength;
-            if (mLineLength > mLineMaxLength) mLineLength = mLineMaxLength;
-            if (mLineLength < mLineMaxLength && mIsExpanding) {
-                mLineLength+=STEP_SIZE;
-            } else if (mLineLength > mLineMinLength && !mIsExpanding) {
-                mLineLength-=STEP_SIZE;
-            } else if (mLineLength >= mLineMaxLength) {
-                mIsExpanding = false;
-            } else if (mLineLength <= mLineMinLength) {
-                mIsExpanding = true;
-            }
-        }
+        valueAnimator.start();
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        mValueAnimator.end();
+        valueAnimator.end();
     }
 
     @Override
     public Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
-        BaseCurveSavedState ss = new BaseCurveSavedState(superState);
-
-        ss.strokeWidth = this.mStrokeWidth;
-        ss.sizeMultiplier = this.mSizeMultiplier;
-        ss.lineLength = this.mLineLength;
-        ss.lineMinLength = this.mLineMinLength;
-        ss.lineMaxLength = this.mLineMaxLength;
-        ss.isLineLengthChangeable = this.mIsLineLengthChangeable;
-        ss.color = this.mColor;
-        ss.duration = this.mDuration;
-        ss.hasHole = this.mHasHole;
-        ss.precision = this.mPrecision;
-
+        BaseCurveSavedState<T> ss = new BaseCurveSavedState(superState);
+        ss.curveSettings = curveSettings;
+        ss.animationSettings = animationSettings;
         return ss;
     }
 
@@ -392,33 +252,23 @@ public abstract class BaseCurveProgressView extends View {
             return;
         }
 
-        BaseCurveSavedState ss = (BaseCurveSavedState)state;
+        BaseCurveSavedState<T> ss = (BaseCurveSavedState)state;
         super.onRestoreInstanceState(ss.getSuperState());
-        //end
 
-        setStrokeWidth(ss.strokeWidth);
-        setSizeMultiplier(ss.sizeMultiplier);
-        setLineLength(ss.lineLength);
-        setLineMinLength(ss.lineMinLength);
-        setLineMaxLength(ss.lineMaxLength);
-        setIsLineLengthChangeable(ss.isLineLengthChangeable);
-        setColor(ss.color);
-        setDuration((int)ss.duration);
-        setHasHole(ss.hasHole);
-        setPrecision(ss.precision);
+        this.curveSettings = ss.curveSettings;
+        this.animationSettings = ss.animationSettings;
     }
 
-    protected static class BaseCurveSavedState extends BaseSavedState {
-        float strokeWidth;
-        float sizeMultiplier;
-        float lineLength;
-        float lineMinLength;
-        float lineMaxLength;
-        boolean isLineLengthChangeable;
-        int color;
-        long duration;
-        boolean hasHole;
-        int precision;
+    public void setSizeMultiplier(float multiplier) {
+        this.viewSize.setSizeMultiplier(multiplier);
+        requestLayout();
+        invalidate();
+    }
+
+    protected static class BaseCurveSavedState<T extends CurveSettings & Parcelable> extends BaseSavedState {
+        T curveSettings;
+        AnimationSettings animationSettings;
+
 
         public BaseCurveSavedState(Parcelable superState) {
             super(superState);
@@ -426,31 +276,16 @@ public abstract class BaseCurveProgressView extends View {
 
         public BaseCurveSavedState(Parcel in) {
             super(in);
-            this.strokeWidth = in.readFloat();
-            this.sizeMultiplier = in.readFloat();
-            this.lineLength = in.readFloat();
-            this.lineMinLength = in.readFloat();
-            this.lineMaxLength = in.readFloat();
-            this.isLineLengthChangeable = in.readByte() != 0;
-            this.color = in.readInt();
-            this.duration = in.readLong();
-            this.hasHole = in.readByte() != 0;
-            this.precision = in.readInt();
+            ClassLoader classLoader = this.curveSettings.getClass().getClassLoader();
+            this.curveSettings = in.readParcelable(classLoader);
+            this.animationSettings = in.readParcelable(AnimationSettings.class.getClassLoader());
         }
 
         @Override
         public void writeToParcel(Parcel out, int flags) {
             super.writeToParcel(out, flags);
-            out.writeFloat(this.strokeWidth);
-            out.writeFloat(this.sizeMultiplier);
-            out.writeFloat(this.lineLength);
-            out.writeFloat(this.lineMinLength);
-            out.writeFloat(this.lineMaxLength);
-            out.writeByte((byte) (isLineLengthChangeable ? 1 : 0));
-            out.writeInt(this.color);
-            out.writeLong(this.duration);
-            out.writeByte((byte) (hasHole ? 1 : 0));
-            out.writeInt(this.precision);
+            out.writeParcelable(this.curveSettings, flags);
+            out.writeParcelable(this.animationSettings, flags);
         }
 
         public static final Parcelable.Creator<BaseCurveSavedState> CREATOR =
@@ -466,99 +301,69 @@ public abstract class BaseCurveProgressView extends View {
 
 
     public void setLineMinLength(float lineMinLength) {
-        if (lineMinLength > 0 && lineMinLength <= 1) mLineMinLength = lineMinLength;
+        curveSettings.getLineLength().setLineMinLength(lineMinLength);
     }
 
     public void setLineMaxLength(float lineMaxLength) {
-        if (lineMaxLength > 0 && lineMaxLength <= 1) mLineMaxLength = lineMaxLength;
-    }
-
-    public void setLineLength(float lineLength) {
-        if (lineLength > 0 && lineLength <= 1) mLineLength = lineLength;
-    }
-
-    public void setIsLineLengthChangeable(boolean lineLengthChangeable) {
-        mIsLineLengthChangeable = lineLengthChangeable;
-    }
-
-    public void setInterpolator(TimeInterpolator interpolator) {
-        mInterpolator = interpolator;
+        curveSettings.getLineLength().setLineMaxLength(lineMaxLength);
     }
 
     public void setColor(int color) {
-        mColor = color;
-        if(mPaint != null) mPaint.setColor(mColor);
+        curveSettings.setColor(color);
     }
 
     public void setDuration(int duration) {
-        mDuration = duration;
-        if(mValueAnimator != null) mValueAnimator.setDuration(mDuration);
+        animationSettings.setDuration(duration);
+        if(valueAnimator != null) valueAnimator.setDuration(duration);
     }
 
     public void setHasHole(boolean hasHole) {
-        mHasHole = hasHole;
+        curveSettings.setHasHole(hasHole);
     }
 
     public void setStrokeWidth(float strokeWidth) {
-        if(strokeWidth > 0) {
-            mStrokeWidth = strokeWidth;
-            if (mPaint != null) mPaint.setStrokeWidth(mStrokeWidth);
-        }
-    }
-
-    public void setSizeMultiplier(float sizeMultiplier) {
-        mSizeMultiplier = sizeMultiplier;
-        requestLayout();
-        invalidate();
+        curveSettings.setStrokeWidth(strokeWidth);
     }
 
     public float getStrokeWidth() {
-        return mStrokeWidth;
+        return curveSettings.getStrokeWidth();
     }
 
     public float getLineMinLength() {
-        return mLineMinLength;
-    }
-
-    public float getLineLength() {
-        return mLineLength;
+        return curveSettings.getLineLength().getLineMinLength();
     }
 
     public float getLineMaxLength() {
-        return mLineMaxLength;
+        return curveSettings.getLineLength().getLineMaxLength();
     }
 
-    public boolean isHasHole() {
-        return mHasHole;
-    }
-
-    public boolean isLineLengthChangeable() {
-        return mIsLineLengthChangeable;
+    public boolean hasHole() {
+        return curveSettings.hasHole();
     }
 
     public int getColor() {
-        return mColor;
+        return curveSettings.getColor();
     }
 
     public long getDuration() {
-        return mDuration;
+        return animationSettings.getDuration();
     }
 
     public int getPrecision() {
-        return mPrecision;
+        return curveSettings.getPrecision();
     }
 
     public void setPrecision(int precision) {
-        mPrecision = precision;
+        curveSettings.setPrecision(precision);
         animateLemniscate();
         invalidate();
     }
 
     /**
      * @param i ∈ [0, mPrecision)
-     * @return function is putting i∈[0, mPrecision) points between [0, 2π]
+     * @return function is putting i∈[0, curveSettings.getPrecision()) points between [0, 2π]
      */
     protected double getT(int i) {
-        return i*2*Math.PI/mPrecision;
+        return i*2*Math.PI/curveSettings.getPrecision();
     }
 }

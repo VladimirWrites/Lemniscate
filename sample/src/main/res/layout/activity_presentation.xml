@@ -15,8 +15,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <com.vlad1m1r.lemniscate.BernoullisProgressView
                 android:layout_width="wrap_content"
@@ -25,28 +25,26 @@
                 app:duration="1250"
                 app:hasHole="true"
                 app:lineColor="@color/color_primary"
-                app:lineLength="0.8"
-                app:lineLengthChangeable="false"
-                app:sizeMultiplier="1"
-                app:strokeWidth="5dp"
-                app:precision="80"/>
+                app:maxLineLength="0.8"
+                app:minLineLength="0.8"
+                app:precision="80"
+                app:strokeWidth="5dp" />
 
             <com.vlad1m1r.lemniscate.roulette.EpitrochoidProgressView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_normal"
+                app:distanceFromCenter="1"
                 app:duration="1250"
                 app:hasHole="true"
                 app:lineColor="@color/color_primary"
-                app:lineLength="0.8"
-                app:lineLengthChangeable="false"
-                app:sizeMultiplier="1"
-                app:strokeWidth="5dp"
+                app:maxLineLength="0.8"
+                app:minLineLength="0.8"
+                app:numberOfCycles="1"
                 app:precision="150"
                 app:radiusFixed="3"
                 app:radiusMoving="1"
-                app:distanceFromCenter="1"
-                app:numberOfCycles="1"/>
+                app:strokeWidth="5dp" />
 
             <com.vlad1m1r.lemniscate.funny.HeartProgressView
                 android:layout_width="wrap_content"
@@ -54,27 +52,25 @@
                 android:layout_margin="@dimen/margin_normal"
                 app:duration="1250"
                 app:lineColor="@color/color_primary"
-                app:lineLength="0.8"
-                app:lineLengthChangeable="false"
-                app:sizeMultiplier="1"
-                app:strokeWidth="5dp"
-                app:precision="150"/>
+                app:maxLineLength="0.8"
+                app:minLineLength="0.8"
+                app:precision="150"
+                app:strokeWidth="5dp" />
 
             <com.vlad1m1r.lemniscate.roulette.HypotrochoidProgressView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_normal"
+                app:distanceFromCenter="2"
                 app:duration="1250"
                 app:lineColor="@color/color_primary"
-                app:lineLength="0.8"
-                app:lineLengthChangeable="false"
-                app:sizeMultiplier="1"
-                app:strokeWidth="5dp"
+                app:maxLineLength="0.8"
+                app:minLineLength="0.8"
+                app:numberOfCycles="2"
                 app:precision="80"
                 app:radiusFixed="5"
                 app:radiusMoving="2"
-                app:distanceFromCenter="2"
-                app:numberOfCycles="2"/>
+                app:strokeWidth="5dp" />
 
         </LinearLayout>
 
@@ -82,8 +78,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <com.vlad1m1r.lemniscate.GeronosProgressView
                 android:layout_width="wrap_content"
@@ -92,60 +88,56 @@
                 app:duration="1250"
                 app:hasHole="true"
                 app:lineColor="@color/color_primary"
-                app:lineLength="0.8"
-                app:lineLengthChangeable="false"
-                app:sizeMultiplier="1"
-                app:strokeWidth="5dp"
-                app:precision="80"/>
+                app:maxLineLength="0.8"
+                app:minLineLength="0.8"
+                app:precision="80"
+                app:strokeWidth="5dp" />
 
             <com.vlad1m1r.lemniscate.roulette.HypotrochoidProgressView
                 android:id="@+id/test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_normal"
+                app:distanceFromCenter="5"
                 app:duration="1250"
                 app:lineColor="@color/color_primary"
-                app:lineLength="0.8"
-                app:lineLengthChangeable="false"
-                app:sizeMultiplier="1"
-                app:strokeWidth="5dp"
+                app:maxLineLength="0.8"
+                app:minLineLength="0.8"
+                app:numberOfCycles="3"
                 app:precision="80"
                 app:radiusFixed="5"
                 app:radiusMoving="3"
-                app:distanceFromCenter="5"
-                app:numberOfCycles="3"/>
+                app:strokeWidth="5dp" />
 
             <com.vlad1m1r.lemniscate.roulette.HypotrochoidProgressView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_normal"
-                app:duration="1250"
-                app:lineColor="@color/color_primary"
-                app:lineLength="0.8"
-                app:lineLengthChangeable="false"
-                app:sizeMultiplier="1"
-                app:strokeWidth="5dp"
-                app:precision="100"
-                app:radiusFixed="7"
-                app:radiusMoving="4"
                 app:distanceFromCenter="8"
-                app:numberOfCycles="4"/>
+                app:duration="1250"
+                app:lineColor="@color/color_primary"
+                app:maxLineLength="0.8"
+                app:minLineLength="0.8"
+                app:numberOfCycles="4"
+                app:precision="100"
+                app:radiusFixed="7"
+                app:radiusMoving="4"
+                app:strokeWidth="5dp" />
 
             <com.vlad1m1r.lemniscate.roulette.HypotrochoidProgressView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_normal"
+                app:distanceFromCenter="5"
                 app:duration="1250"
                 app:lineColor="@color/color_primary"
-                app:lineLength="0.8"
-                app:lineLengthChangeable="false"
-                app:sizeMultiplier="1"
-                app:strokeWidth="5dp"
+                app:maxLineLength="0.8"
+                app:minLineLength="0.8"
+                app:numberOfCycles="4"
                 app:precision="100"
                 app:radiusFixed="7"
                 app:radiusMoving="4"
-                app:distanceFromCenter="5"
-                app:numberOfCycles="4"/>
+                app:strokeWidth="5dp" />
 
         </LinearLayout>
     </LinearLayout>

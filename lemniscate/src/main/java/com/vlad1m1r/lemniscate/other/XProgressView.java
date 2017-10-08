@@ -21,7 +21,6 @@ import android.util.AttributeSet;
 
 import com.vlad1m1r.lemniscate.base.BaseCurveProgressView;
 
-
 public class XProgressView extends BaseCurveProgressView {
 
     public XProgressView(Context context) {
@@ -36,12 +35,22 @@ public class XProgressView extends BaseCurveProgressView {
         super(context, attrs, defStyleAttr);
     }
 
-    public double getGraphY(double t){
-        return (mLemniscateParamY * 2 * Math.sin(t) * Math.cos(t));
+    @Override
+    public float getGraphY(double t) {
+        return (float) (
+                viewSize.getSize()
+                        * Math.sin(t)
+                        * Math.cos(t)
+        );
     }
 
-    public double getGraphX(double t){
-        return (mLemniscateParamX * 2 * Math.abs(Math.sin(t)) * Math.cos(t));
+    @Override
+    public float getGraphX(double t) {
+        return (float) (
+                viewSize.getSize()
+                        * Math.abs(Math.sin(t))
+                        * Math.cos(t)
+        );
     }
 
     @Override

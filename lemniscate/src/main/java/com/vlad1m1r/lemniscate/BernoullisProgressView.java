@@ -21,8 +21,6 @@ import android.util.AttributeSet;
 
 import com.vlad1m1r.lemniscate.base.BaseCurveProgressView;
 
-
-
 public class BernoullisProgressView extends BaseCurveProgressView {
 
     public BernoullisProgressView(Context context) {
@@ -37,11 +35,13 @@ public class BernoullisProgressView extends BaseCurveProgressView {
         super(context, attrs, defStyleAttr);
     }
 
-    public double getGraphY(double t){
-        return (mLemniscateParamY * Math.sin(t) * Math.cos(t)) / (1 + Math.pow(Math.sin(t), 2));
+    @Override
+    public float getGraphY(double t){
+        return (float) ((viewSize.getSize() / 2 * Math.sin(t) * Math.cos(t)) / (1 + Math.pow(Math.sin(t), 2)));
     }
 
-    public double getGraphX(double t){
-        return (mLemniscateParamX * Math.cos(t)) / (1 + Math.pow(Math.sin(t), 2));
+    @Override
+    public float getGraphX(double t){
+        return (float) ((viewSize.getSize() / 2 * Math.cos(t)) / (1 + Math.pow(Math.sin(t), 2)));
     }
 }

@@ -21,8 +21,6 @@ import android.util.AttributeSet;
 
 public class EpitrochoidProgressView extends BaseRouletteProgressView {
 
-    // mRadiusFixed = 5, mRadiusMoving=3, mDistanceFromCenter=5, mNumberOfCycles = 3 to get pentagram
-
     public EpitrochoidProgressView(Context context) {
         super(context);
     }
@@ -35,20 +33,26 @@ public class EpitrochoidProgressView extends BaseRouletteProgressView {
         super(context, attrs, defStyleAttr);
     }
 
+    private double radiusSum;
+    private double sizeFactor;
+
     @Override
-    public double getGraphY(double t) {
+    public float getGraphY(double t) {
         //y = (mRadiusFixed + mRadiusMoving) sin(t) - mDistanceFromCenter sin(((mRadiusFixed+mRadiusMoving)/mRadiusMoving)*t)
-        return mLemniscateParamY/((mRadiusFixed + mDistanceFromCenter + mRadiusMoving))*((mRadiusFixed + mRadiusMoving)*Math.sin(t) - mDistanceFromCenter *Math.sin(((mRadiusFixed + mRadiusMoving)/ mRadiusMoving)*t));
+        return (float) (viewSize.getSize() / sizeFactor
+                        * (radiusSum * Math.sin(t) - curveSettings.getDistanceFromCenter() * Math.sin((radiusSum / curveSettings.getRadiusMoving()) * t)));
     }
 
     @Override
-    public double getGraphX(double t) {
+    public float getGraphX(double t) {
         //x = (mRadiusFixed + mRadiusMoving) cos(t) + mRadiusMoving cos(((mRadiusFixed+mRadiusMoving)/mRadiusMoving)*t),
-        return mLemniscateParamY/((mRadiusFixed + mDistanceFromCenter + mRadiusMoving))*((mRadiusFixed + mRadiusMoving)*Math.cos(t) - mDistanceFromCenter *Math.cos(((mRadiusFixed + mRadiusMoving)/ mRadiusMoving)*t));
+        return (float) (viewSize.getSize() / sizeFactor
+                        * (radiusSum * Math.cos(t) - curveSettings.getDistanceFromCenter() * Math.cos((radiusSum / curveSettings.getRadiusMoving()) * t)));
     }
 
     @Override
-    public void setHasHole(boolean hasHole) {
-        super.setHasHole(false);
+    protected void recalculateConstants() {
+        radiusSum = curveSettings.getRadiusFixed() + curveSettings.getRadiusMoving();
+        sizeFactor = 2 * (radiusSum + curveSettings.getDistanceFromCenter());
     }
 }
