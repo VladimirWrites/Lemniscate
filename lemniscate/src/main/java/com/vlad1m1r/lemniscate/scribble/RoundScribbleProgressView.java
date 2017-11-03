@@ -23,8 +23,6 @@ import com.vlad1m1r.lemniscate.roulette.BaseRouletteProgressView;
 
 public class RoundScribbleProgressView extends BaseRouletteProgressView {
 
-    // mRadiusFixed = 5, mRadiusMoving=3, mDistanceFromCenter=5, mNumberOfCycles = 3 to get pentagram
-
     public RoundScribbleProgressView(Context context) {
         super(context);
     }
@@ -37,18 +35,29 @@ public class RoundScribbleProgressView extends BaseRouletteProgressView {
         super(context, attrs, defStyleAttr);
     }
 
+    private double radiusSum;
+    private double sizeFactor;
+
     @Override
-    public double getGraphY(double t) {
-        return mLemniscateParamY/((mRadiusFixed + mDistanceFromCenter + mRadiusMoving)) * ((mRadiusFixed + mRadiusMoving)*Math.cos(t) - mDistanceFromCenter *Math.sin(((mRadiusFixed + mRadiusMoving)/ mRadiusMoving)*t));
+    public float getGraphY(double t) {
+        return (float) (viewSize.getSize() / sizeFactor
+                        * (radiusSum * Math.cos(t) - curveSettings.getDistanceFromCenter() * Math.sin((radiusSum / curveSettings.getRadiusMoving()) * t)));
     }
 
     @Override
-    public double getGraphX(double t) {
-        return mLemniscateParamY/((mRadiusFixed + mDistanceFromCenter + mRadiusMoving))*((mRadiusFixed + mRadiusMoving)*Math.cos(t) - mDistanceFromCenter *Math.cos(((mRadiusFixed + mRadiusMoving)/ mRadiusMoving)*t));
+    public float getGraphX(double t) {
+        return (float) (viewSize.getSize() / sizeFactor
+                        * (radiusSum * Math.cos(t) - curveSettings.getDistanceFromCenter() * Math.cos((radiusSum / curveSettings.getRadiusMoving()) * t)));
     }
 
     @Override
     public void setHasHole(boolean hasHole) {
         super.setHasHole(false);
+    }
+
+    @Override
+    protected void recalculateConstants() {
+        radiusSum = curveSettings.getRadiusFixed() + curveSettings.getRadiusMoving();
+        sizeFactor = 2 * (radiusSum + curveSettings.getDistanceFromCenter());
     }
 }

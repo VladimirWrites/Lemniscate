@@ -16,44 +16,20 @@
 
 package com.vlad1m1r.lemniscate.utils;
 
-import android.graphics.Path;
-import android.util.Pair;
-
+import com.vlad1m1r.lemniscate.base.models.Point;
 
 public class CurveUtils {
 
     /**
-     * @param start point from which line is drawn
-     * @param end point to which line is drawn
-     * @param path path on which line is drawn
-     * @return  path with line between two points drawn on it
-     */
-    public static Path addPointsToPath(Pair<Float, Float> start, Pair<Float, Float> end, Path path) {
-
-        if(start != null && end != null) {
-            path.moveTo(start.first, start.second);
-            path.quadTo(start.first, start.second, end.first, end.second);
-        }
-        else if (start != null) {
-            path.moveTo(start.first, start.second);
-            path.lineTo(start.first, start.second);
-        } else if(end != null) {
-            path.moveTo(end.first, end.second);
-        }
-        return path;
-    }
-
-    /**
      * @param point is being checked if it's inside hole
      * @param holeSize size of hole
-     * @param viewHeight height of view
-     * @param viewWidth width of view
+     * @param viewSize size of view
      * @return if point is in hole returns null, otherwise returns point
      */
-    public static Pair<Float, Float> checkPointForHole(Pair<Float, Float> point, float holeSize, float viewHeight, float viewWidth) {
+    public static Point checkPointForHole(Point point, float holeSize, float viewSize) {
         if(point != null &&
-                Math.abs(point.first - viewWidth / 2) < holeSize &&
-                Math.abs(point.second - viewHeight / 2) < holeSize) {
+                Math.abs(point.x() - viewSize / 2) < holeSize &&
+                Math.abs(point.y() - viewSize / 2) < holeSize) {
             return null;
         }
         return point;

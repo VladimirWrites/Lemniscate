@@ -36,12 +36,27 @@ public class CannabisProgressView extends BaseCurveProgressView {
     }
 
     @Override
-    public double getGraphY(double t) {
-        return -mLemniscateParamY/3 * Math.sin(t) * (Math.sin(t) + 1) * (9/10f * Math.cos(8*t) + 1) * (1/10f * Math.cos(24*t) + 1) * (1/10f * Math.cos(200*t) + 9/10f) + mLemniscateParamY/2;
+    public float getGraphY(double t) {
+        return (float) (
+                -viewSize.getSize() / 6
+                        * Math.sin(t)
+                        * (Math.sin(t) + 1)
+                        * (9 / 10f * Math.cos(8 * t) + 1)
+                        * (1 / 10f * Math.cos(24 * t) + 1)
+                        * (1 / 10f * Math.cos(200 * t) + 9 / 10f)
+                        + viewSize.getSize() / 4
+        );
     }
 
     @Override
-    public double getGraphX(double t) {
-        return mLemniscateParamX/3 * (Math.sin(t) + 1) * Math.cos(t) * (9/10f * Math.cos(8*t) + 1) * (1/10f * Math.cos(24*t) + 1) * (1/10f * Math.cos(200*t) + 9/10f);
+    public float getGraphX(double t) {
+        return (float) (
+                viewSize.getSize() / 6
+                        * (Math.sin(t) + 1)
+                        * Math.cos(t)
+                        * (9 / 10f * Math.cos(8 * t) + 1)
+                        * (1 / 10f * Math.cos(24 * t) + 1)
+                        * (1 / 10f * Math.cos(200 * t) + 9 / 10f)
+        );
     }
 }

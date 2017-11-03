@@ -21,7 +21,7 @@ import android.util.AttributeSet;
 
 public class HypotrochoidProgressView extends BaseRouletteProgressView {
 
-    // mRadiusFixed = 5, mRadiusMoving=3, mDistanceFromCenter=5, mNumberOfCycles = 3 to get pentagram
+    // radiusFixed = 5, radiusMoving=3, distanceFromCenter=5, numberOfCycles = 3 to get pentagram
 
     public HypotrochoidProgressView(Context context) {
         super(context);
@@ -35,20 +35,31 @@ public class HypotrochoidProgressView extends BaseRouletteProgressView {
         super(context, attrs, defStyleAttr);
     }
 
+    private double radiusDiff;
+    private double sizeFactor;
+
     @Override
-    public double getGraphY(double t) {
+    public float getGraphY(double t) {
         //y = (mRadiusFixed - mRadiusMoving) sin(t) - mRadiusMoving sin(((mRadiusFixed-mRadiusMoving)/mRadiusMoving)*t)
-        return mLemniscateParamY/((mRadiusFixed + mDistanceFromCenter - mRadiusMoving))*((mRadiusFixed - mRadiusMoving)*Math.sin(t) + mDistanceFromCenter *Math.sin(((mRadiusFixed - mRadiusMoving)/ mRadiusMoving)*t));
+        return (float) (viewSize.getSize() / sizeFactor
+                        * (radiusDiff * Math.sin(t) + curveSettings.getDistanceFromCenter() * Math.sin(radiusDiff / curveSettings.getRadiusMoving() * t)));
     }
 
     @Override
-    public double getGraphX(double t) {
+    public float getGraphX(double t) {
         //x = (mRadiusFixed - mRadiusMoving) cos(t) + mRadiusMoving cos(((mRadiusFixed-mRadiusMoving)/mRadiusMoving)*t),
-        return mLemniscateParamY/((mRadiusFixed + mDistanceFromCenter - mRadiusMoving))*((mRadiusFixed - mRadiusMoving)*Math.cos(t) - mDistanceFromCenter *Math.cos(((mRadiusFixed - mRadiusMoving)/ mRadiusMoving)*t));
+        return (float) (viewSize.getSize() / sizeFactor
+                        * (radiusDiff * Math.cos(t) - curveSettings.getDistanceFromCenter() * Math.cos(radiusDiff / curveSettings.getRadiusMoving() * t)));
     }
 
     @Override
     public void setHasHole(boolean hasHole) {
         super.setHasHole(false);
+    }
+
+    @Override
+    protected void recalculateConstants() {
+        radiusDiff = curveSettings.getRadiusFixed() - curveSettings.getRadiusMoving();
+        sizeFactor = 2 * (radiusDiff + curveSettings.getDistanceFromCenter());
     }
 }

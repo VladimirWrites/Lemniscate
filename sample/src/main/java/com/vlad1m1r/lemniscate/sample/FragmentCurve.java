@@ -27,8 +27,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.vlad1m1r.lemniscate.BernoullisBowProgressView;
-import com.vlad1m1r.lemniscate.BernoullisSharpProgressView;
 import com.vlad1m1r.lemniscate.BernoullisProgressView;
+import com.vlad1m1r.lemniscate.BernoullisSharpProgressView;
 import com.vlad1m1r.lemniscate.GeronosProgressView;
 import com.vlad1m1r.lemniscate.base.BaseCurveProgressView;
 import com.vlad1m1r.lemniscate.funny.CannabisProgressView;
@@ -41,7 +41,6 @@ import com.vlad1m1r.lemniscate.scribble.ScribbleProgressView;
 
 public class FragmentCurve  extends Fragment {
 
-
     private static final String KEY_POSITION = "position";
 
     public interface OnViewCreated {
@@ -51,10 +50,10 @@ public class FragmentCurve  extends Fragment {
 
     private OnViewCreated listener;
 
-    private BaseCurveProgressView mBaseCurveProgressView;
+    private BaseCurveProgressView baseCurveProgressView;
 
-    private TextView mCurveName;
-    private LinearLayout mLayoutViewHolder;
+    private TextView curveName;
+    private LinearLayout layoutViewHolder;
 
     private int mPosition;
 
@@ -72,9 +71,9 @@ public class FragmentCurve  extends Fragment {
         if(savedInstanceState != null && savedInstanceState.containsKey(KEY_POSITION))
             mPosition = savedInstanceState.getInt(KEY_POSITION);
 
-        if(mBaseCurveProgressView == null) {
-            mBaseCurveProgressView = getViewForPosition(mPosition);
-            mBaseCurveProgressView.setLayoutParams(new LinearLayout.LayoutParams(
+        if(baseCurveProgressView == null) {
+            baseCurveProgressView = getViewForPosition(mPosition);
+            baseCurveProgressView.setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT));
         }
@@ -85,15 +84,15 @@ public class FragmentCurve  extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_curve, container, false);
 
-        mCurveName = (TextView) root.findViewById(R.id.textCurveName);
-        mLayoutViewHolder = (LinearLayout) root.findViewById(R.id.layoutViewHolder);
+        curveName = root.findViewById(R.id.textCurveName);
+        layoutViewHolder = root.findViewById(R.id.layoutViewHolder);
 
-        if(mBaseCurveProgressView.getParent() != null) {
-            ((ViewGroup) mBaseCurveProgressView.getParent()).removeView(mBaseCurveProgressView);
+        if(baseCurveProgressView.getParent() != null) {
+            ((ViewGroup) baseCurveProgressView.getParent()).removeView(baseCurveProgressView);
         }
-        mLayoutViewHolder.addView(mBaseCurveProgressView);
+        layoutViewHolder.addView(baseCurveProgressView);
 
-        mCurveName.setText(mBaseCurveProgressView.getClass().getSimpleName());
+        curveName.setText(baseCurveProgressView.getClass().getSimpleName());
 
         return root;
     }
@@ -128,7 +127,7 @@ public class FragmentCurve  extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(listener != null) listener.onViewPrepared(mPosition, mBaseCurveProgressView);
+        if(listener != null) listener.onViewPrepared(mPosition, baseCurveProgressView);
     }
 
     @Override
@@ -140,7 +139,7 @@ public class FragmentCurve  extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(listener != null) listener.onViewShown(mPosition, mBaseCurveProgressView);
+        if(listener != null) listener.onViewShown(mPosition, baseCurveProgressView);
     }
 
     public int getPosition() {

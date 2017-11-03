@@ -34,7 +34,7 @@ Add to your module's build.gradle:
 and to your app build.gradle:
 
     dependencies {
-            compile 'com.github.vlad1m1r990:Lemniscate:1.2.0'
+            compile 'com.github.vlad1m1r990:Lemniscate:1.3.0'
     }
 
 Usage
@@ -48,8 +48,6 @@ Example of usage:
         app:duration="1000"
         app:hasHole="false"
         app:lineColor="@color/colorPrimary"
-        app:lineLength="0.6"
-        app:lineLengthChangeable="true"
         app:maxLineLength="0.8"
         app:minLineLength="0.4"
         app:sizeMultiplier="1"
@@ -59,10 +57,8 @@ Example of usage:
 
 * **duration** (int) - duration of one animation cycle in millisecondes
 * **lineColor** (color) - color of the line
-* **lineLengthChangeable** (boolean) - if true, the line length will oscillate between maxLineLength and minLineLength
-* **lineLength** (float) - length of line (in percentage; 1.0 is full length, 0.5 is half of length) if **lineLengthChangeable** is false
-* **maxLineLength** (float) - max length of line (in percentage; 1.0 is full length, 0.5 is half of length) if **lineLengthChangeable** is true
-* **minLineLength** (float) - min length of line (in percentage; 1.0 is full length, 0.5 is half of length) if **lineLengthChangeable** is true
+* **maxLineLength** (float) - max length of line (in percentage; 1.0 is full length, 0.5 is half of length)
+* **minLineLength** (float) - min length of line (in percentage; 1.0 is full length, 0.5 is half of length)
 * **sizeMultiplier** (float) - default size of view will be multiplied with that number
 * **strokeWidth** (dimension) - width of line 
 * **precision** (int) - number of points in curve calculated in one cycle

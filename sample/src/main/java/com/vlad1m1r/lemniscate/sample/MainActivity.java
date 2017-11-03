@@ -36,11 +36,11 @@ public class MainActivity extends AppCompatActivity implements FragmentCurve.OnV
 
     private static final int NUM_PAGES = 11;
 
-    private FragmentSettings mFragmentSettings;
-    private ViewPager mPager;
+    private FragmentSettings fragmentSettings;
+    private ViewPager pager;
 
-    private CurvesPagerAdapter mPagerAdapter;
-    private Toolbar mToolbar;
+    private CurvesPagerAdapter pagerAdapter;
+    private Toolbar toolbar;
 
 
     @Override
@@ -48,41 +48,24 @@ public class MainActivity extends AppCompatActivity implements FragmentCurve.OnV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-
-        mFragmentSettings = (FragmentSettings) getSupportFragmentManager().findFragmentById(R.id.fragment_settings);
-        mPager = (ViewPager) findViewById(viewPager);
-        mPagerAdapter = new CurvesPagerAdapter(getSupportFragmentManager());
-        mPager.setAdapter(mPagerAdapter);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        fragmentSettings = (FragmentSettings) getSupportFragmentManager().findFragmentById(R.id.fragment_settings);
+        pager = findViewById(viewPager);
+        pagerAdapter = new CurvesPagerAdapter(getSupportFragmentManager());
+        pager.setAdapter(pagerAdapter);
 
     }
 
     @Override
     public void onViewShown(int position, BaseCurveProgressView baseCurveProgressView) {
-        if(mPager != null && mPager.getCurrentItem() == position) mFragmentSettings.setBaseCurveProgressView(baseCurveProgressView);
+        if(pager != null && pager.getCurrentItem() == position) fragmentSettings.setBaseCurveProgressView(baseCurveProgressView);
     }
 
     @Override
     public void onViewPrepared(int position, BaseCurveProgressView baseCurveProgressView) {
-        if(mPager != null && mPager.getCurrentItem() == position) mFragmentSettings.setBaseCurveProgressView(baseCurveProgressView);
-        else mFragmentSettings.applySettings(baseCurveProgressView);
-    }
-
-    private class CurvesPagerAdapter extends FragmentStatePagerAdapter {
-        public CurvesPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return FragmentCurve.getInstance(position);
-        }
-
-        @Override
-        public int getCount() {
-            return NUM_PAGES;
-        }
+        if(pager != null && pager.getCurrentItem() == position) fragmentSettings.setBaseCurveProgressView(baseCurveProgressView);
+        else fragmentSettings.applySettings(baseCurveProgressView);
     }
 
     @Override
@@ -105,5 +88,21 @@ public class MainActivity extends AppCompatActivity implements FragmentCurve.OnV
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private class CurvesPagerAdapter extends FragmentStatePagerAdapter {
+        public CurvesPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return FragmentCurve.getInstance(position);
+        }
+
+        @Override
+        public int getCount() {
+            return NUM_PAGES;
+        }
     }
 }

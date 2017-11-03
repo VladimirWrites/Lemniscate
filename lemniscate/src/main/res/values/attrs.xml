@@ -3,8 +3,6 @@
     <declare-styleable name="BaseCurveProgressView">
         <attr name="minLineLength" format="float"/>
         <attr name="maxLineLength" format="float"/>
-        <attr name="lineLength" format="float"/>
-        <attr name="lineLengthChangeable" format="boolean"/>
         <attr name="lineColor" format="color"/>
         <attr name="duration" format="integer"/>
         <attr name="hasHole" format="boolean"/>

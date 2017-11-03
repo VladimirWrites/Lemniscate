@@ -36,12 +36,21 @@ public class HeartProgressView extends BaseCurveProgressView {
     }
 
     @Override
-    public double getGraphY(double t) {
-        return -mLemniscateParamY/17 * (13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+    public float getGraphY(double t) {
+        return (float) (
+                -viewSize.getSize() / 34
+                        * (13 * Math.cos(t)
+                        - 5 * Math.cos(2 * t)
+                        - 2 * Math.cos(3 * t)
+                        - Math.cos(4 * t))
+        );
     }
 
     @Override
-    public double getGraphX(double t) {
-        return mLemniscateParamX/17 * 16 *  Math.pow(Math.sin(t), 3);
+    public float getGraphX(double t) {
+        return (float) (
+                viewSize.getSize() / 34
+                        * 16 * Math.pow(Math.sin(t), 3)
+        );
     }
 }
