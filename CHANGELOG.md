@@ -1,5 +1,13 @@
 Change Log
 ==========
+Version 1.3.0 *(2017-11-03)*
+----------------------------
+
+* `lineLength` and `lineLengthChangeable` do not exist anymore. If `maxLineLength` and `minLineLength` are the same then `lineLengthChangeable==false`, otherwise line length will be changeable
+`getGraphX` and `getGraphY` now return `float` and not `double`
+* `mLemniscateParamX` and `mLemniscateParamY` are not used anymore and are replaced by `viewSize.getSize()`, where `mLemniscateParamX == mLemniscateParamY == viewSize.getSize()/2`
+* `minSdkVersion` moved from 11 to 14
+
 Version 1.2.0 *(2017-02-16)*
 ----------------------------
 
