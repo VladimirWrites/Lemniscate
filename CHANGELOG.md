@@ -1,5 +1,12 @@
 Change Log
 ==========
+Version 1.4.0 *(2017-11-09)*
+----------------------------
+
+* Project rewritten in Kotlin.  
+* Organization of base classes improved
+* Fixed bugs in Sample app
+
 Version 1.3.0 *(2017-11-03)*
 ----------------------------
 
@@ -11,8 +18,8 @@ Version 1.3.0 *(2017-11-03)*
 Version 1.2.0 *(2017-02-16)*
 ----------------------------
 
- * New curves added: BernoullisBowProgressView, BernoullisSharpProgressView, XProgressView, RoundScribbleProgressView, ScribbleProgressView
- * colorAccent is now being used as default line color
+ * New curves added: `BernoullisBowProgressView`, `BernoullisSharpProgressView`, `XProgressView`, `RoundScribbleProgressView`, `ScribbleProgressView`
+ * `colorAccent` is now being used as default line color
 
 Version 1.1.1 *(2017-01-26)*
 ----------------------------
@@ -22,19 +29,19 @@ Version 1.1.1 *(2017-01-26)*
 Version 1.1.0 *(2017-01-26)*
 ----------------------------
 
- * Abstract functions getGraphX() and getGraphY() now receive value of getT()
+ * Abstract functions `getGraphX()` and `getGraphY()` now receive value of `getT()`
 
 Version 1.0.2 *(2017-01-24)*
 ----------------------------
 
- * Fix: Added OnSaveState for Roulette curves
- * Fix: Precision is being saved OnSaveState for all curves
+ * Fix: Added `onSaveState` for Roulette curves
+ * Fix: Precision is being saved `onSaveState` for all curves
 
 
 Version 1.0.1 *(2017-01-23)*
 ----------------------------
 
- * Fix: Crash on `setColor(int color)` in BaseCurveProgressBar, when called from constructor.
+ * Fix: Crash on `setColor(int color)` in `BaseCurveProgressBar`, when called from constructor.
 
 
 Version 1.0.0 *(2017-01-23)*
