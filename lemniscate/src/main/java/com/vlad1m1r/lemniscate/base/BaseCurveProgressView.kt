@@ -69,6 +69,8 @@ abstract class BaseCurveProgressView : View, IBaseCurveProgressView{
             curveSettings.precision = curveAttributes.getInteger(R.styleable.BaseCurveProgressView_precision, 200)
 
             animationSettings.duration = curveAttributes.getInteger(R.styleable.BaseCurveProgressView_duration, 1000)
+
+            viewSize.sizeMultiplier = curveAttributes.getFloat(R.styleable.BaseCurveProgressView_sizeMultiplier, 1f)
         } finally {
             curveAttributes.recycle()
             colorAccentAttributes.recycle()

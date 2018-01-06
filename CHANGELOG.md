@@ -1,5 +1,10 @@
 Change Log
 ==========
+Version 1.4.1 *(2018-01-06)*
+----------------------------
+
+* Fixed bug where SizeMultiplier property was not working when set from `xml`.  [#4](https://github.com/vlad1m1r990/Lemniscate/issues/4)
+
 Version 1.4.0 *(2017-11-09)*
 ----------------------------
 
