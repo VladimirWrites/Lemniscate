@@ -39,16 +39,16 @@ class FragmentSettings : Fragment(), SeekBar.OnSeekBarChangeListener, CompoundBu
     private lateinit var curveData: CurveData
     private var baseCurveProgressView: BaseCurveProgressView? = null
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater!!.inflate(R.layout.fragment_settings, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_settings, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         curveData = if(savedInstanceState != null && savedInstanceState.containsKey("curve_data")) {
             savedInstanceState.getParcelable("curve_data")
         } else {
-            CurveData(color = ContextCompat.getColor(context, R.color.picker_color_1))
+            CurveData(color = ContextCompat.getColor(context!!, R.color.picker_color_1))
         }
 
         setupViews()
@@ -208,19 +208,19 @@ class FragmentSettings : Fragment(), SeekBar.OnSeekBarChangeListener, CompoundBu
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.viewColor1 -> curveData.color = ContextCompat.getColor(context, R.color.picker_color_1)
-            R.id.viewColor2 -> curveData.color = ContextCompat.getColor(context, R.color.picker_color_2)
-            R.id.viewColor3 -> curveData.color = ContextCompat.getColor(context, R.color.picker_color_3)
-            R.id.viewColor4 -> curveData.color = ContextCompat.getColor(context, R.color.picker_color_4)
-            R.id.viewColor5 -> curveData.color = ContextCompat.getColor(context, R.color.picker_color_5)
-            R.id.viewColor6 -> curveData.color = ContextCompat.getColor(context, R.color.picker_color_6)
+            R.id.viewColor1 -> curveData.color = ContextCompat.getColor(context!!, R.color.picker_color_1)
+            R.id.viewColor2 -> curveData.color = ContextCompat.getColor(context!!, R.color.picker_color_2)
+            R.id.viewColor3 -> curveData.color = ContextCompat.getColor(context!!, R.color.picker_color_3)
+            R.id.viewColor4 -> curveData.color = ContextCompat.getColor(context!!, R.color.picker_color_4)
+            R.id.viewColor5 -> curveData.color = ContextCompat.getColor(context!!, R.color.picker_color_5)
+            R.id.viewColor6 -> curveData.color = ContextCompat.getColor(context!!, R.color.picker_color_6)
         }
         invalidateView(baseCurveProgressView)
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState?.putParcelable("curve_data", curveData)
+        outState.putParcelable("curve_data", curveData)
     }
 }
 
