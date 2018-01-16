@@ -69,8 +69,8 @@ class FragmentCurve : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val root = inflater!!.inflate(R.layout.fragment_curve, container, false) as ViewGroup
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val root = inflater.inflate(R.layout.fragment_curve, container, false) as ViewGroup
 
         curveName = root.findViewById(R.id.textCurveName)
         layoutViewHolder = root.findViewById(R.id.layoutViewHolder)
@@ -87,22 +87,22 @@ class FragmentCurve : Fragment() {
 
     private fun getViewForPosition(position: Int): BaseCurveProgressView {
         when (position) {
-            0 -> return BernoullisProgressView(context)
-            1 -> return GeronosProgressView(context)
-            2 -> return BernoullisBowProgressView(context)
-            3 -> return BernoullisSharpProgressView(context)
+            0 -> return BernoullisProgressView(context!!)
+            1 -> return GeronosProgressView(context!!)
+            2 -> return BernoullisBowProgressView(context!!)
+            3 -> return BernoullisSharpProgressView(context!!)
 
-            4 -> return EpitrochoidProgressView(context)
-            5 -> return HypotrochoidProgressView(context)
+            4 -> return EpitrochoidProgressView(context!!)
+            5 -> return HypotrochoidProgressView(context!!)
 
-            6 -> return XProgressView(context)
+            6 -> return XProgressView(context!!)
 
-            7 -> return RoundScribbleProgressView(context)
-            8 -> return ScribbleProgressView(context)
+            7 -> return RoundScribbleProgressView(context!!)
+            8 -> return ScribbleProgressView(context!!)
 
-            9 -> return CannabisProgressView(context)
-            10 -> return HeartProgressView(context)
-            else -> return BernoullisProgressView(context)
+            9 -> return CannabisProgressView(context!!)
+            10 -> return HeartProgressView(context!!)
+            else -> return BernoullisProgressView(context!!)
         }
     }
 
@@ -127,8 +127,8 @@ class FragmentCurve : Fragment() {
     }
 
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState!!.putInt(KEY_POSITION, position)
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt(KEY_POSITION, position)
         super.onSaveInstanceState(outState)
     }
 
