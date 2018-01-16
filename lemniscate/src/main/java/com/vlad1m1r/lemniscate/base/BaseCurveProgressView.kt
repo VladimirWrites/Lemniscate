@@ -180,12 +180,11 @@ abstract class BaseCurveProgressView : View, IBaseCurveProgressView{
     }
 
     private fun getViewDimension(mode: Int, viewSize: Float, defaultSize: Float): Float {
-        return if (mode == View.MeasureSpec.EXACTLY) {
-            viewSize
-        } else if (mode == View.MeasureSpec.AT_MOST) {
-            Math.min(defaultSize, viewSize)
-        } else {
-            defaultSize
+        return when {
+            viewSize == 0f -> defaultSize
+            mode == View.MeasureSpec.EXACTLY -> viewSize
+            mode == View.MeasureSpec.AT_MOST -> Math.min(defaultSize, viewSize)
+            else -> defaultSize
         }
     }
 
