@@ -20,6 +20,9 @@ import android.content.Context
 import android.util.AttributeSet
 
 import com.vlad1m1r.lemniscate.base.BaseCurveProgressView
+import kotlin.math.cos
+import kotlin.math.pow
+import kotlin.math.sin
 
 class HeartProgressView : BaseCurveProgressView {
 
@@ -29,14 +32,12 @@ class HeartProgressView : BaseCurveProgressView {
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    override fun getGraphY(t: Double): Float =
-            (-viewSize.size / 34 * (13 * Math.cos(t)
-                    - 5 * Math.cos(2 * t)
-                    - 2 * Math.cos(3 * t)
-                    - Math.cos(4 * t))).toFloat()
+    override fun getGraphX(t: Float): Float =
+            (size / 34) * 16 * sin(t).pow(3)
 
-    override fun getGraphX(t: Double): Float =
-            ((viewSize.size / 34).toDouble()
-                    * 16.0 * Math.pow(Math.sin(t), 3.0)).toFloat()
-
+    override fun getGraphY(t: Float): Float =
+            -size / 34 * (13 * cos(t)
+                    - 5 * cos(2 * t)
+                    - 2 * cos(3 * t)
+                    - cos(4 * t))
 }

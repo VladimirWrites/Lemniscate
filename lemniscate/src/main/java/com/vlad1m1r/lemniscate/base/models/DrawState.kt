@@ -20,13 +20,13 @@ import com.vlad1m1r.lemniscate.base.settings.CurveSettings
 
 import com.vlad1m1r.lemniscate.utils.CurveUtils
 
+private const val STEP_SIZE = 0.001f
 class DrawState {
-    private val STEP_SIZE = 0.001f
 
     val path = Path()
 
     private var isExpanding = true
-    var currentLineLength: Float = 0.toFloat()
+    var currentLineLength = 0.0f
         private set
 
     private fun addPairOfPointsToPath(start: Point?, end: Point?) {

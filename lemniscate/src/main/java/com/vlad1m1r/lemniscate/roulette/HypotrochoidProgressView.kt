@@ -18,34 +18,31 @@ package com.vlad1m1r.lemniscate.roulette
 
 import android.content.Context
 import android.util.AttributeSet
+import kotlin.math.cos
+import kotlin.math.sin
 
 class HypotrochoidProgressView : BaseRouletteProgressView {
 
-    private var radiusDiff: Float = 0.toFloat()
-    private var sizeFactor: Float = 0.toFloat()
+    internal var radiusDiff = 0f
+        get() = radiusFixed - radiusMoving
+        private set
+
+    internal var sizeFactor = 0f
+        get() = 2 * (radiusDiff + distanceFromCenter)
+        private set
 
     // radiusFixed = 5, radiusMoving=3, distanceFromCenter=5, numberOfCycles = 3 to get pentagram
 
     constructor(context: Context) : super(context)
 
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {}
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {}
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    override fun getGraphY(t: Double): Float =
-            //y = (mRadiusFixed - mRadiusMoving) sin(t) - mRadiusMoving sin(((mRadiusFixed-mRadiusMoving)/mRadiusMoving)*t)
-            (viewSize.size / sizeFactor * (radiusDiff * Math.sin(t) + rouletteCurveSettings.distanceFromCenter * Math.sin(radiusDiff / rouletteCurveSettings.radiusMoving * t))).toFloat()
+    override fun getGraphX(t: Float): Float =
+            size / sizeFactor * (radiusDiff * cos(t) - distanceFromCenter * cos(radiusDiff / radiusMoving * t))
 
-    override fun getGraphX(t: Double): Float =
-            //x = (mRadiusFixed - mRadiusMoving) cos(t) + mRadiusMoving cos(((mRadiusFixed-mRadiusMoving)/mRadiusMoving)*t),
-            (viewSize.size / sizeFactor * (radiusDiff * Math.cos(t) - rouletteCurveSettings.distanceFromCenter * Math.cos(radiusDiff / rouletteCurveSettings.radiusMoving * t))).toFloat()
+    override fun getGraphY(t: Float): Float =
+            size / sizeFactor * (radiusDiff * sin(t) + distanceFromCenter * sin(radiusDiff / radiusMoving * t))
 
-    override fun setHasHole(hasHole: Boolean) {
-        super.setHasHole(false)
-    }
-
-    override fun recalculateConstants() {
-        radiusDiff = rouletteCurveSettings.radiusFixed - rouletteCurveSettings.radiusMoving
-        sizeFactor = 2 * (radiusDiff + rouletteCurveSettings.distanceFromCenter)
-    }
 }

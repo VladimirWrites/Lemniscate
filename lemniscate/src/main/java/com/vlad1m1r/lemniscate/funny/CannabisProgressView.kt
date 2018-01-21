@@ -20,6 +20,8 @@ import android.content.Context
 import android.util.AttributeSet
 
 import com.vlad1m1r.lemniscate.base.BaseCurveProgressView
+import kotlin.math.cos
+import kotlin.math.sin
 
 class CannabisProgressView : BaseCurveProgressView {
 
@@ -29,19 +31,19 @@ class CannabisProgressView : BaseCurveProgressView {
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    override fun getGraphY(t: Double): Float =
-            (((-viewSize.size / 6).toDouble()
-                    * Math.sin(t)
-                    * (Math.sin(t) + 1)
-                    * (9 / 10f * Math.cos(8 * t) + 1)
-                    * (1 / 10f * Math.cos(24 * t) + 1)
-                    * (1 / 10f * Math.cos(200 * t) + 9 / 10f)) + viewSize.size / 4).toFloat()
+    override fun getGraphX(t: Float): Float =
+            ((size / 6)
+                    * (sin(t) + 1)
+                    * cos(t)
+                    * (9 / 10f * cos(8 * t) + 1)
+                    * (1 / 10f * cos(24 * t) + 1)
+                    * (1 / 10f * cos(200 * t) + 9 / 10f))
 
-    override fun getGraphX(t: Double): Float =
-            ((viewSize.size / 6).toDouble()
-                    * (Math.sin(t) + 1)
-                    * Math.cos(t)
-                    * (9 / 10f * Math.cos(8 * t) + 1)
-                    * (1 / 10f * Math.cos(24 * t) + 1)
-                    * (1 / 10f * Math.cos(200 * t) + 9 / 10f)).toFloat()
+    override fun getGraphY(t: Float): Float =
+            ((-size / 6)
+                    * sin(t)
+                    * (sin(t) + 1)
+                    * (9 / 10f * cos(8 * t) + 1)
+                    * (1 / 10f * cos(24 * t) + 1)
+                    * (1 / 10f * cos(200 * t) + 9 / 10f)) + size / 4
 }

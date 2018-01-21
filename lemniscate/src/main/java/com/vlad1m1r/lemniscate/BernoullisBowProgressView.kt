@@ -20,6 +20,9 @@ import android.content.Context
 import android.util.AttributeSet
 
 import com.vlad1m1r.lemniscate.base.BaseCurveProgressView
+import kotlin.math.cos
+import kotlin.math.pow
+import kotlin.math.sin
 
 class BernoullisBowProgressView : BaseCurveProgressView {
 
@@ -29,10 +32,9 @@ class BernoullisBowProgressView : BaseCurveProgressView {
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    override fun getGraphY(t: Double): Float =
-         (viewSize.size.toDouble() * 0.75 * Math.sin(t) * Math.cos(t) / (1 + Math.pow(Math.cos(t), 6.0))).toFloat()
+    override fun getGraphX(t: Float): Float =
+            size * 0.75f * cos(t) / (1 + cos(t).pow(6))
 
-    override fun getGraphX(t: Double): Float =
-         (viewSize.size.toDouble() * 0.75 * Math.cos(t) / (1 + Math.pow(Math.cos(t), 6.0))).toFloat()
-
+    override fun getGraphY(t: Float): Float =
+         size * 0.75f * sin(t) * cos(t) / (1 + cos(t).pow(6))
 }

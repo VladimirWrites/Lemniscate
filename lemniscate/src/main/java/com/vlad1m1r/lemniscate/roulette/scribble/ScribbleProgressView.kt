@@ -20,11 +20,18 @@ import android.content.Context
 import android.util.AttributeSet
 
 import com.vlad1m1r.lemniscate.roulette.BaseRouletteProgressView
+import kotlin.math.cos
+import kotlin.math.sin
 
 class ScribbleProgressView : BaseRouletteProgressView {
 
-    private var radiusSum: Float = 0.toFloat()
-    private var sizeFactor: Float = 0.toFloat()
+    internal var radiusSum: Float = 0f
+        get() = radiusFixed + radiusMoving
+        private set
+
+    internal var sizeFactor: Float = 0f
+        get() = 2 * (radiusSum + distanceFromCenter)
+        private set
 
     constructor(context: Context) : super(context)
 
@@ -32,20 +39,9 @@ class ScribbleProgressView : BaseRouletteProgressView {
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    override fun getGraphY(t: Double): Float =
-         (viewSize.size / sizeFactor * (radiusSum * Math.sin(t) - rouletteCurveSettings.distanceFromCenter * Math.cos(radiusSum / rouletteCurveSettings.radiusMoving * t))).toFloat()
+    override fun getGraphX(t: Float): Float =
+         (size / sizeFactor * (radiusSum * cos(t) - distanceFromCenter * cos(radiusSum / radiusMoving * t))).toFloat()
 
-
-    override fun getGraphX(t: Double): Float =
-         (viewSize.size / sizeFactor * (radiusSum * Math.cos(t) - rouletteCurveSettings.distanceFromCenter * Math.cos(radiusSum / rouletteCurveSettings.radiusMoving * t))).toFloat()
-
-
-    override fun setHasHole(hasHole: Boolean) {
-        super.setHasHole(false)
-    }
-
-    override fun recalculateConstants() {
-        radiusSum = rouletteCurveSettings.radiusFixed + rouletteCurveSettings.radiusMoving
-        sizeFactor = 2 * (radiusSum + rouletteCurveSettings.distanceFromCenter)
-    }
+    override fun getGraphY(t: Float): Float =
+            (size / sizeFactor * (radiusSum * sin(t) - distanceFromCenter * cos(radiusSum / radiusMoving * t))).toFloat()
 }
