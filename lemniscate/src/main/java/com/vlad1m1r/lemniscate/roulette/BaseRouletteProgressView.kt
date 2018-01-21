@@ -25,6 +25,7 @@ import android.view.View
 import com.vlad1m1r.lemniscate.base.BaseCurveProgressView
 import com.vlad1m1r.lemniscate.roulette.settings.RouletteCurveSettings
 import com.vlad1m1r.lemniscate.sample.lemniscate.R
+import kotlin.math.PI
 
 abstract class BaseRouletteProgressView : BaseCurveProgressView {
 
@@ -79,12 +80,14 @@ abstract class BaseRouletteProgressView : BaseCurveProgressView {
 
     protected open fun recalculateConstants() {}
 
-    override fun setHasHole(hasHole: Boolean) {
-        super.setHasHole(false)
-    }
+    override var hasHole: Boolean = false
+        set(hasHole) {
+            super.hasHole = false
+        }
 
-    override fun getT(i: Int): Double {
-        return i.toDouble() * rouletteCurveSettings.numberOfCycles.toDouble() * 2.0 * Math.PI / curveSettings.precision
+
+    override fun getT(i: Int): Float {
+        return i * rouletteCurveSettings.numberOfCycles * 2 * PI.toFloat() / curveSettings.precision
     }
 
     override fun onSaveInstanceState(): Parcelable {

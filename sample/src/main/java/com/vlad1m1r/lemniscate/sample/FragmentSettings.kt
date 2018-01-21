@@ -33,6 +33,7 @@ import com.vlad1m1r.lemniscate.GeronosProgressView
 import com.vlad1m1r.lemniscate.base.BaseCurveProgressView
 import com.vlad1m1r.lemniscate.roulette.BaseRouletteProgressView
 import kotlinx.android.synthetic.main.fragment_settings.*
+import kotlin.math.round
 
 class FragmentSettings : Fragment(), SeekBar.OnSeekBarChangeListener, CompoundButton.OnCheckedChangeListener, View.OnClickListener {
 
@@ -60,7 +61,7 @@ class FragmentSettings : Fragment(), SeekBar.OnSeekBarChangeListener, CompoundBu
         seekBarStrokeWidth.setOnSeekBarChangeListener(this)
 
         seekBarMaxLineLength!!.max = 99
-        seekBarMaxLineLength!!.progress = Math.round(100 * curveData.lineMaxLength) - 1
+        seekBarMaxLineLength!!.progress = round(100 * curveData.lineMaxLength).toInt() - 1
         seekBarMaxLineLength!!.setOnSeekBarChangeListener(this)
 
         seekBarSizeMultiplier!!.max = 15
@@ -68,7 +69,7 @@ class FragmentSettings : Fragment(), SeekBar.OnSeekBarChangeListener, CompoundBu
         seekBarSizeMultiplier!!.setOnSeekBarChangeListener(this)
 
         seekBarMinLineLength!!.max = 99
-        seekBarMinLineLength!!.progress = Math.round(100 * curveData.lineMinLength) - 1
+        seekBarMinLineLength!!.progress = round(100 * curveData.lineMinLength).toInt() - 1
         seekBarMinLineLength!!.setOnSeekBarChangeListener(this)
 
         seekBarAnimationDuration!!.max = 199
@@ -135,15 +136,15 @@ class FragmentSettings : Fragment(), SeekBar.OnSeekBarChangeListener, CompoundBu
 
     override fun onProgressChanged(seekBar: SeekBar, i: Int, fromUser: Boolean) {
         when (seekBar.id) {
-            R.id.seekBarStrokeWidth -> curveData.strokeWidth = resources.dpToPx(i / 3f)
+            R.id.seekBarStrokeWidth -> curveData.strokeWidth = resources.dpToPx(i / 3.0f)
             R.id.seekBarMaxLineLength -> if (i < seekBarMinLineLength!!.progress) {
                 seekBarMaxLineLength!!.progress = seekBarMinLineLength!!.progress
             } else
-                curveData.lineMaxLength = (i + 1) / 100f
+                curveData.lineMaxLength = (i + 1) / 100.0f
             R.id.seekBarMinLineLength -> if (i > seekBarMaxLineLength!!.progress) {
                 seekBarMinLineLength!!.progress = seekBarMaxLineLength!!.progress
             } else
-                curveData.lineMinLength = (i + 1) / 100f
+                curveData.lineMinLength = (i + 1) / 100.0f
             R.id.seekBarSizeMultiplier -> curveData.sizeMultiplier = (i + 5) / 10.0f
             R.id.seekBarAnimationDuration -> curveData.duration = (i + 1) * 10
             R.id.seekBarPrecision -> curveData.precision = i + 10
@@ -167,33 +168,28 @@ class FragmentSettings : Fragment(), SeekBar.OnSeekBarChangeListener, CompoundBu
 
     private fun invalidateView(baseCurveProgressView: BaseCurveProgressView?) {
         if (baseCurveProgressView != null) {
-            baseCurveProgressView.setPrecision(curveData.precision)
-            baseCurveProgressView.setStrokeWidth(curveData.strokeWidth)
-            baseCurveProgressView.setLineMaxLength(curveData.lineMaxLength)
-            baseCurveProgressView.setLineMinLength(curveData.lineMinLength)
-            baseCurveProgressView.setDuration(curveData.duration)
-            baseCurveProgressView.setHasHole(curveData.hasHole)
-            baseCurveProgressView.setColor(curveData.color)
-            baseCurveProgressView.setSizeMultiplier(curveData.sizeMultiplier)
+            baseCurveProgressView.precision = curveData.precision
+            baseCurveProgressView.strokeWidth = curveData.strokeWidth
+            baseCurveProgressView.lineMaxLength = curveData.lineMaxLength
+            baseCurveProgressView.lineMinLength = curveData.lineMinLength
+            baseCurveProgressView.duration = curveData.duration
+            baseCurveProgressView.hasHole = curveData.hasHole
+            baseCurveProgressView.color = curveData.color
+            baseCurveProgressView.sizeMultiplier = curveData.sizeMultiplier
 
             if (baseCurveProgressView is BaseRouletteProgressView) {
-                val baseRouletteProgressView = baseCurveProgressView as BaseRouletteProgressView?
-                baseRouletteProgressView!!.radiusFixed = curveData.radiusFixed
-                baseRouletteProgressView.radiusMoving = curveData.radiusMoving
-                baseRouletteProgressView.distanceFromCenter = curveData.distanceFromCenter
+                baseCurveProgressView.radiusFixed = curveData.radiusFixed
+                baseCurveProgressView.radiusMoving = curveData.radiusMoving
+                baseCurveProgressView.distanceFromCenter = curveData.distanceFromCenter
 
-                baseRouletteProgressView.numberOfCycles = curveData.numberOfCycles.toFloat()
+                baseCurveProgressView.numberOfCycles = curveData.numberOfCycles.toFloat()
             }
         }
     }
 
-    override fun onStartTrackingTouch(seekBar: SeekBar) {
+    override fun onStartTrackingTouch(seekBar: SeekBar) {}
 
-    }
-
-    override fun onStopTrackingTouch(seekBar: SeekBar) {
-
-    }
+    override fun onStopTrackingTouch(seekBar: SeekBar) {}
 
     override fun onCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
         when (buttonView.id) {

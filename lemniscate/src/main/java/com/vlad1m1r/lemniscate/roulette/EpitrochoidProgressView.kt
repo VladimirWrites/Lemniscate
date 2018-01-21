@@ -18,11 +18,18 @@ package com.vlad1m1r.lemniscate.roulette
 
 import android.content.Context
 import android.util.AttributeSet
+import kotlin.math.cos
+import kotlin.math.sin
 
 class EpitrochoidProgressView : BaseRouletteProgressView {
 
-    private var radiusSum: Float = 0.toFloat()
-    private var sizeFactor: Float = 0.toFloat()
+    internal var radiusSum = 0f
+        get() = radiusFixed + radiusMoving
+        private set
+
+    internal var sizeFactor = 0f
+        get() = 2 * (radiusSum + distanceFromCenter)
+        private set
 
     constructor(context: Context) : super(context)
 
@@ -30,17 +37,14 @@ class EpitrochoidProgressView : BaseRouletteProgressView {
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    override fun getGraphY(t: Double): Float =
-            //y = (mRadiusFixed + mRadiusMoving) sin(t) - mDistanceFromCenter sin(((mRadiusFixed+mRadiusMoving)/mRadiusMoving)*t)
-            (viewSize.size / sizeFactor * (radiusSum * Math.sin(t) - rouletteCurveSettings.distanceFromCenter * Math.sin(radiusSum / rouletteCurveSettings.radiusMoving * t))).toFloat()
+    override fun getGraphX(t: Float): Float =
+            size / sizeFactor * (radiusSum * cos(t) - distanceFromCenter * cos(radiusSum / radiusMoving * t))
 
-
-    override fun getGraphX(t: Double): Float =
-            //x = (mRadiusFixed + mRadiusMoving) cos(t) + mRadiusMoving cos(((mRadiusFixed+mRadiusMoving)/mRadiusMoving)*t),
-            (viewSize.size / sizeFactor * (radiusSum * Math.cos(t) - rouletteCurveSettings.distanceFromCenter * Math.cos(radiusSum / rouletteCurveSettings.radiusMoving * t))).toFloat()
+    override fun getGraphY(t: Float): Float =
+            size / sizeFactor * (radiusSum * sin(t) - distanceFromCenter * sin(radiusSum / radiusMoving * t))
 
     override fun recalculateConstants() {
-        radiusSum = rouletteCurveSettings.radiusFixed + rouletteCurveSettings.radiusMoving
-        sizeFactor = 2 * (radiusSum + rouletteCurveSettings.distanceFromCenter)
+        radiusSum = radiusFixed + radiusMoving
+        sizeFactor = 2 * (radiusSum + distanceFromCenter)
     }
 }

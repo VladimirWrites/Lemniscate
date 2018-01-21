@@ -28,7 +28,7 @@ open class CurveSettings (val paint: Paint = Paint(Paint.ANTI_ALIAS_FLAG),  var 
     }
 
     var precision = 200
-    var strokeWidth: Float = 0.toFloat()
+    var strokeWidth: Float = 0f
         set(value) {
             if (value >= 0) {
                 field = value

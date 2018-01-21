@@ -20,6 +20,9 @@ import android.content.Context
 import android.util.AttributeSet
 
 import com.vlad1m1r.lemniscate.base.BaseCurveProgressView
+import kotlin.math.abs
+import kotlin.math.cos
+import kotlin.math.sin
 
 class XProgressView : BaseCurveProgressView {
 
@@ -29,17 +32,14 @@ class XProgressView : BaseCurveProgressView {
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    override fun getGraphY(t: Double): Float =
-            (viewSize.size.toDouble()
-                    * Math.sin(t)
-                    * Math.cos(t)).toFloat()
+    override var hasHole: Boolean = false
+        set(hasHole) {
+            super.hasHole = false
+        }
 
-    override fun getGraphX(t: Double): Float =
-            (viewSize.size.toDouble()
-                    * Math.abs(Math.sin(t))
-                    * Math.cos(t)).toFloat()
+    override fun getGraphX(t: Float): Float =
+            size * abs(sin(t)) * cos(t)
 
-    override fun setHasHole(hasHole: Boolean) {
-        super.setHasHole(false)
-    }
+    override fun getGraphY(t: Float): Float =
+            size * sin(t) * cos(t)
 }

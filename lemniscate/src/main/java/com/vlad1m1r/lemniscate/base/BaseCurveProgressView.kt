@@ -31,11 +31,14 @@ import com.vlad1m1r.lemniscate.base.models.ViewSize
 import com.vlad1m1r.lemniscate.base.settings.AnimationSettings
 import com.vlad1m1r.lemniscate.base.settings.CurveSettings
 import com.vlad1m1r.lemniscate.sample.lemniscate.R
+import kotlin.math.PI
+import kotlin.math.min
+import kotlin.math.round
 
-abstract class BaseCurveProgressView : View, IBaseCurveProgressView{
+abstract class BaseCurveProgressView : View {
 
     protected var curveSettings: CurveSettings = CurveSettings()
-    protected var viewSize = ViewSize()
+    private var viewSize = ViewSize()
     private var animationSettings = AnimationSettings()
     private var drawState = DrawState()
     private var points = Points()
@@ -44,7 +47,7 @@ abstract class BaseCurveProgressView : View, IBaseCurveProgressView{
     private val interpolator = LinearInterpolator()
 
     private val lineLengthToDraw: Int
-        get() = Math.round(curveSettings.precision * drawState.currentLineLength)
+        get() = round(curveSettings.precision * drawState.currentLineLength).toInt()
 
     constructor(context: Context) : super(context)
 
@@ -80,27 +83,27 @@ abstract class BaseCurveProgressView : View, IBaseCurveProgressView{
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     /**
-     * This method should return values of y for t∈[0, upper limit of getT() function].
-     * We should use parametric representation of curve for y.
-     * Curve should be closed and periodic on interval that returns getT().
-     * Resulting value should satisfy y∈[-viewSize.getHeight()/2, viewSize.getHeight()/2].
-     */
-    abstract fun getGraphY(t: Double): Float
-
-    /**
      * This method should return values of x for t∈[0, upper limit of getT() function].
      * We should use parametric representation of curve for x.
      * Curve should be closed and periodic on interval that returns getT().
      * Resulting value should satisfy x∈[-viewSize.getWidth()/2, viewSize.getWidth()/2].
      */
-    abstract fun getGraphX(t: Double): Float
+    abstract fun getGraphX(t: Float): Float
+
+    /**
+     * This method should return values of y for t∈[0, upper limit of getT() function].
+     * We should use parametric representation of curve for y.
+     * Curve should be closed and periodic on interval that returns getT().
+     * Resulting value should satisfy y∈[-viewSize.getHeight()/2, viewSize.getHeight()/2].
+     */
+    abstract fun getGraphY(t: Float): Float
 
     /**
      * @param i ∈ [0, mPrecision)
      * @return function is putting i∈[0, curveSettings.getPrecision()) points between [0, 2π]
      */
-    protected open fun getT(i: Int): Double {
-        return i.toDouble() * 2.0 * Math.PI / curveSettings.precision
+    protected open fun getT(i: Int): Float {
+        return i * 2f * PI.toFloat() / curveSettings.precision
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -130,16 +133,16 @@ abstract class BaseCurveProgressView : View, IBaseCurveProgressView{
     }
 
     private fun addPointsToCurve(start: Int, remainingPoints: Int): Int {
-        var remainingPoints = remainingPoints
+        var remainingPointsTemp = remainingPoints
         for (i in start until curveSettings.precision) {
 
             points.addPoint(getPoint(i))
 
-            if (--remainingPoints == 0) {
-                return remainingPoints
+            if (--remainingPointsTemp == 0) {
+                return remainingPointsTemp
             }
         }
-        return remainingPoints
+        return remainingPointsTemp
     }
 
     private fun getPoint(i: Int): Point {
@@ -172,16 +175,16 @@ abstract class BaseCurveProgressView : View, IBaseCurveProgressView{
                 defaultSize
         )
 
-        setMeasuredDimension(Math.round(this.viewSize.size + xPadding), Math.round(this.viewSize.size + yPadding))
+        setMeasuredDimension(round(this.viewSize.size + xPadding).toInt(), round(this.viewSize.size + yPadding).toInt())
     }
 
     private fun getMaxViewSquareSize(height: Int, width: Int, xPadding: Int, yPadding: Int): Int {
-        return Math.min(height - yPadding, width - xPadding)
+        return min(height - yPadding, width - xPadding)
     }
 
     private fun getViewDimension(mode: Int, viewSize: Float, defaultSize: Float): Float {
         return when {
-            viewSize == 0f -> defaultSize
+            viewSize == 0.0f -> defaultSize
             mode == View.MeasureSpec.EXACTLY -> viewSize
             mode == View.MeasureSpec.AT_MOST -> Math.min(defaultSize, viewSize)
             else -> defaultSize
@@ -233,58 +236,62 @@ abstract class BaseCurveProgressView : View, IBaseCurveProgressView{
         this.animationSettings = state.animationSettings
     }
 
-    override fun getStrokeWidth() = curveSettings.strokeWidth
+    var strokeWidth
+        get() = curveSettings.strokeWidth
+        set(strokeWidth) {
+            curveSettings.strokeWidth = strokeWidth
+        }
 
-    override fun setStrokeWidth(strokeWidth: Float) {
-        curveSettings.strokeWidth = strokeWidth
-    }
+    var lineMaxLength
+        get() = curveSettings.lineLength.lineMaxLength
+        set(lineMaxLength) {
+            curveSettings.lineLength.lineMaxLength = lineMaxLength
+        }
 
-    override fun getLineMaxLength() =  curveSettings.lineLength.lineMaxLength
+    var lineMinLength
+        get() = curveSettings.lineLength.lineMinLength
+        set(lineMinLength) {
+            curveSettings.lineLength.lineMinLength = lineMinLength
+        }
 
-    override fun setLineMaxLength(lineMaxLength: Float) {
-        curveSettings.lineLength.lineMaxLength = lineMaxLength
-    }
+    var color
+        get() = curveSettings.color
+        set(color) {
+            curveSettings.color = color
+        }
 
-    override fun getLineMinLength() =  curveSettings.lineLength.lineMinLength
+    var duration
+        get() = animationSettings.duration
+        set(duration) {
+            animationSettings.duration = duration
+            if (valueAnimator != null) valueAnimator!!.duration = duration.toLong()
+        }
 
-    override fun setLineMinLength(lineMinLength: Float) {
-        curveSettings.lineLength.lineMinLength = lineMinLength
-    }
+    var precision
+        get() = curveSettings.precision
+        set(precision) {
+            curveSettings.precision = precision
+            animateLemniscate()
+            invalidate()
+        }
 
-    override fun getColor() =  curveSettings.color
+    var sizeMultiplier
+        get() = viewSize.sizeMultiplier
+        set(sizeMultiplier) {
+            viewSize.sizeMultiplier = sizeMultiplier
+            requestLayout()
+            invalidate()
+        }
 
-    override fun setColor(color: Int) {
-        curveSettings.color = color
-    }
+    var size = viewSize.size
+        get() = viewSize.size
+        private set
 
-    override fun getDuration() = animationSettings.duration
-
-    override fun setDuration(duration: Int) {
-        animationSettings.duration = duration
-        if (valueAnimator != null) valueAnimator!!.duration = duration.toLong()
-    }
-
-    override fun getPrecision() = curveSettings.precision
-
-    override fun setPrecision(precision: Int) {
-        curveSettings.precision = precision
-        animateLemniscate()
-        invalidate()
-    }
-
-    override fun getSizeMultiplier() = viewSize.sizeMultiplier
-
-    override fun setSizeMultiplier(multiplier: Float) {
-        viewSize.sizeMultiplier = multiplier
-        requestLayout()
-        invalidate()
-    }
-
-    override fun hasHole() = curveSettings.hasHole
-
-    override fun setHasHole(hasHole: Boolean) {
-        curveSettings.hasHole = hasHole
-    }
+    open var hasHole
+        get() = curveSettings.hasHole
+        set(hasHole) {
+            curveSettings.hasHole = hasHole
+        }
 
     protected class BaseCurveSavedState : View.BaseSavedState {
         internal lateinit var curveSettings: CurveSettings

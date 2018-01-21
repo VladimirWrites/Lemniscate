@@ -16,6 +16,6 @@
 package com.vlad1m1r.lemniscate.base.models
 
 class ViewSize {
-    var size: Float = 0.toFloat()
-    var sizeMultiplier = 1f
+    var size: Float = 0.0f
+    var sizeMultiplier: Float = 1.0f
 }

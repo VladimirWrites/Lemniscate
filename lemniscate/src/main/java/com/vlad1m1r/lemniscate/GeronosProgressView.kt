@@ -20,6 +20,8 @@ import android.content.Context
 import android.util.AttributeSet
 
 import com.vlad1m1r.lemniscate.base.BaseCurveProgressView
+import kotlin.math.cos
+import kotlin.math.sin
 
 class GeronosProgressView : BaseCurveProgressView {
 
@@ -29,11 +31,9 @@ class GeronosProgressView : BaseCurveProgressView {
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    override fun getGraphY(t: Double): Float =
-            ((viewSize.size / 2).toDouble() * Math.sin(t) * Math.cos(t)).toFloat()
+    override fun getGraphX(t: Float): Float =
+            size / 2 * sin(t)
 
-
-    override fun getGraphX(t: Double): Float =
-            (viewSize.size / 2 * Math.sin(t)).toFloat()
-    
+    override fun getGraphY(t: Float): Float =
+            (size / 2)* sin(t) * cos(t)
 }
