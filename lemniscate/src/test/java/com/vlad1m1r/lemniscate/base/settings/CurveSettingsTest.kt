@@ -1,13 +1,13 @@
-package com.vlad1m1r.lemniscate.base.models
+package com.vlad1m1r.lemniscate.base.settings
 
 import android.graphics.Paint
-import com.vlad1m1r.lemniscate.TestConstants
-import com.vlad1m1r.lemniscate.base.settings.CurveSettings
+import com.google.common.truth.Truth.assertThat
+import com.nhaarman.mockito_kotlin.mock
+import com.vlad1m1r.lemniscate.base.models.LineLength
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
 
@@ -16,8 +16,7 @@ class CurveSettingsTest {
 
     private lateinit var curveSettings: CurveSettings
 
-    @Mock
-    lateinit var paint: Paint
+    val paint = mock<Paint>()
 
     @Before
     fun setUp() {
@@ -27,14 +26,14 @@ class CurveSettingsTest {
 
     @Test
     fun setStrokeWidth() {
-        curveSettings.strokeWidth = 10f
-        assertEquals(10.0f, curveSettings.strokeWidth, TestConstants.DELTA)
+        curveSettings.strokeWidth = 10.0f
+        assertThat(curveSettings.strokeWidth).isEqualTo(10.0f)
         verify<Paint>(paint).strokeWidth = 10f
     }
 
     @Test(expected = IllegalArgumentException::class)
     fun setStrokeWidthException() {
-        curveSettings.strokeWidth = -1f
+        curveSettings.strokeWidth = -1.0f
     }
 
     @Test

@@ -8,19 +8,19 @@ class RouletteCurveSettings : Parcelable {
     /**
      * Radius of the non-moving circle
      */
-    var radiusFixed = 3f
+    var radiusFixed = 3.0f
     /**
      * Radius of the moving circle
      */
-    var radiusMoving = 1f
+    var radiusMoving = 1.0f
     /**
      * Distance from the center of the moving circle
      */
-    var distanceFromCenter = 1f
+    var distanceFromCenter = 1.0f
     /**
      * Curve will be drawn on interval  [0, 2*numberOfCycles*π] before repeating
      */
-    var numberOfCycles = 1f
+    var numberOfCycles = 1.0f
 
     constructor()
 

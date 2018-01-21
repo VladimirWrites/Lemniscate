@@ -20,16 +20,16 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class CurveData(var precision: Int = 200,
-                var strokeWidth: Float = 10f,
-                var sizeMultiplier: Float = 1f,
+                var strokeWidth: Float = 10.0f,
+                var sizeMultiplier: Float = 1.0f,
                 var lineMinLength: Float = 0.4f,
                 var lineMaxLength: Float = 0.8f,
                 var color: Int = 0,
                 var duration: Int = 1000,
                 var hasHole: Boolean = false,
-                var radiusFixed: Float = 4f,
-                var radiusMoving: Float = 1f,
-                var distanceFromCenter: Float = 3f,
+                var radiusFixed: Float = 4.0f,
+                var radiusMoving: Float = 1.0f,
+                var distanceFromCenter: Float = 3.0f,
                 var numberOfCycles: Int = 1) : Parcelable {
 
     override fun describeContents(): Int {

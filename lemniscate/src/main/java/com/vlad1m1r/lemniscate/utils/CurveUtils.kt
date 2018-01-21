@@ -17,19 +17,14 @@
 package com.vlad1m1r.lemniscate.utils
 
 import com.vlad1m1r.lemniscate.base.models.Point
+import kotlin.math.abs
 
 object CurveUtils {
 
-    /**
-     * @param point is being checked if it's inside hole
-     * @param holeSize size of hole
-     * @param viewSize size of view
-     * @return if point is in hole returns null, otherwise returns point
-     */
     fun checkPointForHole(point: Point?, holeSize: Float, viewSize: Float): Point? {
         return if (point != null &&
-                Math.abs(point.x - viewSize / 2) < holeSize &&
-                Math.abs(point.y - viewSize / 2) < holeSize) {
+                abs(point.x - viewSize / 2) < holeSize &&
+                abs(point.y - viewSize / 2) < holeSize) {
             null
         } else point
     }

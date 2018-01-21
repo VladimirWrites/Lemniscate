@@ -1,39 +1,51 @@
 package com.vlad1m1r.lemniscate.base.models
 
-import com.vlad1m1r.lemniscate.TestConstants
-import org.junit.Assert.assertEquals
-import org.junit.Before
+import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
 class LineLengthTest {
 
-    private lateinit var lineLength: LineLength
-
-    @Before
-    fun setUp() {
-        lineLength = LineLength()
-    }
+    private val lineLength = LineLength()
 
     @Test
     fun getLineMaxLength() {
         lineLength.lineMaxLength = 0.9f
-        assertEquals(0.9f, lineLength.lineMaxLength, TestConstants.DELTA)
-
+        assertThat(lineLength.lineMaxLength).isEqualTo(0.9f)
     }
 
     @Test(expected = IllegalArgumentException::class)
-    fun getLineMaxLengthException() {
+    fun setLineMaxLengthGreaterThan1ThrowsException() {
         lineLength.lineMaxLength = 1.1f
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun setLineMaxLengthEqualTo0ThrowsException() {
+        lineLength.lineMaxLength = 0.0f
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun setLineMaxLengthLestThan0ThrowsException() {
+        lineLength.lineMaxLength = -1.0f
     }
 
     @Test
     fun setLineMinLength() {
         lineLength.lineMinLength = 0.1f
-        assertEquals(0.1f, lineLength.lineMinLength, TestConstants.DELTA)
+        assertThat(lineLength.lineMinLength).isEqualTo(0.1f)
     }
 
     @Test(expected = IllegalArgumentException::class)
-    fun setLineMinLengthException() {
-        lineLength.lineMaxLength = -1.1f
+    fun setLineMinLengthLestThan0ThrowsException() {
+        lineLength.lineMinLength = -0.1f
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun setLineMinLengthGreaterThan1ThrowsException() {
+        lineLength.lineMinLength = 1.1f
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun setLineMinLengthEqualTo0ThrowsException() {
+        lineLength.lineMinLength = 0.0f
     }
 }

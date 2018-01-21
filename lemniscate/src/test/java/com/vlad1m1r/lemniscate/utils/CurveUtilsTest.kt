@@ -1,21 +1,17 @@
 package com.vlad1m1r.lemniscate.utils
 
+import com.google.common.truth.Truth.assertThat
 import com.vlad1m1r.lemniscate.base.models.Point
-import org.junit.Assert.assertNull
-import org.junit.Assert.assertSame
 import org.junit.Test
 
 class CurveUtilsTest {
 
     @Test
     fun checkPointForHole() {
-        val viewSize = 100f
-        val strokeWidth = 10f
-        val point = Point(5f, 0f, strokeWidth, viewSize)
+        val point = Point(5f, 0f, 100f, 10f)
 
-        assertSame(CurveUtils.checkPointForHole(point, 1f, viewSize), point)
-        assertNull(CurveUtils.checkPointForHole(point, 5f, viewSize))
-        assertNull(CurveUtils.checkPointForHole(null, 1f, viewSize))
+        assertThat(CurveUtils.checkPointForHole(point, 0.2f, 10f)).isSameAs(point)
+        assertThat(CurveUtils.checkPointForHole(point, 5.0f, 10f)).isNull()
+        assertThat(CurveUtils.checkPointForHole(null, 0.2f, 10f)).isNull()
     }
-
 }
