@@ -18,14 +18,9 @@ package com.vlad1m1r.lemniscate.base.settings
 import android.os.Parcel
 import android.os.Parcelable
 
-class AnimationSettings : Parcelable {
+class AnimationSettings(var startingPointOnCurve:Int = 0, var duration: Int = 1000) : Parcelable {
 
-    var startingPointOnCurve = 0
-    var duration: Int = 1000
-
-    constructor()
-
-    protected constructor(`in`: Parcel) {
+    protected constructor(`in`: Parcel) : this() {
         this.startingPointOnCurve = `in`.readInt()
         this.duration = `in`.readInt()
     }

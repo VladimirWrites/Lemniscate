@@ -21,15 +21,13 @@ import com.vlad1m1r.lemniscate.base.settings.CurveSettings
 import com.vlad1m1r.lemniscate.utils.CurveUtils
 
 private const val STEP_SIZE = 0.001f
-class DrawState {
+class DrawState(val path:Path) {
 
-    val path = Path()
-
-    private var isExpanding = true
+    internal var isExpanding = true
     var currentLineLength = 0.0f
-        private set
+        internal set
 
-    private fun addPairOfPointsToPath(start: Point?, end: Point?) {
+    internal fun addPairOfPointsToPath(start: Point?, end: Point?) {
         if (start != null && end != null) {
             path.moveTo(start.x, start.y)
             path.quadTo(start.x, start.y, end.x, end.y)
@@ -51,7 +49,6 @@ class DrawState {
             var start: Point? = listOfPoints[i]
             var end: Point? = null
 
-
             if (listOfPoints.size > i + 1)
                 end = listOfPoints[i + 1]
 
@@ -66,28 +63,37 @@ class DrawState {
         }
     }
 
-    private fun resetPath() {
+    internal fun resetPath() {
         path.reset()
+    }
+
+    internal fun keepLineLengthInsideLimits(lineLength: LineLength){
+        if (currentLineLength < lineLength.lineMinLength) {
+            currentLineLength = lineLength.lineMinLength
+        }
+        if (currentLineLength > lineLength.lineMaxLength) {
+            currentLineLength = lineLength.lineMaxLength
+        }
+    }
+
+    internal fun calculateNewCurrentLineLength(lineLength: LineLength) {
+        if (currentLineLength < lineLength.lineMaxLength && isExpanding) {
+            currentLineLength += STEP_SIZE
+        } else if (currentLineLength > lineLength.lineMinLength && !isExpanding) {
+            currentLineLength -= STEP_SIZE
+        } else if (currentLineLength == lineLength.lineMaxLength) {
+            isExpanding = false
+        } else if (currentLineLength == lineLength.lineMinLength) {
+            isExpanding = true
+        } else {
+            throw IllegalArgumentException("currentLineLength is not inside limits")
+        }
     }
 
     fun recalculateLineLength(lineLength: LineLength) {
         if (lineLength.lineMinLength < lineLength.lineMaxLength) {
-            if (currentLineLength < lineLength.lineMinLength) {
-                currentLineLength = lineLength.lineMinLength
-            }
-            if (currentLineLength > lineLength.lineMaxLength) {
-                currentLineLength = lineLength.lineMaxLength
-            }
-
-            if (currentLineLength < lineLength.lineMaxLength && isExpanding) {
-                currentLineLength += STEP_SIZE
-            } else if (currentLineLength > lineLength.lineMinLength && !isExpanding) {
-                currentLineLength -= STEP_SIZE
-            } else if (currentLineLength >= lineLength.lineMaxLength) {
-                isExpanding = false
-            } else if (currentLineLength <= lineLength.lineMinLength) {
-                isExpanding = true
-            }
+            keepLineLengthInsideLimits(lineLength)
+            calculateNewCurrentLineLength(lineLength)
         } else {
             currentLineLength = lineLength.lineMaxLength
         }

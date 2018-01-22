@@ -1,6 +1,10 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'jacoco-android'
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = '0.8.0'
+}
 
 android {
     compileSdkVersion 27
