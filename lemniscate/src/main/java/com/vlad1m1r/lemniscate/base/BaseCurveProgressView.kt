@@ -19,6 +19,7 @@ package com.vlad1m1r.lemniscate.base
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Path
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
@@ -40,7 +41,7 @@ abstract class BaseCurveProgressView : View {
     protected var curveSettings: CurveSettings = CurveSettings()
     private var viewSize = ViewSize()
     private var animationSettings = AnimationSettings()
-    private var drawState = DrawState()
+    private var drawState = DrawState(Path())
     private var points = Points()
 
     private var valueAnimator: ValueAnimator? = null
