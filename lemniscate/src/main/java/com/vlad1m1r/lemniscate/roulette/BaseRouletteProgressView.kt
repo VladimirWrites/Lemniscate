@@ -86,8 +86,8 @@ abstract class BaseRouletteProgressView : BaseCurveProgressView {
         }
 
 
-    override fun getT(i: Int): Float {
-        return i * rouletteCurveSettings.numberOfCycles * 2 * PI.toFloat() / curveSettings.precision
+    override fun getT(i: Int, precision: Int): Float {
+        return i * rouletteCurveSettings.numberOfCycles * 2 * PI.toFloat() / precision
     }
 
     override fun onSaveInstanceState(): Parcelable {
