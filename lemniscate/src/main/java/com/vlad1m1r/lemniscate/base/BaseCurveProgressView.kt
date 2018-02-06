@@ -26,29 +26,25 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.animation.LinearInterpolator
 import com.vlad1m1r.lemniscate.base.models.DrawState
-import com.vlad1m1r.lemniscate.base.models.Point
 import com.vlad1m1r.lemniscate.base.models.Points
 import com.vlad1m1r.lemniscate.base.models.ViewSize
 import com.vlad1m1r.lemniscate.base.settings.AnimationSettings
 import com.vlad1m1r.lemniscate.base.settings.CurveSettings
 import com.vlad1m1r.lemniscate.sample.lemniscate.R
-import kotlin.math.PI
 import kotlin.math.min
 import kotlin.math.round
 
-abstract class BaseCurveProgressView : View {
+abstract class BaseCurveProgressView : View, IBaseCurveView {
 
-    protected var curveSettings: CurveSettings = CurveSettings()
-    private var viewSize = ViewSize()
-    private var animationSettings = AnimationSettings()
-    private var drawState = DrawState(Path())
-    private var points = Points()
+    protected var presenter: IBaseCurvePresenter = BaseCurvePresenter(
+            this,
+            CurveSettings(),
+            ViewSize(), AnimationSettings(),
+            DrawState(Path()),
+            Points())
 
     private var valueAnimator: ValueAnimator? = null
     private val interpolator = LinearInterpolator()
-
-    private val lineLengthToDraw: Int
-        get() = round(curveSettings.precision * drawState.currentLineLength).toInt()
 
     constructor(context: Context) : super(context)
 
@@ -64,17 +60,15 @@ abstract class BaseCurveProgressView : View {
         try {
             val colorAccent = colorAccentAttributes.getColor(0, 0)
 
-            curveSettings.lineLength.lineMaxLength = curveAttributes.getFloat(R.styleable.BaseCurveProgressView_maxLineLength, 0.8f)
-            curveSettings.lineLength.lineMinLength = curveAttributes.getFloat(R.styleable.BaseCurveProgressView_minLineLength, 0.4f)
+            presenter.curveSettings.lineLength.lineMaxLength = curveAttributes.getFloat(R.styleable.BaseCurveProgressView_maxLineLength, 0.8f)
+            presenter.curveSettings.lineLength.lineMinLength = curveAttributes.getFloat(R.styleable.BaseCurveProgressView_minLineLength, 0.4f)
 
-            curveSettings.color = curveAttributes.getColor(R.styleable.BaseCurveProgressView_lineColor, colorAccent)
-            curveSettings.hasHole = curveAttributes.getBoolean(R.styleable.BaseCurveProgressView_hasHole, false)
-            curveSettings.strokeWidth = curveAttributes.getDimension(R.styleable.BaseCurveProgressView_strokeWidth, resources.getDimension(R.dimen.lemniscate_stroke_width))
-            curveSettings.precision = curveAttributes.getInteger(R.styleable.BaseCurveProgressView_precision, 200)
+            presenter.curveSettings.color = curveAttributes.getColor(R.styleable.BaseCurveProgressView_lineColor, colorAccent)
+            presenter.curveSettings.hasHole = curveAttributes.getBoolean(R.styleable.BaseCurveProgressView_hasHole, false)
+            presenter.curveSettings.strokeWidth = curveAttributes.getDimension(R.styleable.BaseCurveProgressView_strokeWidth, resources.getDimension(R.dimen.lemniscate_stroke_width))
+            presenter.curveSettings.precision = curveAttributes.getInteger(R.styleable.BaseCurveProgressView_precision, 200)
 
-            animationSettings.duration = curveAttributes.getInteger(R.styleable.BaseCurveProgressView_duration, 1000)
-
-            viewSize.sizeMultiplier = curveAttributes.getFloat(R.styleable.BaseCurveProgressView_sizeMultiplier, 1f)
+            presenter.animationSettings.duration = curveAttributes.getInteger(R.styleable.BaseCurveProgressView_duration, 1000)
         } finally {
             curveAttributes.recycle()
             colorAccentAttributes.recycle()
@@ -83,82 +77,16 @@ abstract class BaseCurveProgressView : View {
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    /**
-     * This method should return values of x for t∈[0, upper limit of getT() function].
-     * We should use parametric representation of curve for x.
-     * Curve should be closed and periodic on interval that returns getT().
-     * Resulting value should satisfy x∈[-viewSize.getWidth()/2, viewSize.getWidth()/2].
-     */
-    abstract fun getGraphX(t: Float): Float
-
-    /**
-     * This method should return values of y for t∈[0, upper limit of getT() function].
-     * We should use parametric representation of curve for y.
-     * Curve should be closed and periodic on interval that returns getT().
-     * Resulting value should satisfy y∈[-viewSize.getHeight()/2, viewSize.getHeight()/2].
-     */
-    abstract fun getGraphY(t: Float): Float
-
-    /**
-     * @param i ∈ [0, mPrecision)
-     * @return function is putting i∈[0, curveSettings.getPrecision()) points between [0, 2π]
-     */
-    protected open fun getT(i: Int): Float {
-        return i * 2f * PI.toFloat() / curveSettings.precision
-    }
-
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-
-        recreatePoints()
-        drawState.addPointsToPath(points.getPoints(), curveSettings, viewSize)
-        canvas.drawPath(drawState.path, curveSettings.paint)
-    }
-
-    private fun recreatePoints() {
-        points.clear()
-        createNewPoints()
-    }
-
-    private fun createNewPoints() {
-        var lineLengthToDraw = lineLengthToDraw
-
-        // creates points from mStart till mLineLength points is created, or till mPrecision is reached in first pass
-        // if there is more points to be created goes to second pass
-        while (lineLengthToDraw > 0) {
-            lineLengthToDraw = addPointsToCurve(
-                    if (points.isEmpty) animationSettings.startingPointOnCurve else 0,
-                    lineLengthToDraw
-            )
-        }
-    }
-
-    private fun addPointsToCurve(start: Int, remainingPoints: Int): Int {
-        var remainingPointsTemp = remainingPoints
-        for (i in start until curveSettings.precision) {
-
-            points.addPoint(getPoint(i))
-
-            if (--remainingPointsTemp == 0) {
-                return remainingPointsTemp
-            }
-        }
-        return remainingPointsTemp
-    }
-
-    private fun getPoint(i: Int): Point {
-        return Point(
-                getGraphX(getT(i)),
-                getGraphY(getT(i)),
-                curveSettings.strokeWidth,
-                viewSize.size
-        )
+        presenter.recreatePoints()
+        canvas.drawPath(presenter.drawState.path, presenter.curveSettings.paint)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
-        val defaultSize = resources.getDimension(R.dimen.lemniscate_preferred_height) * viewSize.sizeMultiplier
+        val defaultSize = resources.getDimension(R.dimen.lemniscate_preferred_height) * presenter.viewSize.sizeMultiplier
 
         val xPadding = paddingLeft + paddingRight
         val yPadding = paddingTop + paddingBottom
@@ -170,13 +98,13 @@ abstract class BaseCurveProgressView : View {
                 yPadding
         )
 
-        this.viewSize.size = getViewDimension(
+        presenter.viewSize.size = getViewDimension(
                 View.MeasureSpec.getMode(widthMeasureSpec),
                 viewSize.toFloat(),
                 defaultSize
         )
 
-        setMeasuredDimension(round(this.viewSize.size + xPadding).toInt(), round(this.viewSize.size + yPadding).toInt())
+        setMeasuredDimension(round(presenter.viewSize.size + xPadding).toInt(), round(presenter.viewSize.size + yPadding).toInt())
     }
 
     private fun getMaxViewSquareSize(height: Int, width: Int, xPadding: Int, yPadding: Int): Int {
@@ -199,15 +127,13 @@ abstract class BaseCurveProgressView : View {
 
     private fun animateLemniscate() {
         if (valueAnimator != null) valueAnimator!!.end()
-        valueAnimator = ValueAnimator.ofInt(curveSettings.precision - 1, 0)
-        valueAnimator!!.duration = animationSettings.duration.toLong()
+        valueAnimator = ValueAnimator.ofInt(presenter.curveSettings.precision - 1, 0)
+        valueAnimator!!.duration = presenter.animationSettings.duration.toLong()
         valueAnimator!!.repeatCount = -1
         valueAnimator!!.repeatMode = ValueAnimator.RESTART
         valueAnimator!!.interpolator = interpolator
         valueAnimator!!.addUpdateListener { animation ->
-            animationSettings.startingPointOnCurve = animation.animatedValue as Int
-            drawState.recalculateLineLength(curveSettings.lineLength)
-            invalidate()
+            presenter.updateStartingPointOnCurve(animation.animatedValue as Int)
         }
         valueAnimator!!.start()
     }
@@ -220,8 +146,8 @@ abstract class BaseCurveProgressView : View {
     public override fun onSaveInstanceState(): Parcelable {
         val superState = super.onSaveInstanceState()
         val ss = BaseCurveSavedState(superState)
-        ss.curveSettings = curveSettings
-        ss.animationSettings = animationSettings
+        ss.curveSettings = this.presenter.curveSettings
+        ss.animationSettings = this.presenter.animationSettings
         return ss
     }
 
@@ -233,65 +159,65 @@ abstract class BaseCurveProgressView : View {
 
         super.onRestoreInstanceState(state.superState)
 
-        this.curveSettings = state.curveSettings
-        this.animationSettings = state.animationSettings
+        this.presenter.curveSettings = state.curveSettings
+        this.presenter.animationSettings = state.animationSettings
     }
 
     var strokeWidth
-        get() = curveSettings.strokeWidth
+        get() = presenter.curveSettings.strokeWidth
         set(strokeWidth) {
-            curveSettings.strokeWidth = strokeWidth
+            presenter.curveSettings.strokeWidth = strokeWidth
         }
 
     var lineMaxLength
-        get() = curveSettings.lineLength.lineMaxLength
+        get() = presenter.curveSettings.lineLength.lineMaxLength
         set(lineMaxLength) {
-            curveSettings.lineLength.lineMaxLength = lineMaxLength
+            presenter.curveSettings.lineLength.lineMaxLength = lineMaxLength
         }
 
     var lineMinLength
-        get() = curveSettings.lineLength.lineMinLength
+        get() = presenter.curveSettings.lineLength.lineMinLength
         set(lineMinLength) {
-            curveSettings.lineLength.lineMinLength = lineMinLength
+            presenter.curveSettings.lineLength.lineMaxLength = lineMinLength
         }
 
     var color
-        get() = curveSettings.color
+        get() = presenter.curveSettings.color
         set(color) {
-            curveSettings.color = color
+            presenter.curveSettings.color = color
         }
 
     var duration
-        get() = animationSettings.duration
+        get() = presenter.animationSettings.duration
         set(duration) {
-            animationSettings.duration = duration
+            presenter.animationSettings.duration = duration
             if (valueAnimator != null) valueAnimator!!.duration = duration.toLong()
         }
 
     var precision
-        get() = curveSettings.precision
+        get() = presenter.curveSettings.precision
         set(precision) {
-            curveSettings.precision = precision
+            presenter.curveSettings.precision = precision
             animateLemniscate()
             invalidate()
         }
 
     var sizeMultiplier
-        get() = viewSize.sizeMultiplier
+        get() = presenter.viewSize.sizeMultiplier
         set(sizeMultiplier) {
-            viewSize.sizeMultiplier = sizeMultiplier
+            presenter.viewSize.sizeMultiplier = sizeMultiplier
             requestLayout()
             invalidate()
         }
 
-    var size = viewSize.size
-        get() = viewSize.size
+    var size = presenter.viewSize.size
+        get() = presenter.viewSize.size
         private set
 
     open var hasHole
-        get() = curveSettings.hasHole
+        get() = presenter.curveSettings.hasHole
         set(hasHole) {
-            curveSettings.hasHole = hasHole
+            presenter.curveSettings.hasHole = hasHole
         }
 
     protected class BaseCurveSavedState : View.BaseSavedState {
@@ -311,7 +237,6 @@ abstract class BaseCurveProgressView : View {
             out.writeParcelable(this.animationSettings, flags)
         }
 
-
         val CREATOR: Parcelable.Creator<BaseCurveSavedState> = object : Parcelable.Creator<BaseCurveSavedState> {
             override fun createFromParcel(`in`: Parcel): BaseCurveSavedState {
                 return BaseCurveSavedState(`in`)
@@ -321,5 +246,13 @@ abstract class BaseCurveProgressView : View {
                 return arrayOfNulls(size)
             }
         }
+    }
+
+    override fun invalidateView() {
+        invalidate()
+    }
+
+    override fun requestViewLayout() {
+        requestLayout()
     }
 }
