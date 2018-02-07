@@ -50,7 +50,7 @@ abstract class BaseCurveProgressView : View, IBaseCurveView {
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
 
-        val curveAttributes = context.theme.obtainStyledAttributes(
+        val curveAttributes = context.obtainStyledAttributes(
                 attrs,
                 R.styleable.BaseCurveProgressView,
                 0, 0)
@@ -107,11 +107,11 @@ abstract class BaseCurveProgressView : View, IBaseCurveView {
         setMeasuredDimension(round(presenter.viewSize.size + xPadding).toInt(), round(presenter.viewSize.size + yPadding).toInt())
     }
 
-    private fun getMaxViewSquareSize(height: Int, width: Int, xPadding: Int, yPadding: Int): Int {
+    internal fun getMaxViewSquareSize(height: Int, width: Int, xPadding: Int, yPadding: Int): Int {
         return min(height - yPadding, width - xPadding)
     }
 
-    private fun getViewDimension(mode: Int, viewSize: Float, defaultSize: Float): Float {
+    internal fun getViewDimension(mode: Int, viewSize: Float, defaultSize: Float): Float {
         return when {
             viewSize == 0.0f -> defaultSize
             mode == View.MeasureSpec.EXACTLY -> viewSize
@@ -248,11 +248,11 @@ abstract class BaseCurveProgressView : View, IBaseCurveView {
         }
     }
 
-    override fun invalidateView() {
+    override fun invalidateProgressView() {
         invalidate()
     }
 
-    override fun requestViewLayout() {
+    override fun requestProgressViewLayout() {
         requestLayout()
     }
 }

@@ -40,7 +40,7 @@ class LineLength : Parcelable {
 
     constructor()
 
-    protected constructor(`in`: Parcel) {
+    internal constructor(`in`: Parcel) {
         this.lineMinLength = `in`.readFloat()
         this.lineMaxLength = `in`.readFloat()
     }

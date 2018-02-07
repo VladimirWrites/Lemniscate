@@ -24,7 +24,7 @@ class RouletteCurveSettings : Parcelable {
 
     constructor()
 
-    protected constructor(`in`: Parcel) {
+    internal constructor(`in`: Parcel) {
         this.radiusFixed = `in`.readFloat()
         this.radiusMoving = `in`.readFloat()
         this.distanceFromCenter = `in`.readFloat()

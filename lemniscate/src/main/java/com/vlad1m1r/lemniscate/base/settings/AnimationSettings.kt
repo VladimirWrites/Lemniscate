@@ -20,7 +20,7 @@ import android.os.Parcelable
 
 class AnimationSettings(var startingPointOnCurve:Int = 0, var duration: Int = 1000) : Parcelable {
 
-    protected constructor(`in`: Parcel) : this() {
+    internal constructor(`in`: Parcel) : this() {
         this.startingPointOnCurve = `in`.readInt()
         this.duration = `in`.readInt()
     }

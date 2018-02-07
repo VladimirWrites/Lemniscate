@@ -46,4 +46,9 @@ class CannabisProgressView : BaseCurveProgressView {
                     * (9 / 10f * cos(8 * t) + 1)
                     * (1 / 10f * cos(24 * t) + 1)
                     * (1 / 10f * cos(200 * t) + 9 / 10f)) + size / 4
+
+    override var hasHole: Boolean = false
+        set(hasHole) {
+            super.hasHole = false
+        }
 }

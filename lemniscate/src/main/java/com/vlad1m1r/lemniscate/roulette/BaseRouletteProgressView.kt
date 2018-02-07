@@ -61,7 +61,7 @@ abstract class BaseRouletteProgressView : BaseCurveProgressView {
     constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        val rouletteCurveAttributes = context.theme.obtainStyledAttributes(
+        val rouletteCurveAttributes = context.obtainStyledAttributes(
                 attrs,
                 R.styleable.RouletteCurveProgressView,
                 0, 0)
@@ -78,7 +78,7 @@ abstract class BaseRouletteProgressView : BaseCurveProgressView {
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    protected open fun recalculateConstants() {}
+    internal open fun recalculateConstants() {}
 
     override var hasHole: Boolean = false
         set(hasHole) {
