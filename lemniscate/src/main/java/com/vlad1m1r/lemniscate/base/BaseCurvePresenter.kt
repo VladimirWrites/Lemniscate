@@ -18,7 +18,7 @@ class BaseCurvePresenter(override val view: IBaseCurveView,
     override fun updateStartingPointOnCurve(point: Int) {
         animationSettings.startingPointOnCurve = point
         drawState.recalculateLineLength(curveSettings.lineLength)
-        view.invalidateView()
+        view.invalidateProgressView()
     }
 
     internal val lineLengthToDraw: Int

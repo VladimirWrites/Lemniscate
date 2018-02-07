@@ -45,7 +45,7 @@ open class CurveSettings (val paint: Paint = Paint(Paint.ANTI_ALIAS_FLAG),  var 
         }
     var hasHole = false
 
-    protected constructor(`in`: Parcel) : this() {
+    internal constructor(`in`: Parcel) : this() {
         this.precision = `in`.readInt()
         this.strokeWidth = `in`.readFloat()
         this.color = `in`.readInt()

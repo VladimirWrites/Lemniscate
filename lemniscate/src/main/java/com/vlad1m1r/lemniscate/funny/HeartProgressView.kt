@@ -40,4 +40,9 @@ class HeartProgressView : BaseCurveProgressView {
                     - 5 * cos(2 * t)
                     - 2 * cos(3 * t)
                     - cos(4 * t))
+
+    override var hasHole: Boolean = false
+        set(hasHole) {
+            super.hasHole = false
+        }
 }

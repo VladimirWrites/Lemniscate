@@ -7,6 +7,9 @@ import com.vlad1m1r.lemniscate.testutils.isPeriodic
 import com.vlad1m1r.lemniscate.testutils.setupDefaultMock
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.RuntimeEnvironment
 import kotlin.math.PI
 
 class XProgressViewTest {
@@ -43,5 +46,18 @@ class XProgressViewTest {
     @Test
     fun isPeriodic() {
         view.isPeriodic(2 * PI.toFloat())
+    }
+}
+
+@RunWith(RobolectricTestRunner::class)
+class XProgressViewHasHoleTest {
+
+    val context = RuntimeEnvironment.application.applicationContext
+    private val view = XProgressView(context)
+
+    @Test
+    fun hasHoleDisabled() {
+        view.hasHole = true
+        assertThat(view.hasHole).isFalse()
     }
 }

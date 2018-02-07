@@ -12,6 +12,8 @@ import org.junit.Test
 
 import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.RuntimeEnvironment
 import kotlin.math.PI
 
 @RunWith(MockitoJUnitRunner::class)
@@ -51,5 +53,18 @@ class ScribbleProgressViewTest {
     @Test
     fun isPeriodic() {
         view.isPeriodic(2 * PI.toFloat())
+    }
+}
+
+@RunWith(RobolectricTestRunner::class)
+class ScribbleProgressViewHasHoleTest {
+
+    val context = RuntimeEnvironment.application.applicationContext
+    private val view = ScribbleProgressView(context)
+
+    @Test
+    fun hasHoleDisabled() {
+        view.hasHole = true
+        assertThat(view.hasHole).isFalse()
     }
 }

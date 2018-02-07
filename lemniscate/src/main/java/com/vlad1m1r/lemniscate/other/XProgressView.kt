@@ -32,14 +32,14 @@ class XProgressView : BaseCurveProgressView {
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    override var hasHole: Boolean = false
-        set(hasHole) {
-            super.hasHole = false
-        }
-
     override fun getGraphX(t: Float): Float =
             size * abs(sin(t)) * cos(t)
 
     override fun getGraphY(t: Float): Float =
             size * sin(t) * cos(t)
+
+    override var hasHole: Boolean = false
+        set(hasHole) {
+            super.hasHole = false
+        }
 }

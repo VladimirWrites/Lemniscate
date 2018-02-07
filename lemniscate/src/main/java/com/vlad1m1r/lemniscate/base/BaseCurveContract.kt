@@ -45,8 +45,8 @@ interface IBaseCurveView {
         return i * 2f * PI.toFloat() / precision
     }
 
-    fun invalidateView()
+    fun invalidateProgressView()
 
-    fun requestViewLayout()
+    fun requestProgressViewLayout()
 }
 

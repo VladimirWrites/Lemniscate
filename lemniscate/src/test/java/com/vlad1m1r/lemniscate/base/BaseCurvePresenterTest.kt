@@ -24,7 +24,7 @@ class BaseCurvePresenterTest {
         presenter.updateStartingPointOnCurve(1)
         verify(animationSettings).startingPointOnCurve = 1
         verify(drawState).recalculateLineLength(curveSettings.lineLength)
-        verify(view).invalidateView()
+        verify(view).invalidateProgressView()
     }
 
     @Test
