@@ -31,10 +31,9 @@ import android.view.MenuItem
 import com.vlad1m1r.lemniscate.base.BaseCurveProgressView
 import me.relex.circleindicator.CircleIndicator
 
-
+private const val NUM_PAGES = 11
 
 class MainActivity : AppCompatActivity(), FragmentCurve.OnViewCreated {
-    private val NUM_PAGES = 11
 
     private lateinit var fragmentSettings: FragmentSettings
     private lateinit var pager: ViewPager

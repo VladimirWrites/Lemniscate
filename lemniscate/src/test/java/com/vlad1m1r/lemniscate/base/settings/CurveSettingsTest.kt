@@ -21,7 +21,8 @@ class CurveSettingsTest {
     @Before
     fun setUp() {
         val lineLength = LineLength()
-        curveSettings = CurveSettings(paint, lineLength)
+        curveSettings = CurveSettings(paint)
+        curveSettings.lineLength = lineLength
     }
 
     @Test

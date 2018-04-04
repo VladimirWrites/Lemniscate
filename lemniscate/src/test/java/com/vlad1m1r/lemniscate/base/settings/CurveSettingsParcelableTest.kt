@@ -5,12 +5,10 @@ import android.os.Parcel
 import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockito_kotlin.mock
 import com.vlad1m1r.lemniscate.base.models.LineLength
-import com.vlad1m1r.lemniscate.testutils.isEqualTo
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-
 
 @RunWith(RobolectricTestRunner::class)
 class CurveSettingsParcelableTest {
@@ -21,7 +19,7 @@ class CurveSettingsParcelableTest {
 
     @Before
     fun setUp() {
-        curveSettings = CurveSettings(paint)
+        curveSettings = CurveSettings()
         curveSettings.color = 123
         curveSettings.hasHole = true
         curveSettings.lineLength = LineLength()
@@ -40,6 +38,11 @@ class CurveSettingsParcelableTest {
         val copy = CurveSettings(parcel)
         parcel.recycle()
 
-        assertThat(curveSettings.isEqualTo(copy)).isTrue()
+        assertThat(curveSettings.color).isEqualTo(copy.color)
+        assertThat(curveSettings.hasHole).isEqualTo(copy.hasHole)
+        assertThat(curveSettings.lineLength.lineMaxLength).isEqualTo(copy.lineLength.lineMaxLength)
+        assertThat(curveSettings.lineLength.lineMinLength).isEqualTo(copy.lineLength.lineMinLength)
+        assertThat(curveSettings.strokeWidth).isEqualTo(copy.strokeWidth)
+        assertThat(curveSettings.precision).isEqualTo(copy.precision)
     }
 }

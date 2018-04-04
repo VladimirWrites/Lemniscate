@@ -23,8 +23,8 @@ class Points {
     val isEmpty: Boolean
         get() = points.isEmpty()
 
-    fun getPoints(): ArrayList<Point> {
-        return points.clone() as ArrayList<Point>
+    fun getPoints(): List<Point> {
+        return points.toList()
     }
 
     fun addPoint(point: Point) {

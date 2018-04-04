@@ -36,8 +36,11 @@ class DrawState(val path:Path) {
             path.lineTo(start.x, start.y)
         } else if (end != null) {
             path.moveTo(end.x, end.y)
-        }
+        } 
     }
+
+    internal fun isInRightDirectionToBeInHole(start: Point?, end: Point?)
+            = start != null && end != null && start.x > end.x
 
     fun addPointsToPath(listOfPoints: List<Point>, curveSettings: CurveSettings, viewSize: ViewSize) {
         resetPath()
@@ -53,7 +56,7 @@ class DrawState(val path:Path) {
                 end = listOfPoints[i + 1]
 
             if (curveSettings.hasHole) {
-                if (start != null && end != null && start.x > end.x) {
+                if (isInRightDirectionToBeInHole(start, end)) {
                     start = CurveUtils.checkPointForHole(start, holeSize, viewSize.size)
                     end = CurveUtils.checkPointForHole(end, holeSize, viewSize.size)
                 }

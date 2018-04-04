@@ -16,13 +16,8 @@
 package com.vlad1m1r.lemniscate.base.models
 
 class Point(x: Float, y: Float, strokeWidth: Float, viewSize: Float) {
-    val x: Float
-    val y: Float
-
-    init {
-        this.x = translateToPositiveCoordinates(x, strokeWidth, viewSize)
-        this.y = translateToPositiveCoordinates(y, strokeWidth, viewSize)
-    }
+    val x: Float = translateToPositiveCoordinates(x, strokeWidth, viewSize)
+    val y: Float = translateToPositiveCoordinates(y, strokeWidth, viewSize)
 
     private fun compensateForStrokeWidth(coordinate: Float, strokeWidth: Float, viewSize: Float): Float {
         val ratio = viewSize / (viewSize + 2 * strokeWidth)

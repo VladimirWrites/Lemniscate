@@ -20,23 +20,22 @@ import android.os.Parcelable
 
 class AnimationSettings(var startingPointOnCurve:Int = 0, var duration: Int = 1000) : Parcelable {
 
-    internal constructor(`in`: Parcel) : this() {
-        this.startingPointOnCurve = `in`.readInt()
-        this.duration = `in`.readInt()
+    constructor(parcel: Parcel) : this(
+            parcel.readInt(),
+            parcel.readInt())
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(startingPointOnCurve)
+        parcel.writeInt(duration)
     }
 
     override fun describeContents(): Int {
         return 0
     }
 
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-        dest.writeInt(this.startingPointOnCurve)
-        dest.writeInt(this.duration)
-    }
-
     companion object CREATOR : Parcelable.Creator<AnimationSettings> {
-        override fun createFromParcel(source: Parcel): AnimationSettings {
-            return AnimationSettings(source)
+        override fun createFromParcel(parcel: Parcel): AnimationSettings {
+            return AnimationSettings(parcel)
         }
 
         override fun newArray(size: Int): Array<AnimationSettings?> {

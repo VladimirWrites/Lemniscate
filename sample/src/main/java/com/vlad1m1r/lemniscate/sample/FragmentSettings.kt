@@ -56,78 +56,79 @@ class FragmentSettings : Fragment(), SeekBar.OnSeekBarChangeListener, CompoundBu
     }
 
     private fun setupViews() {
+
         seekBarStrokeWidth.max = 50
         seekBarStrokeWidth.progress = curveData.strokeWidth.toInt()
         seekBarStrokeWidth.setOnSeekBarChangeListener(this)
 
-        seekBarMaxLineLength!!.max = 99
-        seekBarMaxLineLength!!.progress = round(100 * curveData.lineMaxLength).toInt() - 1
-        seekBarMaxLineLength!!.setOnSeekBarChangeListener(this)
+        seekBarMaxLineLength.max = 99
+        seekBarMaxLineLength.progress = round(100 * curveData.lineMaxLength).toInt() - 1
+        seekBarMaxLineLength.setOnSeekBarChangeListener(this)
 
-        seekBarSizeMultiplier!!.max = 15
-        seekBarSizeMultiplier!!.progress = 5
-        seekBarSizeMultiplier!!.setOnSeekBarChangeListener(this)
+        seekBarSizeMultiplier.max = 15
+        seekBarSizeMultiplier.progress = 5
+        seekBarSizeMultiplier.setOnSeekBarChangeListener(this)
 
-        seekBarMinLineLength!!.max = 99
-        seekBarMinLineLength!!.progress = round(100 * curveData.lineMinLength).toInt() - 1
-        seekBarMinLineLength!!.setOnSeekBarChangeListener(this)
+        seekBarMinLineLength.max = 99
+        seekBarMinLineLength.progress = round(100 * curveData.lineMinLength).toInt() - 1
+        seekBarMinLineLength.setOnSeekBarChangeListener(this)
 
-        seekBarAnimationDuration!!.max = 199
-        seekBarAnimationDuration!!.progress = curveData.duration / 10 - 1
-        seekBarAnimationDuration!!.setOnSeekBarChangeListener(this)
+        seekBarAnimationDuration.max = 199
+        seekBarAnimationDuration.progress = curveData.duration / 10 - 1
+        seekBarAnimationDuration.setOnSeekBarChangeListener(this)
 
-        checkBoxHasHole!!.setOnCheckedChangeListener(this)
+        checkBoxHasHole.setOnCheckedChangeListener(this)
 
-        checkBoxHasHole!!.isChecked = curveData.hasHole
+        checkBoxHasHole.isChecked = curveData.hasHole
 
-        seekBarPrecision!!.max = 990
-        seekBarPrecision!!.progress = curveData.precision
-        seekBarPrecision!!.setOnSeekBarChangeListener(this)
+        seekBarPrecision.max = 990
+        seekBarPrecision.progress = curveData.precision
+        seekBarPrecision.setOnSeekBarChangeListener(this)
 
-        seekBarA!!.max = 10
-        seekBarA!!.progress = (curveData.radiusFixed - 1).toInt()
-        seekBarA!!.setOnSeekBarChangeListener(this)
+        seekBarA.max = 10
+        seekBarA.progress = (curveData.radiusFixed - 1).toInt()
+        seekBarA.setOnSeekBarChangeListener(this)
 
-        seekBarB!!.max = 10
-        seekBarB!!.progress = (curveData.radiusMoving - 1).toInt()
-        seekBarB!!.setOnSeekBarChangeListener(this)
+        seekBarB.max = 10
+        seekBarB.progress = (curveData.radiusMoving - 1).toInt()
+        seekBarB.setOnSeekBarChangeListener(this)
 
-        seekBarD!!.max = 10
-        seekBarD!!.progress = (curveData.distanceFromCenter - 1).toInt()
-        seekBarD!!.setOnSeekBarChangeListener(this)
+        seekBarD.max = 10
+        seekBarD.progress = (curveData.distanceFromCenter - 1).toInt()
+        seekBarD.setOnSeekBarChangeListener(this)
 
-        seekBarNumberOfCycles!!.max = 5
-        seekBarNumberOfCycles!!.progress = curveData.numberOfCycles - 1
-        seekBarNumberOfCycles!!.setOnSeekBarChangeListener(this)
+        seekBarNumberOfCycles.max = 5
+        seekBarNumberOfCycles.progress = curveData.numberOfCycles - 1
+        seekBarNumberOfCycles.setOnSeekBarChangeListener(this)
 
-        viewColor1!!.setOnClickListener(this)
-        viewColor2!!.setOnClickListener(this)
-        viewColor3!!.setOnClickListener(this)
-        viewColor4!!.setOnClickListener(this)
-        viewColor5!!.setOnClickListener(this)
-        viewColor6!!.setOnClickListener(this)
+        viewColor1.setOnClickListener(this)
+        viewColor2.setOnClickListener(this)
+        viewColor3.setOnClickListener(this)
+        viewColor4.setOnClickListener(this)
+        viewColor5.setOnClickListener(this)
+        viewColor6.setOnClickListener(this)
     }
 
     fun setBaseCurveProgressView(baseCurveProgressView: BaseCurveProgressView) {
         this.baseCurveProgressView = baseCurveProgressView
 
         //Checkbox
-        checkBoxHasHole!!.isEnabled = this.baseCurveProgressView is BernoullisProgressView ||
+        checkBoxHasHole.isEnabled = this.baseCurveProgressView is BernoullisProgressView ||
                 this.baseCurveProgressView is GeronosProgressView ||
                 this.baseCurveProgressView is BernoullisBowProgressView ||
                 this.baseCurveProgressView is BernoullisSharpProgressView
 
         //Roulette params
         if (this.baseCurveProgressView is BaseRouletteProgressView) {
-            seekBarA!!.isEnabled = true
-            seekBarB!!.isEnabled = true
-            seekBarD!!.isEnabled = true
+            seekBarA.isEnabled = true
+            seekBarB.isEnabled = true
+            seekBarD.isEnabled = true
             seekBarNumberOfCycles!!.isEnabled = true
         } else {
-            seekBarA!!.isEnabled = false
-            seekBarB!!.isEnabled = false
-            seekBarD!!.isEnabled = false
-            seekBarNumberOfCycles!!.isEnabled = false
+            seekBarA.isEnabled = false
+            seekBarB.isEnabled = false
+            seekBarD.isEnabled = false
+            seekBarNumberOfCycles.isEnabled = false
         }
 
         invalidateView(this.baseCurveProgressView)
@@ -137,12 +138,12 @@ class FragmentSettings : Fragment(), SeekBar.OnSeekBarChangeListener, CompoundBu
     override fun onProgressChanged(seekBar: SeekBar, i: Int, fromUser: Boolean) {
         when (seekBar.id) {
             R.id.seekBarStrokeWidth -> curveData.strokeWidth = resources.dpToPx(i / 3.0f)
-            R.id.seekBarMaxLineLength -> if (i < seekBarMinLineLength!!.progress) {
-                seekBarMaxLineLength!!.progress = seekBarMinLineLength!!.progress
+            R.id.seekBarMaxLineLength -> if (i < seekBarMinLineLength.progress) {
+                seekBarMaxLineLength.progress = seekBarMinLineLength.progress
             } else
                 curveData.lineMaxLength = (i + 1) / 100.0f
-            R.id.seekBarMinLineLength -> if (i > seekBarMaxLineLength!!.progress) {
-                seekBarMinLineLength!!.progress = seekBarMaxLineLength!!.progress
+            R.id.seekBarMinLineLength -> if (i > seekBarMaxLineLength.progress) {
+                seekBarMinLineLength.progress = seekBarMaxLineLength.progress
             } else
                 curveData.lineMinLength = (i + 1) / 100.0f
             R.id.seekBarSizeMultiplier -> curveData.sizeMultiplier = (i + 5) / 10.0f
@@ -158,31 +159,31 @@ class FragmentSettings : Fragment(), SeekBar.OnSeekBarChangeListener, CompoundBu
     }
 
     private fun updateValues() {
-        textStrokeWidth!!.text = curveData.strokeWidth.toString()
-        textMaxLineLength!!.text = String.format(resources.getString(R.string.format_percentage), (curveData.lineMaxLength * 100).toInt())
-        textMinLineLength!!.text = String.format(resources.getString(R.string.format_percentage), (curveData.lineMinLength * 100).toInt())
-        textSizeMultiplier!!.text = curveData.sizeMultiplier.toString()
-        textAnimationDuration!!.text = String.format(resources.getString(R.string.format_ms), curveData.duration)
-        textPrecision!!.text = String.format(resources.getString(R.string.format_points), curveData.precision)
+        textStrokeWidth.text = curveData.strokeWidth.toString()
+        textMaxLineLength.text = String.format(resources.getString(R.string.format_percentage), (curveData.lineMaxLength * 100).toInt())
+        textMinLineLength.text = String.format(resources.getString(R.string.format_percentage), (curveData.lineMinLength * 100).toInt())
+        textSizeMultiplier.text = curveData.sizeMultiplier.toString()
+        textAnimationDuration.text = String.format(resources.getString(R.string.format_ms), curveData.duration)
+        textPrecision.text = String.format(resources.getString(R.string.format_points), curveData.precision)
     }
 
     private fun invalidateView(baseCurveProgressView: BaseCurveProgressView?) {
-        if (baseCurveProgressView != null) {
-            baseCurveProgressView.precision = curveData.precision
-            baseCurveProgressView.strokeWidth = curveData.strokeWidth
-            baseCurveProgressView.lineMaxLength = curveData.lineMaxLength
-            baseCurveProgressView.lineMinLength = curveData.lineMinLength
-            baseCurveProgressView.duration = curveData.duration
-            baseCurveProgressView.hasHole = curveData.hasHole
-            baseCurveProgressView.color = curveData.color
-            baseCurveProgressView.sizeMultiplier = curveData.sizeMultiplier
+        baseCurveProgressView?.let {
+            it.precision = curveData.precision
+            it.strokeWidth = curveData.strokeWidth
+            it.lineMaxLength = curveData.lineMaxLength
+            it.lineMinLength = curveData.lineMinLength
+            it.duration = curveData.duration
+            it.hasHole = curveData.hasHole
+            it.color = curveData.color
+            it.sizeMultiplier = curveData.sizeMultiplier
 
-            if (baseCurveProgressView is BaseRouletteProgressView) {
-                baseCurveProgressView.radiusFixed = curveData.radiusFixed
-                baseCurveProgressView.radiusMoving = curveData.radiusMoving
-                baseCurveProgressView.distanceFromCenter = curveData.distanceFromCenter
+            if (it is BaseRouletteProgressView) {
+                it.radiusFixed = curveData.radiusFixed
+                it.radiusMoving = curveData.radiusMoving
+                it.distanceFromCenter = curveData.distanceFromCenter
 
-                baseCurveProgressView.numberOfCycles = curveData.numberOfCycles.toFloat()
+                it.numberOfCycles = curveData.numberOfCycles.toFloat()
             }
         }
     }

@@ -18,7 +18,7 @@ package com.vlad1m1r.lemniscate.base.models
 import android.os.Parcel
 import android.os.Parcelable
 
-class LineLength : Parcelable {
+class LineLength() : Parcelable {
 
     var lineMinLength = 0.4f
         set(value) {
@@ -38,9 +38,7 @@ class LineLength : Parcelable {
             }
         }
 
-    constructor()
-
-    internal constructor(`in`: Parcel) {
+    internal constructor(`in`: Parcel) : this() {
         this.lineMinLength = `in`.readFloat()
         this.lineMaxLength = `in`.readFloat()
     }

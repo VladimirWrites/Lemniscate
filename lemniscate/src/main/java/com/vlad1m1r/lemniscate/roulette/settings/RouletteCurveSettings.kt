@@ -3,7 +3,7 @@ package com.vlad1m1r.lemniscate.roulette.settings
 import android.os.Parcel
 import android.os.Parcelable
 
-class RouletteCurveSettings : Parcelable {
+class RouletteCurveSettings() : Parcelable {
 
     /**
      * Radius of the non-moving circle
@@ -22,36 +22,31 @@ class RouletteCurveSettings : Parcelable {
      */
     var numberOfCycles = 1.0f
 
-    constructor()
+    constructor(parcel: Parcel) : this() {
+        radiusFixed = parcel.readFloat()
+        radiusMoving = parcel.readFloat()
+        distanceFromCenter = parcel.readFloat()
+        numberOfCycles = parcel.readFloat()
+    }
 
-    internal constructor(`in`: Parcel) {
-        this.radiusFixed = `in`.readFloat()
-        this.radiusMoving = `in`.readFloat()
-        this.distanceFromCenter = `in`.readFloat()
-        this.numberOfCycles = `in`.readFloat()
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeFloat(radiusFixed)
+        parcel.writeFloat(radiusMoving)
+        parcel.writeFloat(distanceFromCenter)
+        parcel.writeFloat(numberOfCycles)
     }
 
     override fun describeContents(): Int {
         return 0
     }
 
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-        dest.writeFloat(this.radiusFixed)
-        dest.writeFloat(this.radiusMoving)
-        dest.writeFloat(this.distanceFromCenter)
-        dest.writeFloat(this.numberOfCycles)
-    }
+    companion object CREATOR : Parcelable.Creator<RouletteCurveSettings> {
+        override fun createFromParcel(parcel: Parcel): RouletteCurveSettings {
+            return RouletteCurveSettings(parcel)
+        }
 
-    companion object {
-
-        val CREATOR: Parcelable.Creator<RouletteCurveSettings> = object : Parcelable.Creator<RouletteCurveSettings> {
-            override fun createFromParcel(source: Parcel): RouletteCurveSettings {
-                return RouletteCurveSettings(source)
-            }
-
-            override fun newArray(size: Int): Array<RouletteCurveSettings?> {
-                return arrayOfNulls(size)
-            }
+        override fun newArray(size: Int): Array<RouletteCurveSettings?> {
+            return arrayOfNulls(size)
         }
     }
 }
