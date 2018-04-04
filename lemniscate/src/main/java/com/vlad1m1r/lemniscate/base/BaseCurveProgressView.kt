@@ -44,7 +44,6 @@ abstract class BaseCurveProgressView : View, IBaseCurveView {
             Points())
 
     private var valueAnimator: ValueAnimator? = null
-    private val interpolator = LinearInterpolator()
 
     constructor(context: Context) : super(context)
 
@@ -126,41 +125,22 @@ abstract class BaseCurveProgressView : View, IBaseCurveView {
     }
 
     private fun animateLemniscate() {
-        if (valueAnimator != null) valueAnimator!!.end()
-        valueAnimator = ValueAnimator.ofInt(presenter.curveSettings.precision - 1, 0)
-        valueAnimator!!.duration = presenter.animationSettings.duration.toLong()
-        valueAnimator!!.repeatCount = -1
-        valueAnimator!!.repeatMode = ValueAnimator.RESTART
-        valueAnimator!!.interpolator = interpolator
-        valueAnimator!!.addUpdateListener { animation ->
-            presenter.updateStartingPointOnCurve(animation.animatedValue as Int)
+        valueAnimator?.end()
+        valueAnimator = ValueAnimator.ofInt(presenter.curveSettings.precision - 1, 0).apply {
+            duration = presenter.animationSettings.duration.toLong()
+            repeatCount = -1
+            repeatMode = ValueAnimator.RESTART
+            interpolator = LinearInterpolator()
+            addUpdateListener { animation ->
+                presenter.updateStartingPointOnCurve(animation.animatedValue as Int)
+            }
+            start()
         }
-        valueAnimator!!.start()
     }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-        valueAnimator!!.end()
-    }
-
-    public override fun onSaveInstanceState(): Parcelable {
-        val superState = super.onSaveInstanceState()
-        val ss = BaseCurveSavedState(superState)
-        ss.curveSettings = this.presenter.curveSettings
-        ss.animationSettings = this.presenter.animationSettings
-        return ss
-    }
-
-    public override fun onRestoreInstanceState(state: Parcelable) {
-        if (state !is BaseCurveSavedState) {
-            super.onRestoreInstanceState(state)
-            return
-        }
-
-        super.onRestoreInstanceState(state.superState)
-
-        this.presenter.curveSettings = state.curveSettings
-        this.presenter.animationSettings = state.animationSettings
+        valueAnimator?.end()
     }
 
     var strokeWidth
@@ -220,15 +200,33 @@ abstract class BaseCurveProgressView : View, IBaseCurveView {
             presenter.curveSettings.hasHole = hasHole
         }
 
-    protected class BaseCurveSavedState : View.BaseSavedState {
+    public override fun onSaveInstanceState(): Parcelable {
+        val superState = super.onSaveInstanceState()
+        val ss = BaseCurveSavedState(superState)
+        ss.curveSettings = this.presenter.curveSettings
+        ss.animationSettings = this.presenter.animationSettings
+        return ss
+    }
+
+    public override fun onRestoreInstanceState(state: Parcelable) {
+        if (state is BaseCurveSavedState) {
+            super.onRestoreInstanceState(state.superState)
+            this.presenter.curveSettings = state.curveSettings
+            this.presenter.animationSettings = state.animationSettings
+        } else {
+            super.onRestoreInstanceState(state)
+        }
+    }
+
+    protected open class BaseCurveSavedState : View.BaseSavedState {
         internal lateinit var curveSettings: CurveSettings
         internal lateinit var animationSettings: AnimationSettings
 
         constructor(superState: Parcelable) : super(superState)
 
-        constructor(`in`: Parcel) : super(`in`) {
-            this.curveSettings = `in`.readParcelable(CurveSettings::class.java.classLoader)
-            this.animationSettings = `in`.readParcelable(AnimationSettings::class.java.classLoader)
+        constructor(state: Parcel) : super(state) {
+            this.curveSettings = state.readParcelable(CurveSettings::class.java.classLoader)
+            this.animationSettings = state.readParcelable(AnimationSettings::class.java.classLoader)
         }
 
         override fun writeToParcel(out: Parcel, flags: Int) {
@@ -237,13 +235,16 @@ abstract class BaseCurveProgressView : View, IBaseCurveView {
             out.writeParcelable(this.animationSettings, flags)
         }
 
-        val CREATOR: Parcelable.Creator<BaseCurveSavedState> = object : Parcelable.Creator<BaseCurveSavedState> {
-            override fun createFromParcel(`in`: Parcel): BaseCurveSavedState {
-                return BaseCurveSavedState(`in`)
-            }
+        companion object {
+            @JvmField
+            val CREATOR = object : Parcelable.Creator<BaseCurveSavedState> {
+                override fun createFromParcel(source: Parcel): BaseCurveSavedState {
+                    return BaseCurveSavedState(source)
+                }
 
-            override fun newArray(size: Int): Array<BaseCurveSavedState?> {
-                return arrayOfNulls(size)
+                override fun newArray(size: Int): Array<BaseCurveSavedState?> {
+                    return arrayOfNulls(size)
+                }
             }
         }
     }

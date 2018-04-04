@@ -32,49 +32,46 @@ class CurveData(var precision: Int = 200,
                 var distanceFromCenter: Float = 3.0f,
                 var numberOfCycles: Int = 1) : Parcelable {
 
+    constructor(parcel: Parcel) : this(
+            parcel.readInt(),
+            parcel.readFloat(),
+            parcel.readFloat(),
+            parcel.readFloat(),
+            parcel.readFloat(),
+            parcel.readInt(),
+            parcel.readInt(),
+            parcel.readByte() != 0.toByte(),
+            parcel.readFloat(),
+            parcel.readFloat(),
+            parcel.readFloat(),
+            parcel.readInt())
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(precision)
+        parcel.writeFloat(strokeWidth)
+        parcel.writeFloat(sizeMultiplier)
+        parcel.writeFloat(lineMinLength)
+        parcel.writeFloat(lineMaxLength)
+        parcel.writeInt(color)
+        parcel.writeInt(duration)
+        parcel.writeByte(if (hasHole) 1 else 0)
+        parcel.writeFloat(radiusFixed)
+        parcel.writeFloat(radiusMoving)
+        parcel.writeFloat(distanceFromCenter)
+        parcel.writeInt(numberOfCycles)
+    }
+
     override fun describeContents(): Int {
         return 0
     }
 
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-        dest.writeInt(this.precision)
-        dest.writeFloat(this.strokeWidth)
-        dest.writeFloat(this.sizeMultiplier)
-        dest.writeFloat(this.lineMinLength)
-        dest.writeFloat(this.lineMaxLength)
-        dest.writeInt(this.color)
-        dest.writeInt(this.duration)
-        dest.writeByte(if (this.hasHole) 1.toByte() else 0.toByte())
-        dest.writeFloat(this.radiusFixed)
-        dest.writeFloat(this.radiusMoving)
-        dest.writeFloat(this.distanceFromCenter)
-        dest.writeInt(this.numberOfCycles)
-    }
+    companion object CREATOR : Parcelable.Creator<CurveData> {
+        override fun createFromParcel(parcel: Parcel): CurveData {
+            return CurveData(parcel)
+        }
 
-    protected constructor(`in`: Parcel) : this() {
-        this.precision = `in`.readInt()
-        this.strokeWidth = `in`.readFloat()
-        this.sizeMultiplier = `in`.readFloat()
-        this.lineMinLength = `in`.readFloat()
-        this.lineMaxLength = `in`.readFloat()
-        this.color = `in`.readInt()
-        this.duration = `in`.readInt()
-        this.hasHole = `in`.readByte().toInt() != 0
-        this.radiusFixed = `in`.readFloat()
-        this.radiusMoving = `in`.readFloat()
-        this.distanceFromCenter = `in`.readFloat()
-        this.numberOfCycles = `in`.readInt()
-    }
-
-    companion object {
-        val CREATOR: Parcelable.Creator<CurveData> = object : Parcelable.Creator<CurveData> {
-            override fun createFromParcel(source: Parcel): CurveData {
-                return CurveData(source)
-            }
-
-            override fun newArray(size: Int): Array<CurveData?> {
-                return arrayOfNulls(size)
-            }
+        override fun newArray(size: Int): Array<CurveData?> {
+            return arrayOfNulls(size)
         }
     }
 }

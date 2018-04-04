@@ -61,11 +61,12 @@ class FragmentCurve : Fragment() {
             position = savedInstanceState.getInt(KEY_POSITION)
 
         if (baseCurveProgressView == null) {
-            baseCurveProgressView = getViewForPosition(position)
-            baseCurveProgressView!!.id = position
-            baseCurveProgressView!!.layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT)
+            baseCurveProgressView = getViewForPosition(position).apply {
+                id = position
+                layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT)
+            }
         }
     }
 
@@ -75,12 +76,11 @@ class FragmentCurve : Fragment() {
         curveName = root.findViewById(R.id.textCurveName)
         layoutViewHolder = root.findViewById(R.id.layoutViewHolder)
 
-        if (baseCurveProgressView!!.parent != null) {
-            (baseCurveProgressView!!.parent as ViewGroup).removeView(baseCurveProgressView)
-        }
+        (baseCurveProgressView?.parent as ViewGroup?)?.removeView(baseCurveProgressView)
+
         layoutViewHolder.addView(baseCurveProgressView)
 
-        curveName.text = baseCurveProgressView!!.javaClass.simpleName
+        curveName.text = baseCurveProgressView?.javaClass?.simpleName
 
         return root
     }
@@ -113,7 +113,7 @@ class FragmentCurve : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if (listener != null) listener!!.onViewPrepared(position, baseCurveProgressView)
+        listener?.onViewPrepared(position, baseCurveProgressView)
     }
 
     override fun onDetach() {
@@ -123,7 +123,7 @@ class FragmentCurve : Fragment() {
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        if (listener != null) listener!!.onViewShown(position, baseCurveProgressView)
+        listener?.onViewShown(position, baseCurveProgressView)
     }
 
 
@@ -134,13 +134,12 @@ class FragmentCurve : Fragment() {
 
     companion object {
 
-        private val KEY_POSITION = "position"
+        private const val KEY_POSITION = "position"
 
-        fun getInstance(position: Int): FragmentCurve {
-            val fragmentCurve = FragmentCurve()
-            fragmentCurve.position = position
-            fragmentCurve.retainInstance = true
-            return fragmentCurve
-        }
+        fun getInstance(fragmentsPosition: Int) =
+                FragmentCurve().apply {
+                    position = fragmentsPosition
+                    retainInstance = true
+                }
     }
 }

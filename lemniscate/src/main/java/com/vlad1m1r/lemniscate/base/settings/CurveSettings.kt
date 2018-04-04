@@ -20,13 +20,12 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.vlad1m1r.lemniscate.base.models.LineLength
 
-open class CurveSettings (val paint: Paint = Paint(Paint.ANTI_ALIAS_FLAG),  var lineLength: LineLength = LineLength()) : Parcelable {
+open class CurveSettings(val paint: Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+    style = Paint.Style.STROKE
+    strokeCap = Paint.Cap.ROUND
+}) : Parcelable {
 
-    init {
-        paint.style = Paint.Style.STROKE
-        paint.strokeCap = Paint.Cap.ROUND
-    }
-
+    var lineLength: LineLength = LineLength()
     var precision = 200
     var strokeWidth: Float = 0f
         set(value) {
@@ -45,29 +44,25 @@ open class CurveSettings (val paint: Paint = Paint(Paint.ANTI_ALIAS_FLAG),  var 
         }
     var hasHole = false
 
-    internal constructor(`in`: Parcel) : this() {
-        this.precision = `in`.readInt()
-        this.strokeWidth = `in`.readFloat()
-        this.color = `in`.readInt()
-        this.lineLength = `in`.readParcelable(LineLength::class.java.classLoader)
-        this.hasHole = `in`.readByte().toInt() != 0
+    constructor(parcel: Parcel) : this() {
+        lineLength = parcel.readParcelable(LineLength::class.java.classLoader)
+        precision = parcel.readInt()
+        hasHole = parcel.readByte() != 0.toByte()
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeParcelable(lineLength, flags)
+        parcel.writeInt(precision)
+        parcel.writeByte(if (hasHole) 1 else 0)
     }
 
     override fun describeContents(): Int {
         return 0
     }
 
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-        dest.writeInt(this.precision)
-        dest.writeFloat(this.strokeWidth)
-        dest.writeInt(this.color)
-        dest.writeParcelable(this.lineLength, flags)
-        dest.writeByte(if (this.hasHole) 1.toByte() else 0.toByte())
-    }
-
     companion object CREATOR : Parcelable.Creator<CurveSettings> {
-        override fun createFromParcel(source: Parcel): CurveSettings {
-            return CurveSettings(source)
+        override fun createFromParcel(parcel: Parcel): CurveSettings {
+            return CurveSettings(parcel)
         }
 
         override fun newArray(size: Int): Array<CurveSettings?> {

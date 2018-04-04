@@ -1,5 +1,11 @@
 Change Log
 ==========
+Version 1.4.3 *(2018-04-04)*
+----------------------------
+
+* Fixed problem with restoring view's state
+* Small code optimization
+
 Version 1.4.2 *(2018-01-16)*
 ----------------------------
 

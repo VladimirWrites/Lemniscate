@@ -27,11 +27,4 @@ class PointsTest {
         points.clear()
         assertThat(points.isEmpty).isTrue()
     }
-
-    @Test
-    fun getPointsReturnsCopy() {
-        val list = points.getPoints()
-        list.add(point)
-        assertThat(points.isEmpty).isTrue()
-    }
 }

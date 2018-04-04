@@ -20,8 +20,6 @@ import android.content.Context
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
-import android.view.View
-
 import com.vlad1m1r.lemniscate.base.BaseCurveProgressView
 import com.vlad1m1r.lemniscate.roulette.settings.RouletteCurveSettings
 import com.vlad1m1r.lemniscate.sample.lemniscate.R
@@ -91,29 +89,28 @@ abstract class BaseRouletteProgressView : BaseCurveProgressView {
     }
 
     override fun onSaveInstanceState(): Parcelable {
-        val superState = super.onSaveInstanceState()
-        val ss = RouletteCurveSavedState(superState)
+        val ss = RouletteCurveSavedState(super.onSaveInstanceState())
         ss.rouletteCurveSettings = rouletteCurveSettings
         return ss
     }
 
     override fun onRestoreInstanceState(state: Parcelable) {
-        if (state !is RouletteCurveSavedState) {
+        if (state is RouletteCurveSavedState) {
+            super.onRestoreInstanceState(state.superState)
+            this.rouletteCurveSettings = state.rouletteCurveSettings
+        } else {
             super.onRestoreInstanceState(state)
-            return
         }
-        super.onRestoreInstanceState(state.superState)
-
-        this.rouletteCurveSettings = state.rouletteCurveSettings
     }
 
-    protected class RouletteCurveSavedState : View.BaseSavedState {
+    protected open class RouletteCurveSavedState : BaseCurveSavedState {
+
         internal lateinit var rouletteCurveSettings: RouletteCurveSettings
 
         constructor(superState: Parcelable) : super(superState)
 
-        constructor(`in`: Parcel) : super(`in`) {
-            this.rouletteCurveSettings = `in`.readParcelable(RouletteCurveSettings::class.java.classLoader)
+        constructor(source: Parcel) : super(source) {
+            this.rouletteCurveSettings = source.readParcelable(RouletteCurveSettings::class.java.classLoader)
         }
 
         override fun writeToParcel(out: Parcel, flags: Int) {
@@ -121,14 +118,16 @@ abstract class BaseRouletteProgressView : BaseCurveProgressView {
             out.writeParcelable(this.rouletteCurveSettings, flags)
         }
 
+        companion object {
+            @JvmField
+            val CREATOR = object : Parcelable.Creator<RouletteCurveSavedState> {
+                override fun createFromParcel(source: Parcel): RouletteCurveSavedState {
+                    return RouletteCurveSavedState(source)
+                }
 
-        val CREATOR: Parcelable.Creator<RouletteCurveSavedState> = object : Parcelable.Creator<RouletteCurveSavedState> {
-            override fun createFromParcel(`in`: Parcel): RouletteCurveSavedState {
-                return RouletteCurveSavedState(`in`)
-            }
-
-            override fun newArray(size: Int): Array<RouletteCurveSavedState?> {
-                return arrayOfNulls(size)
+                override fun newArray(size: Int): Array<RouletteCurveSavedState?> {
+                    return arrayOfNulls(size)
+                }
             }
         }
     }
