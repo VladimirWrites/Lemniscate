@@ -1,9 +1,7 @@
 package com.vlad1m1r.lemniscate.base.settings
 
-import android.graphics.Paint
 import android.os.Parcel
 import com.google.common.truth.Truth.assertThat
-import com.nhaarman.mockito_kotlin.mock
 import com.vlad1m1r.lemniscate.base.models.LineLength
 import org.junit.Before
 import org.junit.Test
@@ -12,8 +10,6 @@ import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 class CurveSettingsParcelableTest {
-
-    private val paint = mock<Paint>()
 
     private lateinit var curveSettings: CurveSettings
 
