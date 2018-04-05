@@ -1,5 +1,10 @@
 Change Log
 ==========
+Version 1.4.4 *(2018-04-05)*
+----------------------------
+
+* Replace `View.BaseSavedState` with `android.support.v4.view.AbsSavedState` in `BaseCurveProgressView`
+
 Version 1.4.3 *(2018-04-04)*
 ----------------------------
 

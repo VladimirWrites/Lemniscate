@@ -40,7 +40,7 @@ Add to your module's build.gradle:
 and to your app build.gradle:
 
     dependencies {
-            compile 'com.github.vlad1m1r990:Lemniscate:1.4.3'
+            implementation 'com.github.vlad1m1r990:Lemniscate:1.4.4'
     }
 
 Usage

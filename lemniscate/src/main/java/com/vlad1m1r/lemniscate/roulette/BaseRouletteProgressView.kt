@@ -96,8 +96,10 @@ abstract class BaseRouletteProgressView : BaseCurveProgressView {
 
     override fun onRestoreInstanceState(state: Parcelable) {
         if (state is RouletteCurveSavedState) {
-            super.onRestoreInstanceState(state.superState)
-            this.rouletteCurveSettings = state.rouletteCurveSettings
+            super.onRestoreInstanceState(state.superState!!)
+            state.rouletteCurveSettings?.let {
+                this.rouletteCurveSettings = it
+            }
         } else {
             super.onRestoreInstanceState(state)
         }
@@ -105,7 +107,7 @@ abstract class BaseRouletteProgressView : BaseCurveProgressView {
 
     protected open class RouletteCurveSavedState : BaseCurveSavedState {
 
-        internal lateinit var rouletteCurveSettings: RouletteCurveSettings
+        internal var rouletteCurveSettings: RouletteCurveSettings? = null
 
         constructor(superState: Parcelable) : super(superState)
 
@@ -115,7 +117,7 @@ abstract class BaseRouletteProgressView : BaseCurveProgressView {
 
         override fun writeToParcel(out: Parcel, flags: Int) {
             super.writeToParcel(out, flags)
-            out.writeParcelable(this.rouletteCurveSettings, flags)
+            out.writeParcelable(rouletteCurveSettings, flags)
         }
 
         companion object {

@@ -10,8 +10,8 @@ android {
         applicationId "com.vlad1m1r.lemniscate.sample"
         minSdkVersion 14
         targetSdkVersion 27
-        versionCode 122
-        versionName "1.2.2"
+        versionCode 123
+        versionName "1.2.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

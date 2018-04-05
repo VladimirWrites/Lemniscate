@@ -22,6 +22,7 @@ import android.graphics.Canvas
 import android.graphics.Path
 import android.os.Parcel
 import android.os.Parcelable
+import android.support.v4.view.AbsSavedState
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.LinearInterpolator
@@ -201,8 +202,7 @@ abstract class BaseCurveProgressView : View, IBaseCurveView {
         }
 
     public override fun onSaveInstanceState(): Parcelable {
-        val superState = super.onSaveInstanceState()
-        val ss = BaseCurveSavedState(superState)
+        val ss = BaseCurveSavedState(super.onSaveInstanceState())
         ss.curveSettings = this.presenter.curveSettings
         ss.animationSettings = this.presenter.animationSettings
         return ss
@@ -211,28 +211,32 @@ abstract class BaseCurveProgressView : View, IBaseCurveView {
     public override fun onRestoreInstanceState(state: Parcelable) {
         if (state is BaseCurveSavedState) {
             super.onRestoreInstanceState(state.superState)
-            this.presenter.curveSettings = state.curveSettings
-            this.presenter.animationSettings = state.animationSettings
+            state.curveSettings?.let {
+                this.presenter.curveSettings = it
+            }
+            state.animationSettings?.let {
+                this.presenter.animationSettings = it
+            }
         } else {
             super.onRestoreInstanceState(state)
         }
     }
 
-    protected open class BaseCurveSavedState : View.BaseSavedState {
-        internal lateinit var curveSettings: CurveSettings
-        internal lateinit var animationSettings: AnimationSettings
+    protected open class BaseCurveSavedState : AbsSavedState {
+        internal var curveSettings: CurveSettings? = null
+        internal var animationSettings: AnimationSettings? = null
 
         constructor(superState: Parcelable) : super(superState)
 
-        constructor(state: Parcel) : super(state) {
+        constructor(state: Parcel) : super(state, BaseCurveSavedState::class.java.classLoader) {
             this.curveSettings = state.readParcelable(CurveSettings::class.java.classLoader)
             this.animationSettings = state.readParcelable(AnimationSettings::class.java.classLoader)
         }
 
         override fun writeToParcel(out: Parcel, flags: Int) {
             super.writeToParcel(out, flags)
-            out.writeParcelable(this.curveSettings, flags)
-            out.writeParcelable(this.animationSettings, flags)
+            out.writeParcelable(curveSettings, flags)
+            out.writeParcelable(animationSettings, flags)
         }
 
         companion object {
