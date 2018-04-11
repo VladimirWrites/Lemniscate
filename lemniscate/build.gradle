@@ -69,7 +69,7 @@ dependencies {
     testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
     testImplementation 'com.google.truth:truth:0.40'
     testImplementation 'org.robolectric:robolectric:3.8'
-    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {

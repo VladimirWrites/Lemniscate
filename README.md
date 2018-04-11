@@ -1,12 +1,12 @@
 ![Lemniscate header](http://i.imgur.com/i9t5vUm.png)
 
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/vlad1m1r990/Lemniscate/blob/master/LICENSE)
-[![](https://jitpack.io/v/vlad1m1r990/Lemniscate.svg)](https://jitpack.io/#vlad1m1r990/Lemniscate) 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/VladimirWrites/Lemniscate/blob/master/LICENSE)
+[![](https://jitpack.io/v/VladimirWrites/Lemniscate.svg)](https://jitpack.io/#VladimirWrites/Lemniscate) 
 [![API](https://img.shields.io/badge/API-14%2B-green.svg?style=flat)](https://android-arsenal.com/api?level-11) 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Lemniscate-green.svg?style=flat)](https://android-arsenal.com/details/1/5142)
-[![Build Status](https://travis-ci.org/vlad1m1r990/Lemniscate.svg?branch=master)](https://travis-ci.org/vlad1m1r990/Lemniscate)
-[![codecov](https://codecov.io/gh/vlad1m1r990/Lemniscate/branch/master/graph/badge.svg)](https://codecov.io/gh/vlad1m1r990/Lemniscate)
+[![Build Status](https://travis-ci.org/VladimirWrites/Lemniscate.svg?branch=master)](https://travis-ci.org/VladimirWrites/Lemniscate)
+[![codecov](https://codecov.io/gh/VladimirWrites/Lemniscate/branch/master/graph/badge.svg)](https://codecov.io/gh/VladimirWrites/Lemniscate)
 
 -----
 
@@ -40,7 +40,7 @@ Add to your module's build.gradle:
 and to your app build.gradle:
 
     dependencies {
-            implementation 'com.github.vlad1m1r990:Lemniscate:1.4.4'
+            implementation 'com.github.VladimirWrites:Lemniscate:1.4.4'
     }
 
 Usage
@@ -103,12 +103,12 @@ Contributing
 -------
 
 Want to contribute? You are welcome! 
-Note that all pull request should go to [`development`](https://github.com/vlad1m1r990/Lemniscate/tree/development) branch.
+Note that all pull request should go to [`development`](https://github.com/VladimirWrites/Lemniscate/tree/development) branch.
 
 Credits
 -------
 
-+ [Vladimir Jovanovic](https://github.com/vlad1m1r990)
++ [Vladimir Jovanovic](https://github.com/VladimirWrites)
 
 License
 -------

@@ -14,12 +14,12 @@ Version 1.4.3 *(2018-04-04)*
 Version 1.4.2 *(2018-01-16)*
 ----------------------------
 
-* Fixed bug where View would not show inside ScrollView.  [#5](https://github.com/vlad1m1r990/Lemniscate/issues/5)
+* Fixed bug where View would not show inside ScrollView.  [#5](https://github.com/VladimirWrites/Lemniscate/issues/5)
 
 Version 1.4.1 *(2018-01-06)*
 ----------------------------
 
-* Fixed bug where SizeMultiplier property was not working when set from `xml`.  [#4](https://github.com/vlad1m1r990/Lemniscate/issues/4)
+* Fixed bug where SizeMultiplier property was not working when set from `xml`.  [#4](https://github.com/VladimirWrites/Lemniscate/issues/4)
 
 Version 1.4.0 *(2017-11-09)*
 ----------------------------
