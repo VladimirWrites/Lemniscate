@@ -29,9 +29,11 @@ class PresentationActivity : AppCompatActivity() {
         setContentView(R.layout.activity_presentation)
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-        supportActionBar?.setTitle(R.string.screen_presentation)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.apply {
+            setTitle(R.string.screen_presentation)
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+        }
     }
 }
 

@@ -47,8 +47,6 @@ class CannabisProgressViewTest {
     fun isPeriodic() {
         view.isPeriodic(2 * PI.toFloat())
     }
-
-
 }
 
 @RunWith(RobolectricTestRunner::class)

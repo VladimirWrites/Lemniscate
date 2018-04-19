@@ -45,12 +45,12 @@ open class CurveSettings (val paint: Paint = Paint(Paint.ANTI_ALIAS_FLAG),  var 
         }
     var hasHole = false
 
-    internal constructor(`in`: Parcel) : this() {
-        this.precision = `in`.readInt()
-        this.strokeWidth = `in`.readFloat()
-        this.color = `in`.readInt()
-        this.lineLength = `in`.readParcelable(LineLength::class.java.classLoader)
-        this.hasHole = `in`.readByte().toInt() != 0
+    internal constructor(state: Parcel) : this() {
+        this.precision = state.readInt()
+        this.strokeWidth = state.readFloat()
+        this.color = state.readInt()
+        this.lineLength = state.readParcelable(LineLength::class.java.classLoader)
+        this.hasHole = state.readByte().toInt() != 0
     }
 
     override fun describeContents(): Int {

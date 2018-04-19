@@ -1,8 +1,8 @@
 package com.vlad1m1r.lemniscate.base.settings
 
 import android.os.Parcel
-import com.google.common.truth.Truth.assertThat
 import com.vlad1m1r.lemniscate.base.models.LineLength
+import com.vlad1m1r.lemniscate.testutils.isEqualTo
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,14 +15,16 @@ class CurveSettingsParcelableTest {
 
     @Before
     fun setUp() {
-        curveSettings = CurveSettings()
-        curveSettings.color = 123
-        curveSettings.hasHole = true
-        curveSettings.lineLength = LineLength()
-        curveSettings.lineLength.lineMaxLength = 0.85f
-        curveSettings.lineLength.lineMinLength = 0.26f
-        curveSettings.strokeWidth = 23.2f
-        curveSettings.precision = 123
+        curveSettings = CurveSettings().apply {
+            color = 123
+            hasHole = true
+            lineLength = LineLength().apply {
+                lineMaxLength = 0.85f
+                lineMinLength = 0.26f
+            }
+            strokeWidth = 23.2f
+            precision = 123
+        }
     }
 
     @Test
@@ -34,11 +36,6 @@ class CurveSettingsParcelableTest {
         val copy = CurveSettings(parcel)
         parcel.recycle()
 
-        assertThat(curveSettings.color).isEqualTo(copy.color)
-        assertThat(curveSettings.hasHole).isEqualTo(copy.hasHole)
-        assertThat(curveSettings.lineLength.lineMaxLength).isEqualTo(copy.lineLength.lineMaxLength)
-        assertThat(curveSettings.lineLength.lineMinLength).isEqualTo(copy.lineLength.lineMinLength)
-        assertThat(curveSettings.strokeWidth).isEqualTo(copy.strokeWidth)
-        assertThat(curveSettings.precision).isEqualTo(copy.precision)
+        curveSettings.isEqualTo(copy)
     }
 }

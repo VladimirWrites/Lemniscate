@@ -168,22 +168,22 @@ class FragmentSettings : Fragment(), SeekBar.OnSeekBarChangeListener, CompoundBu
     }
 
     private fun invalidateView(baseCurveProgressView: BaseCurveProgressView?) {
-        baseCurveProgressView?.let {
-            it.precision = curveData.precision
-            it.strokeWidth = curveData.strokeWidth
-            it.lineMaxLength = curveData.lineMaxLength
-            it.lineMinLength = curveData.lineMinLength
-            it.duration = curveData.duration
-            it.hasHole = curveData.hasHole
-            it.color = curveData.color
-            it.sizeMultiplier = curveData.sizeMultiplier
+        baseCurveProgressView?.apply {
+            precision = curveData.precision
+            strokeWidth = curveData.strokeWidth
+            lineMaxLength = curveData.lineMaxLength
+            lineMinLength = curveData.lineMinLength
+            duration = curveData.duration
+            hasHole = curveData.hasHole
+            color = curveData.color
+            sizeMultiplier = curveData.sizeMultiplier
 
-            if (it is BaseRouletteProgressView) {
-                it.radiusFixed = curveData.radiusFixed
-                it.radiusMoving = curveData.radiusMoving
-                it.distanceFromCenter = curveData.distanceFromCenter
+            if (this is BaseRouletteProgressView) {
+                radiusFixed = curveData.radiusFixed
+                radiusMoving = curveData.radiusMoving
+                distanceFromCenter = curveData.distanceFromCenter
 
-                it.numberOfCycles = curveData.numberOfCycles.toFloat()
+                numberOfCycles = curveData.numberOfCycles.toFloat()
             }
         }
     }

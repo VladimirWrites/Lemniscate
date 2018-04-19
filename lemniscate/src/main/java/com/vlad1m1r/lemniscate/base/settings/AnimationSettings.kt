@@ -20,9 +20,9 @@ import android.os.Parcelable
 
 class AnimationSettings(var startingPointOnCurve:Int = 0, var duration: Int = 1000) : Parcelable {
 
-    constructor(parcel: Parcel) : this(
-            parcel.readInt(),
-            parcel.readInt())
+    constructor(state: Parcel) : this(
+            state.readInt(),
+            state.readInt())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(startingPointOnCurve)

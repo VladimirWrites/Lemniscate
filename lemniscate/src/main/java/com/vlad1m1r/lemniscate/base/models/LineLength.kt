@@ -38,9 +38,9 @@ class LineLength() : Parcelable {
             }
         }
 
-    internal constructor(`in`: Parcel) : this() {
-        this.lineMinLength = `in`.readFloat()
-        this.lineMaxLength = `in`.readFloat()
+    internal constructor(state: Parcel) : this() {
+        this.lineMinLength = state.readFloat()
+        this.lineMaxLength = state.readFloat()
     }
 
     override fun describeContents(): Int {

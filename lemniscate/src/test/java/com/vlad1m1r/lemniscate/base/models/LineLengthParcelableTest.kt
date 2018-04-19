@@ -16,9 +16,10 @@ class LineLengthParcelableTest {
 
     @Before
     fun setUp() {
-        lineLength = LineLength()
-        lineLength.lineMinLength = 0.24f
-        lineLength.lineMaxLength = 0.83f
+        lineLength = LineLength().apply {
+            lineMinLength = 0.24f
+            lineMaxLength = 0.83f
+        }
     }
 
     @Test
