@@ -20,7 +20,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.vlad1m1r.lemniscate.base.models.LineLength
 
-open class CurveSettings (val paint: Paint = Paint(Paint.ANTI_ALIAS_FLAG),  var lineLength: LineLength = LineLength()) : Parcelable {
+open class CurveSettings (val paint: Paint = Paint(Paint.ANTI_ALIAS_FLAG), var lineLength: LineLength = LineLength()) : Parcelable {
 
     init {
         paint.style = Paint.Style.STROKE
@@ -29,6 +29,7 @@ open class CurveSettings (val paint: Paint = Paint(Paint.ANTI_ALIAS_FLAG),  var 
 
     var precision = 200
     var strokeWidth: Float = 0f
+        @Throws(IllegalArgumentException::class)
         set(value) {
             if (value >= 0) {
                 field = value

@@ -2,7 +2,7 @@ package com.vlad1m1r.lemniscate.base.settings
 
 import android.graphics.Paint
 import com.google.common.truth.Truth.assertThat
-import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockitokotlin2.mock
 import com.vlad1m1r.lemniscate.base.models.LineLength
 import org.junit.Assert.assertEquals
 import org.junit.Before

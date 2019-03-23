@@ -47,8 +47,10 @@ class CannabisProgressView : BaseCurveProgressView {
                     * (1 / 10f * cos(24 * t) + 1)
                     * (1 / 10f * cos(200 * t) + 9 / 10f)) + size / 4
 
+    // Disable hasHole setter. Should stay false
     override var hasHole: Boolean = false
         set(hasHole) {
-            super.hasHole = false
+            super.hasHole = hasHole && false
+            field = hasHole && false
         }
 }

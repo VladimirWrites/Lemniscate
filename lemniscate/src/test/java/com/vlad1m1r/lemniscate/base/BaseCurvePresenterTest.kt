@@ -1,7 +1,8 @@
 package com.vlad1m1r.lemniscate.base
 
 import com.google.common.truth.Truth.assertThat
-import com.nhaarman.mockito_kotlin.*
+import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.whenever
 import com.vlad1m1r.lemniscate.base.models.*
 import com.vlad1m1r.lemniscate.base.settings.AnimationSettings
 import com.vlad1m1r.lemniscate.base.settings.CurveSettings

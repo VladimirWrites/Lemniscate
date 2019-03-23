@@ -41,8 +41,10 @@ class HeartProgressView : BaseCurveProgressView {
                     - 2 * cos(3 * t)
                     - cos(4 * t))
 
+    // Disable hasHole setter. Should stay false
     override var hasHole: Boolean = false
         set(hasHole) {
-            super.hasHole = false
+            super.hasHole = hasHole && false
+            field = hasHole && false
         }
 }

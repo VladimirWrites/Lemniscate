@@ -78,9 +78,11 @@ abstract class BaseRouletteProgressView : BaseCurveProgressView {
 
     internal open fun recalculateConstants() {}
 
+    // Disable hasHole setter. Should stay false
     override var hasHole: Boolean = false
         set(hasHole) {
-            super.hasHole = false
+            super.hasHole = hasHole && false
+            field = hasHole && false
         }
 
 

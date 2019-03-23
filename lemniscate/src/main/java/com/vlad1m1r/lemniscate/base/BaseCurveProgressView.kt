@@ -202,7 +202,7 @@ abstract class BaseCurveProgressView : View, IBaseCurveView {
         }
 
     public override fun onSaveInstanceState(): Parcelable {
-        val ss = BaseCurveSavedState(super.onSaveInstanceState())
+        val ss = BaseCurveSavedState(super.onSaveInstanceState()!!)
         ss.curveSettings = this.presenter.curveSettings
         ss.animationSettings = this.presenter.animationSettings
         return ss

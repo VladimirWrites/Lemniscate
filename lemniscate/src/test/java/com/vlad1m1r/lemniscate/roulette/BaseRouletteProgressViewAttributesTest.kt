@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
 import com.google.common.truth.Truth.assertThat
-import com.nhaarman.mockito_kotlin.*
+import com.nhaarman.mockitokotlin2.*
 import com.vlad1m1r.lemniscate.sample.lemniscate.R
 import com.vlad1m1r.lemniscate.testutils.TestLayoutInflater
 import org.junit.Before

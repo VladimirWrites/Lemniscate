@@ -3,18 +3,18 @@ apply plugin: 'kotlin-android'
 apply plugin: 'jacoco'
 
 jacoco {
-    toolVersion = '0.8.0'
+    toolVersion = '0.8.3'
 }
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 27
-        versionCode 144
-        versionName "1.4.4"
+        targetSdkVersion 28
+        versionCode 145
+        versionName "1.4.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -65,11 +65,11 @@ task jacocoDebugReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'cre
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:2.17.0'
-    testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
-    testImplementation 'com.google.truth:truth:0.40'
-    testImplementation 'org.robolectric:robolectric:3.8'
-    implementation 'com.android.support:appcompat-v7:27.1.1'
+    testImplementation 'org.mockito:mockito-core:2.23.4'
+    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0'
+    testImplementation 'com.google.truth:truth:0.43'
+    testImplementation 'org.robolectric:robolectric:4.2'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {

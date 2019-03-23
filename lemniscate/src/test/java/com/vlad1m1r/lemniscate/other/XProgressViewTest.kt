@@ -1,7 +1,7 @@
 package com.vlad1m1r.lemniscate.other
 
 import com.google.common.truth.Truth.assertThat
-import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockitokotlin2.mock
 import com.vlad1m1r.lemniscate.testutils.TestConstants
 import com.vlad1m1r.lemniscate.testutils.isPeriodic
 import com.vlad1m1r.lemniscate.testutils.setupDefaultMock

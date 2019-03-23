@@ -38,8 +38,10 @@ class XProgressView : BaseCurveProgressView {
     override fun getGraphY(t: Float): Float =
             size * sin(t) * cos(t)
 
+    // Disable hasHole setter. Should stay false
     override var hasHole: Boolean = false
         set(hasHole) {
-            super.hasHole = false
+            super.hasHole = hasHole && false
+            field = hasHole && false
         }
 }

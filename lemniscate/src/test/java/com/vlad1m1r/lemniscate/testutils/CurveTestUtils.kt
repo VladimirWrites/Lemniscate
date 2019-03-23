@@ -1,9 +1,9 @@
 package com.vlad1m1r.lemniscate.testutils
 
 import com.google.common.truth.Truth
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.doCallRealMethod
-import com.nhaarman.mockito_kotlin.whenever
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.doCallRealMethod
+import com.nhaarman.mockitokotlin2.whenever
 import com.vlad1m1r.lemniscate.base.BaseCurveProgressView
 import com.vlad1m1r.lemniscate.roulette.BaseRouletteProgressView
 
