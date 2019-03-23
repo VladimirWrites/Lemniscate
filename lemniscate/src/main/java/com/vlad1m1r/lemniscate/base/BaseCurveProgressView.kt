@@ -22,7 +22,7 @@ import android.graphics.Canvas
 import android.graphics.Path
 import android.os.Parcel
 import android.os.Parcelable
-import android.support.v4.view.AbsSavedState
+import androidx.customview.view.AbsSavedState
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.LinearInterpolator

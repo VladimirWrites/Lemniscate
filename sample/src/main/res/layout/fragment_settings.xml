@@ -14,7 +14,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin">
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/stroke_width"
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"/>
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textStrokeWidth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
             android:layout_marginTop="@dimen/margin_normal"
             android:background="@color/divider"/>
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/stroke_color"
@@ -105,7 +105,7 @@
             android:layout_marginTop="@dimen/margin_normal"
             android:background="@color/divider"/>
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/line_min_length"
@@ -118,7 +118,7 @@
             android:layout_marginTop="@dimen/margin_small"
             />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textMinLineLength"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
             tools:text="0.4" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/line_max_length"
@@ -140,7 +140,7 @@
             android:layout_marginTop="@dimen/margin_small"
             />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textMaxLineLength"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -169,7 +169,7 @@
             android:layout_marginTop="@dimen/margin_normal"
             android:background="@color/divider"/>
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_small"
@@ -183,7 +183,7 @@
             android:layout_height="wrap_content"
             />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textSizeMultiplier"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -199,7 +199,7 @@
             android:layout_marginTop="@dimen/margin_normal"
             android:background="@color/divider"/>
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/duration"
@@ -212,7 +212,7 @@
             android:layout_marginTop="@dimen/margin_small"
             />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textAnimationDuration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -228,7 +228,7 @@
             android:layout_marginTop="@dimen/margin_normal"
             android:background="@color/divider"/>
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/precision"
@@ -241,7 +241,7 @@
             android:layout_marginTop="@dimen/margin_small"
             />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textPrecision"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -257,7 +257,7 @@
             android:layout_marginTop="@dimen/margin_normal"
             android:background="@color/divider"/>
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/param_a"
@@ -272,7 +272,7 @@
             android:layout_marginTop="@dimen/margin_small"
             />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/param_b"
@@ -287,7 +287,7 @@
             android:layout_marginTop="@dimen/margin_small"
             />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/param_d"
@@ -309,7 +309,7 @@
             android:layout_marginTop="@dimen/margin_normal"
             android:background="@color/divider"/>
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/number_of_cycles"

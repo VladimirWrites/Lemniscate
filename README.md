@@ -28,36 +28,49 @@ The application is intentionally simple, without any libraries, to be understand
 Setup
 -----
 
-Add to your module's build.gradle:
+Add to your module's `build.gradle`:
 
-    allprojects {
-        repositories {
-            ...
-            maven { url 'https://jitpack.io' }
-        }
+```groovy
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
     }
+}
+```
 
-and to your app build.gradle:
+and to your app `build.gradle`:
 
-    dependencies {
-            implementation 'com.github.VladimirWrites:Lemniscate:1.4.5'
-    }
+###### AndroidX
+```groovy
+dependencies {
+    implementation 'com.github.VladimirWrites:Lemniscate:1.4.5'
+}
+```
+    
+###### Android Support Library
+```groovy
+dependencies {
+    implementation 'com.github.VladimirWrites:Lemniscate:2.0.0'
+}
+```
 
 Usage
 -----
 
 Example of usage:
-
-    <com.vlad1m1r.lemniscate.BernoullisProgressView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:duration="1000"
-        app:hasHole="false"
-        app:lineColor="@color/colorPrimary"
-        app:maxLineLength="0.8"
-        app:minLineLength="0.4"
-        app:sizeMultiplier="1"
-        app:strokeWidth="5dp"/>
+```xml
+<com.vlad1m1r.lemniscate.BernoullisProgressView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:duration="1000"
+    app:hasHole="false"
+    app:lineColor="@color/colorPrimary"
+    app:maxLineLength="0.8"
+    app:minLineLength="0.4"
+    app:sizeMultiplier="1"
+    app:strokeWidth="5dp"/>
+```
 
 ###### Params available in all views:
 
