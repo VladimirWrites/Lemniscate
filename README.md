@@ -44,14 +44,14 @@ and to your app `build.gradle`:
 ###### AndroidX
 ```groovy
 dependencies {
-    implementation 'com.github.VladimirWrites:Lemniscate:1.4.5'
+    implementation 'com.github.VladimirWrites:Lemniscate:2.0.0'
 }
 ```
     
 ###### Android Support Library
 ```groovy
 dependencies {
-    implementation 'com.github.VladimirWrites:Lemniscate:2.0.0'
+    implementation 'com.github.VladimirWrites:Lemniscate:1.4.5'
 }
 ```
 
