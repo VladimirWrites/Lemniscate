@@ -10,7 +10,7 @@ class CurveUtilsTest {
     fun checkPointForHole() {
         val point = Point(5f, 0f, 1f, 10f)
 
-        assertThat(CurveUtils.checkPointForHole(point, 0.2f, 10f)).isSameAs(point)
+        assertThat(CurveUtils.checkPointForHole(point, 0.2f, 10f)).isSameInstanceAs(point)
         assertThat(CurveUtils.checkPointForHole(point, 5.0f, 10f)).isNull()
         assertThat(CurveUtils.checkPointForHole(null, 0.2f, 10f)).isNull()
     }

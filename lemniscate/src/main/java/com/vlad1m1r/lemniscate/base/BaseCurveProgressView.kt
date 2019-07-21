@@ -22,16 +22,16 @@ import android.graphics.Canvas
 import android.graphics.Path
 import android.os.Parcel
 import android.os.Parcelable
-import androidx.customview.view.AbsSavedState
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.LinearInterpolator
+import androidx.customview.view.AbsSavedState
+import com.vlad1m1r.lemniscate.R
 import com.vlad1m1r.lemniscate.base.models.DrawState
 import com.vlad1m1r.lemniscate.base.models.Points
 import com.vlad1m1r.lemniscate.base.models.ViewSize
 import com.vlad1m1r.lemniscate.base.settings.AnimationSettings
 import com.vlad1m1r.lemniscate.base.settings.CurveSettings
-import com.vlad1m1r.lemniscate.sample.lemniscate.R
 import kotlin.math.min
 import kotlin.math.round
 
@@ -99,7 +99,7 @@ abstract class BaseCurveProgressView : View, IBaseCurveView {
         )
 
         presenter.viewSize.size = getViewDimension(
-                View.MeasureSpec.getMode(widthMeasureSpec),
+                MeasureSpec.getMode(widthMeasureSpec),
                 viewSize.toFloat(),
                 defaultSize
         )
@@ -114,8 +114,8 @@ abstract class BaseCurveProgressView : View, IBaseCurveView {
     internal fun getViewDimension(mode: Int, viewSize: Float, defaultSize: Float): Float {
         return when {
             viewSize == 0.0f -> defaultSize
-            mode == View.MeasureSpec.EXACTLY -> viewSize
-            mode == View.MeasureSpec.AT_MOST -> Math.min(defaultSize, viewSize)
+            mode == MeasureSpec.EXACTLY -> viewSize
+            mode == MeasureSpec.AT_MOST -> Math.min(defaultSize, viewSize)
             else -> defaultSize
         }
     }
