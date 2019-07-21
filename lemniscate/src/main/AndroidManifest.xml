@@ -1,7 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.vlad1m1r.lemniscate.sample.lemniscate">
-    <application
-        android:allowBackup="true"
-        android:supportsRtl="true">
-    </application>
-</manifest>
+<manifest package="com.vlad1m1r.lemniscate"/>

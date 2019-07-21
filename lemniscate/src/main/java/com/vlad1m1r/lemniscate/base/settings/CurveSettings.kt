@@ -50,7 +50,7 @@ open class CurveSettings (val paint: Paint = Paint(Paint.ANTI_ALIAS_FLAG), var l
         this.precision = state.readInt()
         this.strokeWidth = state.readFloat()
         this.color = state.readInt()
-        this.lineLength = state.readParcelable(LineLength::class.java.classLoader)
+        this.lineLength = state.readParcelable(LineLength::class.java.classLoader)!!
         this.hasHole = state.readByte().toInt() != 0
     }
 
