@@ -20,9 +20,9 @@ import android.content.Context
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
+import com.vlad1m1r.lemniscate.R
 import com.vlad1m1r.lemniscate.base.BaseCurveProgressView
 import com.vlad1m1r.lemniscate.roulette.settings.RouletteCurveSettings
-import com.vlad1m1r.lemniscate.sample.lemniscate.R
 import kotlin.math.PI
 
 abstract class BaseRouletteProgressView : BaseCurveProgressView {
