@@ -3,21 +3,17 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    compileSdkVersion Versions.compile_sdk
+    buildToolsVersion Versions.build_tools
 
     defaultConfig {
         applicationId "com.vlad1m1r.lemniscate.sample"
-        minSdkVersion 14
-        targetSdkVersion 28
-        versionCode 130
-        versionName "1.3.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        minSdkVersion Versions.min_sdk
+        targetSdkVersion Versions.target_sdk
+        versionCode Versions.sample_version_code
+        versionName Versions.sample_version_name
     }
     buildTypes {
-        debug{
-            testCoverageEnabled true
-        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -27,9 +23,9 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'me.relex:circleindicator:2.1.2'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    testImplementation 'junit:junit:4.12'
+    implementation Deps.appcompat
+    implementation Deps.circleindicator
+    implementation Deps.kotlin_stdlib
+
     implementation project(':lemniscate')
 }
