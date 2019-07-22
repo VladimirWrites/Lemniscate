@@ -47,7 +47,7 @@ class FragmentSettings : Fragment(), SeekBar.OnSeekBarChangeListener, CompoundBu
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         curveData = if(savedInstanceState != null && savedInstanceState.containsKey("curve_data")) {
-            savedInstanceState.getParcelable("curve_data")
+            savedInstanceState.getParcelable("curve_data")!!
         } else {
             CurveData(color = ContextCompat.getColor(context!!, R.color.picker_color_1))
         }
