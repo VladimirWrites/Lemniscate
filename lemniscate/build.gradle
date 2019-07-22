@@ -41,7 +41,7 @@ android {
     }
 }
 
-task jacocoDebugReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
+task jacocoDebugReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
 
     reports {
         csv.enabled = false
