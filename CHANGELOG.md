@@ -1,5 +1,23 @@
 Change Log
 ==========
+
+Version 2.0.1 *(2019-07-21)*
+----------------------------
+
+* Remove `android:allowBackup` and `android:supportsRtl` from manifest
+* Update dependencies
+* Change package from `com.vlad1m1r.lemniscate.sample.lemniscate` to `com.vlad1m1r.lemniscate`
+
+Version 2.0.0 *(2019-03-23)*
+----------------------------
+
+* Migration to AndroidX
+
+Version 1.4.5 *(2019-03-23)*
+----------------------------
+
+* Update dependencies
+
 Version 1.4.4 *(2018-04-05)*
 ----------------------------
 
