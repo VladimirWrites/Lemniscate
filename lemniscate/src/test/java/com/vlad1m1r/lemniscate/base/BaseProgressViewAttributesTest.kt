@@ -26,16 +26,15 @@ class BaseProgressViewAttributesTest {
             .build()
 
     @Test
-    fun constructorWithAttributeSet() {
+    fun constructFromAttributeSet_whenProvided() {
         val bernoullisProgressView = BernoullisProgressView(context, atributeSet)
+
         assertThat(bernoullisProgressView.lineMaxLength).isEqualTo(0.81f)
         assertThat(bernoullisProgressView.lineMinLength).isEqualTo(0.23f)
-
         assertThat(bernoullisProgressView.color).isEqualTo(Color.BLACK)
         assertThat(bernoullisProgressView.hasHole).isTrue()
         assertThat(bernoullisProgressView.strokeWidth).isEqualTo(33f)
         assertThat(bernoullisProgressView.precision).isEqualTo(111)
-
         assertThat(bernoullisProgressView.duration).isEqualTo(999)
     }
 }

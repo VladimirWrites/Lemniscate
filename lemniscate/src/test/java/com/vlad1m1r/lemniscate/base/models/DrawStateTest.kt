@@ -16,7 +16,9 @@ class DrawStateTest {
     fun addPairOfPoints() {
         val start = Point(0f,1f, 2f, 100f)
         val end = Point(2f, 3f, 2f, 100f)
+
         drawState.addPairOfPointsToPath(start, end)
+
         verify(path).moveTo(start.x, start.y)
         verify(path).quadTo(start.x, start.y, end.x, end.y)
         verifyNoMoreInteractions(path)
@@ -25,7 +27,9 @@ class DrawStateTest {
     @Test
     fun addStartPoints() {
         val start = Point(0f,1f, 2f, 100f)
+
         drawState.addPairOfPointsToPath(start, null)
+
         verify(path).moveTo(start.x, start.y)
         verify(path).lineTo(start.x, start.y)
         verifyNoMoreInteractions(path)
@@ -34,7 +38,9 @@ class DrawStateTest {
     @Test
     fun addEndPoints() {
         val end = Point(2f, 3f, 2f, 100f)
+
         drawState.addPairOfPointsToPath(null, end)
+
         verify(path).moveTo(end.x, end.y)
         verifyNoMoreInteractions(path)
     }
@@ -43,7 +49,9 @@ class DrawStateTest {
     fun addPointsToPathWhenListEmpty() {
         val curveSettings = mock<CurveSettings>()
         val viewSize = mock<ViewSize>()
+
         drawState.addPointsToPath(emptyList(), curveSettings, viewSize)
+
         verify(path).reset()
         verifyNoMoreInteractions(path)
     }
@@ -58,9 +66,10 @@ class DrawStateTest {
         val viewSize = mock<ViewSize>()
         whenever(curveSettings.hasHole).thenReturn(false)
         whenever(curveSettings.strokeWidth).thenReturn(1f)
-
         val drawStateSpy = spy(drawState)
+
         drawStateSpy.addPointsToPath(list, curveSettings, viewSize)
+
         verify(drawStateSpy).addPairOfPointsToPath(list[0], list[1])
         verify(drawStateSpy).addPairOfPointsToPath(list[1], null)
     }
@@ -75,9 +84,10 @@ class DrawStateTest {
         val viewSize = mock<ViewSize>()
         whenever(curveSettings.hasHole).thenReturn(true)
         whenever(curveSettings.strokeWidth).thenReturn(100f)
-
         val drawStateSpy = spy(drawState)
+
         drawStateSpy.addPointsToPath(list, curveSettings, viewSize)
+
         verify(drawStateSpy).addPairOfPointsToPath(null, null)
     }
 
@@ -86,7 +96,9 @@ class DrawStateTest {
         val drawStateSpy = spy(drawState)
         val inOrder = inOrder(drawStateSpy)
         val lineLength = LineLength()
+
         drawStateSpy.recalculateLineLength(lineLength)
+
         inOrder.verify(drawStateSpy).keepLineLengthInsideLimits(lineLength)
         inOrder.verify(drawStateSpy).calculateNewCurrentLineLength(lineLength)
         inOrder.verifyNoMoreInteractions()
@@ -97,8 +109,10 @@ class DrawStateTest {
         val lineLength = LineLength()
         lineLength.lineMinLength = 0.8f
         lineLength.lineMaxLength = 0.6f
+
         drawState.recalculateLineLength(lineLength)
-        drawState.currentLineLength = lineLength.lineMaxLength
+
+        assertThat(drawState.currentLineLength).isEqualTo(lineLength.lineMaxLength)
     }
 
     @Test
@@ -106,7 +120,9 @@ class DrawStateTest {
         val lineLength = LineLength()
         lineLength.lineMinLength = 0.5f
         drawState.currentLineLength = 0.4f
+
         drawState.keepLineLengthInsideLimits(lineLength)
+
         assertThat(drawState.currentLineLength).isEqualTo(lineLength.lineMinLength)
     }
 
@@ -115,7 +131,9 @@ class DrawStateTest {
         val lineLength = LineLength()
         lineLength.lineMaxLength = 0.5f
         drawState.currentLineLength = 0.7f
+
         drawState.keepLineLengthInsideLimits(lineLength)
+
         assertThat(drawState.currentLineLength).isEqualTo(lineLength.lineMaxLength)
     }
 
@@ -125,7 +143,9 @@ class DrawStateTest {
         lineLength.lineMaxLength = 0.7f
         drawState.isExpanding = true
         drawState.currentLineLength = 0.5f
+
         drawState.calculateNewCurrentLineLength(lineLength)
+
         assertThat(drawState.currentLineLength).isEqualTo(0.501f)
     }
 
@@ -135,7 +155,9 @@ class DrawStateTest {
         lineLength.lineMinLength = 0.2f
         drawState.isExpanding = false
         drawState.currentLineLength = 0.5f
+
         drawState.calculateNewCurrentLineLength(lineLength)
+
         assertThat(drawState.currentLineLength).isEqualTo(0.499f)
     }
 
@@ -144,7 +166,9 @@ class DrawStateTest {
         val lineLength = LineLength()
         drawState.currentLineLength = lineLength.lineMaxLength
         drawState.isExpanding = true
+
         drawState.calculateNewCurrentLineLength(lineLength)
+
         assertThat(drawState.currentLineLength).isEqualTo(lineLength.lineMaxLength)
         assertThat(drawState.isExpanding).isFalse()
     }
@@ -154,7 +178,9 @@ class DrawStateTest {
         val lineLength = LineLength()
         drawState.currentLineLength = lineLength.lineMinLength
         drawState.isExpanding = false
+
         drawState.calculateNewCurrentLineLength(lineLength)
+
         assertThat(drawState.currentLineLength).isEqualTo(lineLength.lineMinLength)
         assertThat(drawState.isExpanding).isTrue()
     }
@@ -163,12 +189,14 @@ class DrawStateTest {
     fun calculateNewCurrentLineLengthIsNotInsideLimits() {
         val lineLength = LineLength()
         drawState.currentLineLength = lineLength.lineMaxLength + 1
+
         drawState.calculateNewCurrentLineLength(lineLength)
     }
 
     @Test
     fun resetPath() {
         drawState.resetPath()
+
         verify(path).reset()
     }
 

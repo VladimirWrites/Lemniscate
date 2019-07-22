@@ -5,7 +5,7 @@ import org.junit.Test
 
 class PointTest {
     @Test
-    fun testIfPointsAreTranslated() {
+    fun translatesPoints_whenCreated() {
         val point = Point(0.0f, 30.0f, 30.0f, 270.0f)
         assertThat(point.x).isEqualTo(135.0f)
         assertThat(point.y).isEqualTo(159.545455f)
