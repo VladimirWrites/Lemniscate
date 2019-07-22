@@ -5,7 +5,7 @@
 [![](https://jitpack.io/v/VladimirWrites/Lemniscate.svg)](https://jitpack.io/#VladimirWrites/Lemniscate) 
 [![API](https://img.shields.io/badge/API-14%2B-green.svg?style=flat)](https://android-arsenal.com/api?level-11) 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Lemniscate-green.svg?style=flat)](https://android-arsenal.com/details/1/5142)
-[![Build Status](https://travis-ci.org/VladimirWrites/Lemniscate.svg?branch=master)](https://travis-ci.org/VladimirWrites/Lemniscate)
+[![Build Status](https://app.bitrise.io/app/a22f82dd1a84f058.svg?token=sufo7FQOqMK9NjUqcP4CzA&branch=master)](https://app.bitrise.io/app/a22f82dd1a84f058#/builds)
 [![codecov](https://codecov.io/gh/VladimirWrites/Lemniscate/branch/master/graph/badge.svg)](https://codecov.io/gh/VladimirWrites/Lemniscate)
 
 -----
