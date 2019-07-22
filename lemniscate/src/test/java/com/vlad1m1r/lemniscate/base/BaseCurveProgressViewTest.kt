@@ -28,25 +28,25 @@ class BaseCurveProgressViewTest {
     }
 
     @Test
-    fun getViewDimensionWhenViewSizeIsZero() {
+    fun getViewDimension_whenViewSizeIsZero() {
         val defaultSize = 10f
         assertThat(baseCurveProgressView.getViewDimension(View.MeasureSpec.AT_MOST, 0f, defaultSize)).isEqualTo(defaultSize)
     }
 
     @Test
-    fun getViewDimensionWhenExactly() {
+    fun getViewDimension_whenMeasureSpecIsExactly() {
         val viewSize = 10f
         assertThat(baseCurveProgressView.getViewDimension(View.MeasureSpec.EXACTLY, viewSize, 10f)).isEqualTo(viewSize)
     }
 
     @Test
-    fun getViewDimensionWhenAtMost() {
+    fun getViewDimension_whenMeasureSpecIsAtMost() {
         assertThat(baseCurveProgressView.getViewDimension(View.MeasureSpec.AT_MOST, 10f, 20f)).isEqualTo(10f)
         assertThat(baseCurveProgressView.getViewDimension(View.MeasureSpec.AT_MOST, 30f, 20f)).isEqualTo(20f)
     }
 
     @Test
-    fun getViewDimensionWhenUnspecified() {
+    fun getViewDimension_whenMeasureSpecIsUnspecified() {
         val defaultSize = 10f
         assertThat(baseCurveProgressView.getViewDimension(View.MeasureSpec.UNSPECIFIED, 20f, defaultSize)).isEqualTo(defaultSize)
     }

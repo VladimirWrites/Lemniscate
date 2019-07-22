@@ -2,7 +2,6 @@ package com.vlad1m1r.lemniscate.base
 
 import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.*
-import com.nhaarman.mockitokotlin2.whenever
 import com.vlad1m1r.lemniscate.base.models.*
 import com.vlad1m1r.lemniscate.base.settings.AnimationSettings
 import com.vlad1m1r.lemniscate.base.settings.CurveSettings
@@ -22,7 +21,9 @@ class BaseCurvePresenterTest {
     @Test
     fun updateStartingPointOnCurve() {
         whenever(curveSettings.lineLength).thenReturn(LineLength())
+
         presenter.updateStartingPointOnCurve(1)
+
         verify(animationSettings).startingPointOnCurve = 1
         verify(drawState).recalculateLineLength(curveSettings.lineLength)
         verify(view).invalidateProgressView()
@@ -31,32 +32,32 @@ class BaseCurvePresenterTest {
     @Test
     fun recreatePoints() {
         val presenterSpy = spy(presenter)
+
         presenterSpy.recreatePoints()
+
         verify(points).clear()
         verify(presenterSpy).createNewPoints()
         verify(presenterSpy).addPointsToPath()
     }
 
     @Test
-    fun getLineLengthToDraw() {
+    fun getCorrectLineLengthToDraw() {
         whenever(curveSettings.precision).thenReturn(99)
         whenever(drawState.currentLineLength).thenReturn(10.32f)
+
         assertThat(presenter.lineLengthToDraw).isEqualTo(1022)
     }
 
     @Test
-    fun createNewPoints() {
-    }
-
-    @Test
-    fun getStartingPointWhenPointsIsEmpty() {
+    fun getCorrectStartingPoint_whenPointsIsEmpty() {
         whenever(animationSettings.startingPointOnCurve).thenReturn(10)
         whenever(points.isEmpty).thenReturn(true)
+
         assertThat(presenter.getStartingPoint()).isEqualTo(10)
     }
 
     @Test
-    fun getStartingPointWhenPointsIsNotEmpty() {
+    fun getCorrectStartingPoint_whenPointsIsNotEmpty() {
         whenever(points.isEmpty).thenReturn(false)
         assertThat(presenter.getStartingPoint()).isEqualTo(0)
     }
@@ -69,13 +70,14 @@ class BaseCurvePresenterTest {
     }
 
     @Test
-    fun addPointsToCurveWhenNotAllAddedStartO() {
+    fun addPointsToCurve_whenNotAllAddedStartO() {
         val presenterSpy = spy(presenter)
         val point = Point(1f,2f, 3f, 200f)
         doReturn(point).whenever(presenterSpy).getPoint(any())
         whenever(curveSettings.precision).thenReturn(20)
         val remainingPointsValue = 100
         val remainingPoints = presenterSpy.addPointsToCurve(0, remainingPointsValue)
+
         verify(points, times(curveSettings.precision)).addPoint(point)
         assertThat(remainingPoints).isEqualTo(remainingPointsValue - curveSettings.precision)
     }
@@ -111,14 +113,12 @@ class BaseCurvePresenterTest {
     }
 
     @Test
-    fun addPointsToCurve() {
-    }
-
-    @Test
-    fun getPoint() {
+    fun getCorrectPoint() {
         val presenterSpy = spy(presenter)
         whenever(presenterSpy.getT(1)).thenReturn(10.9f)
+
         presenterSpy.getPoint(1)
+
         verify(view).getGraphX(10.9f)
         verify(view).getGraphY(10.9f)
     }
@@ -126,7 +126,9 @@ class BaseCurvePresenterTest {
     @Test
     fun getT() {
         whenever(curveSettings.precision).thenReturn(10)
+
         presenter.getT(1)
+
         verify(view).getT(1, curveSettings.precision)
     }
 }
