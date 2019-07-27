@@ -159,7 +159,7 @@ abstract class BaseCurveProgressView : View, IBaseCurveView {
     var lineMinLength
         get() = presenter.curveSettings.lineLength.lineMinLength
         set(lineMinLength) {
-            presenter.curveSettings.lineLength.lineMaxLength = lineMinLength
+            presenter.curveSettings.lineLength.lineMinLength = lineMinLength
         }
 
     var color
