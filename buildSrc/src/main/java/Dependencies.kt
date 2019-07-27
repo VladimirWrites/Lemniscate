@@ -20,11 +20,11 @@ object Versions {
     const val compile_sdk = 28
     const val build_tools = "28.0.3"
 
-    const val lemniscate_version_code = 201
-    const val lemniscate_version_name = "2.0.1"
+    const val lemniscate_version_code = 202
+    const val lemniscate_version_name = "2.0.2"
 
-    const val sample_version_code = 130
-    const val sample_version_name = "1.3.0"
+    const val sample_version_code = 131
+    const val sample_version_name = "1.3.1"
 }
 
 object Deps {
