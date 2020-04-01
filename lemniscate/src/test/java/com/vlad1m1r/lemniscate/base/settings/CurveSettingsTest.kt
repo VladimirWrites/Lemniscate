@@ -29,7 +29,7 @@ class CurveSettingsTest {
     fun setStrokeWidth() {
         curveSettings.strokeWidth = 10.0f
         assertThat(curveSettings.strokeWidth).isEqualTo(10.0f)
-        verify<Paint>(paint).strokeWidth = 10f
+        verify(paint).strokeWidth = 10f
     }
 
     @Test(expected = IllegalArgumentException::class)
@@ -41,6 +41,6 @@ class CurveSettingsTest {
     fun setColor() {
         curveSettings.color = 123
         assertEquals(123, curveSettings.color.toLong())
-        verify<Paint>(paint).color = 123
+        verify(paint).color = 123
     }
 }

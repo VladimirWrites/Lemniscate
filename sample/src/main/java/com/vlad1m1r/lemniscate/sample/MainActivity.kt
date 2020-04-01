@@ -58,14 +58,9 @@ class MainActivity : AppCompatActivity(), FragmentCurve.OnViewCreated {
     }
 
     override fun onViewShown(position: Int, baseCurveProgressView: BaseCurveProgressView?) {
-        if (pager.currentItem == position) fragmentSettings.setBaseCurveProgressView(baseCurveProgressView!!)
-    }
-
-    override fun onViewPrepared(position: Int, baseCurveProgressView: BaseCurveProgressView?) {
-        if (pager.currentItem == position)
+        if (pager.currentItem == position) {
             fragmentSettings.setBaseCurveProgressView(baseCurveProgressView!!)
-        else
-            fragmentSettings.applySettings(baseCurveProgressView!!)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -89,7 +84,7 @@ class MainActivity : AppCompatActivity(), FragmentCurve.OnViewCreated {
         return super.onOptionsItemSelected(item)
     }
 
-    private inner class CurvesPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+    private inner class CurvesPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm,  BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         override fun getItem(position: Int): Fragment {
             return FragmentCurve.getInstance(position)

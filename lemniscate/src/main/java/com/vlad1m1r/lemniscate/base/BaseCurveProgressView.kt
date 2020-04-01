@@ -115,7 +115,7 @@ abstract class BaseCurveProgressView : View, IBaseCurveView {
         return when {
             viewSize == 0.0f -> defaultSize
             mode == MeasureSpec.EXACTLY -> viewSize
-            mode == MeasureSpec.AT_MOST -> Math.min(defaultSize, viewSize)
+            mode == MeasureSpec.AT_MOST -> min(defaultSize, viewSize)
             else -> defaultSize
         }
     }

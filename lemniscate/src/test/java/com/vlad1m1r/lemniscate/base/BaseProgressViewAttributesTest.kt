@@ -1,6 +1,8 @@
 package com.vlad1m1r.lemniscate.base
 
 import android.graphics.Color
+import android.os.Build
+import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth.assertThat
 import com.vlad1m1r.lemniscate.BernoullisProgressView
 import com.vlad1m1r.lemniscate.R
@@ -8,12 +10,13 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
+import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
+@Config(sdk = [Build.VERSION_CODES.P])
 class BaseProgressViewAttributesTest {
 
-    val context = RuntimeEnvironment.application.applicationContext
+    val context = InstrumentationRegistry.getInstrumentation().targetContext
 
     val atributeSet =  Robolectric.buildAttributeSet()
             .addAttribute(R.attr.maxLineLength, "0.81")

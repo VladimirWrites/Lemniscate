@@ -40,8 +40,8 @@ class ScribbleProgressView : BaseRouletteProgressView {
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     override fun getGraphX(t: Float): Float =
-         (size / sizeFactor * (radiusSum * cos(t) - distanceFromCenter * cos(radiusSum / radiusMoving * t))).toFloat()
+         (size / sizeFactor * (radiusSum * cos(t) - distanceFromCenter * cos(radiusSum / radiusMoving * t)))
 
     override fun getGraphY(t: Float): Float =
-            (size / sizeFactor * (radiusSum * sin(t) - distanceFromCenter * cos(radiusSum / radiusMoving * t))).toFloat()
+            (size / sizeFactor * (radiusSum * sin(t) - distanceFromCenter * cos(radiusSum / radiusMoving * t)))
 }

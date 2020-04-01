@@ -51,7 +51,6 @@ class FragmentCurve : Fragment() {
 
     interface OnViewCreated {
         fun onViewShown(position: Int, baseCurveProgressView: BaseCurveProgressView?)
-        fun onViewPrepared(position: Int, baseCurveProgressView: BaseCurveProgressView?)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -106,26 +105,20 @@ class FragmentCurve : Fragment() {
         }
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
-        listener = context as OnViewCreated?
+        listener = context as OnViewCreated
     }
 
     override fun onResume() {
         super.onResume()
-        listener?.onViewPrepared(position, baseCurveProgressView)
+        listener?.onViewShown(position, baseCurveProgressView)
     }
 
     override fun onDetach() {
         listener = null
         super.onDetach()
     }
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        listener?.onViewShown(position, baseCurveProgressView)
-    }
-
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putInt(KEY_POSITION, position)

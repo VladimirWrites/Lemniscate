@@ -1,5 +1,7 @@
 package com.vlad1m1r.lemniscate.roulette.scribble
 
+import android.os.Build
+import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.doCallRealMethod
 import com.nhaarman.mockitokotlin2.mock
@@ -11,7 +13,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
+import org.robolectric.annotation.Config
 import kotlin.math.PI
 
 class RoundScribbleProgressViewTest {
@@ -54,9 +56,10 @@ class RoundScribbleProgressViewTest {
 }
 
 @RunWith(RobolectricTestRunner::class)
+@Config(sdk = [Build.VERSION_CODES.P])
 class RoundScribbleProgressViewHasHoleTest {
 
-    val context = RuntimeEnvironment.application.applicationContext
+    val context = InstrumentationRegistry.getInstrumentation().targetContext
     private val view = RoundScribbleProgressView(context)
 
     @Test

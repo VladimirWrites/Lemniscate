@@ -1,5 +1,7 @@
 package com.vlad1m1r.lemniscate.funny
 
+import android.os.Build
+import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.mock
 import com.vlad1m1r.lemniscate.testutils.TestConstants
@@ -9,7 +11,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
+import org.robolectric.annotation.Config
 import kotlin.math.PI
 
 class HeartProgressViewTest{
@@ -50,9 +52,10 @@ class HeartProgressViewTest{
 }
 
 @RunWith(RobolectricTestRunner::class)
+@Config(sdk = [Build.VERSION_CODES.P])
 class HeartProgressViewHasHoleTest {
 
-    val context = RuntimeEnvironment.application.applicationContext
+    val context = InstrumentationRegistry.getInstrumentation().targetContext
     private val view = HeartProgressView(context)
 
     @Test

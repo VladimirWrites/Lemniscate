@@ -54,12 +54,12 @@ task jacocoDebugReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
     def kotlinDebugTree = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", excludes: fileFilter)
     def mainSrc = "${project.projectDir}/src/androidTest/java"
 
-    sourceDirectories = files([mainSrc])
-    classDirectories = files([debugTree], [kotlinDebugTree])
-    executionData = fileTree(dir: "$buildDir", includes: [
+    getSourceDirectories().setFrom(files([mainSrc]))
+    getClassDirectories().setFrom(files([debugTree], [kotlinDebugTree]))
+    getExecutionData().setFrom(fileTree(dir: "$buildDir", includes: [
             "jacoco/testDebugUnitTest.exec",
             "outputs/code-coverage/connected/*coverage.ec"
-    ])
+    ]))
 }
 
 dependencies {

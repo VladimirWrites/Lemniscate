@@ -1,5 +1,6 @@
 package com.vlad1m1r.lemniscate.base.settings
 
+import android.os.Build
 import android.os.Parcel
 import com.google.common.truth.Truth.assertThat
 import com.vlad1m1r.lemniscate.testutils.isEqualTo
@@ -7,8 +8,10 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
+@Config(sdk = [Build.VERSION_CODES.P])
 class AnimationSettingsParcelableTest {
 
     private lateinit var animationSettings: AnimationSettings

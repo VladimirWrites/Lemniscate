@@ -1,30 +1,30 @@
 
 object Versions {
-    const val kotlin = "1.3.41"
+    const val kotlin = "1.3.71"
 
-    const val android_x = "1.0.2"
+    const val android_x = "1.1.0"
 
-    const val circleindicator = "2.1.2"
+    const val circleindicator = "2.1.4"
 
-    const val junit = "4.12"
-    const val mockito_core = "2.28.2"
-    const val mockito_kotlin = "2.1.0"
-    const val truth = "0.46"
-    const val robolectric = "4.2.1"
+    const val junit = "4.13"
+    const val mockito_core = "3.3.3"
+    const val mockito_kotlin = "2.2.0"
+    const val truth = "1.0.1"
+    const val robolectric = "4.3.1"
 
-    const val gradle_android = "3.4.2"
-    const val jacoco = "0.8.4"
+    const val gradle_android = "3.6.1"
+    const val jacoco = "0.8.5"
 
     const val min_sdk = 14
-    const val target_sdk = 28
-    const val compile_sdk = 28
-    const val build_tools = "28.0.3"
+    const val target_sdk = 29
+    const val compile_sdk = 29
+    const val build_tools = "29.0.3"
 
-    const val lemniscate_version_code = 202
-    const val lemniscate_version_name = "2.0.2"
+    const val lemniscate_version_code = 203
+    const val lemniscate_version_name = "2.0.3"
 
-    const val sample_version_code = 131
-    const val sample_version_name = "1.3.1"
+    const val sample_version_code = 132
+    const val sample_version_name = "1.3.2"
 }
 
 object Deps {
