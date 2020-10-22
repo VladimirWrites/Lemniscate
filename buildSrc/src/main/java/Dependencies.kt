@@ -1,19 +1,19 @@
 
 object Versions {
-    const val kotlin = "1.3.71"
+    const val kotlin = "1.4.10"
 
-    const val android_x = "1.1.0"
+    const val android_x = "1.2.0"
 
     const val circleindicator = "2.1.4"
 
-    const val junit = "4.13"
-    const val mockito_core = "3.3.3"
+    const val junit = "4.13.1"
+    const val mockito_core = "3.5.15"
     const val mockito_kotlin = "2.2.0"
-    const val truth = "1.0.1"
-    const val robolectric = "4.3.1"
+    const val truth = "1.1"
+    const val robolectric = "4.4"
 
-    const val gradle_android = "3.6.1"
-    const val jacoco = "0.8.5"
+    const val gradle_android = "4.0.2"
+    const val jacoco = "0.8.6"
 
     const val min_sdk = 14
     const val target_sdk = 29
