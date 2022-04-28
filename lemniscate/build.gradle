@@ -8,7 +8,6 @@ jacoco {
 
 android {
     compileSdkVersion Versions.compile_sdk
-    buildToolsVersion Versions.build_tools
 
     defaultConfig {
         minSdkVersion Versions.min_sdk
@@ -44,9 +43,15 @@ android {
 task jacocoDebugReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
 
     reports {
-        csv.enabled = false
-        xml.enabled = true
-        html.enabled = true
+        csv {
+            enabled true
+        }
+        xml {
+            enabled true
+        }
+        html {
+            enabled true
+        }
     }
 
     def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
@@ -63,8 +68,6 @@ task jacocoDebugReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-
     implementation Deps.appcompat
     implementation Deps.kotlin_stdlib
 

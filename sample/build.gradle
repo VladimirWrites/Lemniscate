@@ -4,7 +4,6 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion Versions.compile_sdk
-    buildToolsVersion Versions.build_tools
 
     defaultConfig {
         applicationId "com.vlad1m1r.lemniscate.sample"
@@ -22,7 +21,6 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation Deps.appcompat
     implementation Deps.circleindicator
     implementation Deps.kotlin_stdlib

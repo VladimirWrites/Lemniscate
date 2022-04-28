@@ -3,9 +3,7 @@ package com.vlad1m1r.lemniscate.roulette
 import android.os.Build
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth.assertThat
-import com.nhaarman.mockitokotlin2.doCallRealMethod
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.*
 import com.vlad1m1r.lemniscate.testutils.TestConstants.DELTA
 import com.vlad1m1r.lemniscate.testutils.isPeriodic
 import com.vlad1m1r.lemniscate.testutils.setupDefaultMock

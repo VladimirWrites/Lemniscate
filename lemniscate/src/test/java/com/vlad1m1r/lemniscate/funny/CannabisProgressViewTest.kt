@@ -3,7 +3,7 @@ package com.vlad1m1r.lemniscate.funny
 import android.os.Build
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth.assertThat
-import com.nhaarman.mockitokotlin2.mock
+import org.mockito.kotlin.mock
 import com.vlad1m1r.lemniscate.testutils.TestConstants
 import com.vlad1m1r.lemniscate.testutils.isPeriodic
 import com.vlad1m1r.lemniscate.testutils.setupDefaultMock
