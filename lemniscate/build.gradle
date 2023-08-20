@@ -7,11 +7,11 @@ jacoco {
 }
 
 android {
-    compileSdkVersion Versions.compile_sdk
-
+    namespace "com.vlad1m1r.lemniscate"
     defaultConfig {
         minSdkVersion Versions.min_sdk
         targetSdkVersion Versions.target_sdk
+        compileSdk Versions.compile_sdk
         versionCode Versions.lemniscate_version_code
         versionName Versions.lemniscate_version_name
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -37,6 +37,13 @@ android {
         unitTests {
             includeAndroidResources = true
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 }
 

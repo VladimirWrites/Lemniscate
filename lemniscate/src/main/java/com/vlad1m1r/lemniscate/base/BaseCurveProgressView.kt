@@ -55,7 +55,7 @@ abstract class BaseCurveProgressView : View, IBaseCurveView {
                 R.styleable.BaseCurveProgressView,
                 0, 0)
 
-        val colorAccentAttributes = context.obtainStyledAttributes(attrs, intArrayOf(R.attr.colorAccent))
+        val colorAccentAttributes = context.obtainStyledAttributes(attrs, intArrayOf(android.R.attr.colorAccent))
 
         try {
             val colorAccent = colorAccentAttributes.getColor(0, 0)
