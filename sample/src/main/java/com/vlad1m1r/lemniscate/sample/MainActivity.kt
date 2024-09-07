@@ -27,6 +27,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 
 import com.vlad1m1r.lemniscate.base.BaseCurveProgressView
 import me.relex.circleindicator.CircleIndicator
@@ -55,6 +58,12 @@ class MainActivity : AppCompatActivity(), FragmentCurve.OnViewCreated {
         pager.adapter = pagerAdapter
         indicator.setViewPager(pager)
 
+        val rootView = findViewById<View>(R.id.root_view)
+        ViewCompat.setOnApplyWindowInsetsListener(rootView) { view, insets ->
+            val systemInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(0, systemInsets.top, 0, systemInsets.bottom)
+            insets
+        }
     }
 
     override fun onViewShown(position: Int, baseCurveProgressView: BaseCurveProgressView?) {

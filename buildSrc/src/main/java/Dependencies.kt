@@ -1,8 +1,8 @@
 
 object Versions {
-    const val kotlin = "1.9.0"
+    const val kotlin = "2.0.20"
 
-    const val android_x = "1.6.1"
+    const val android_x = "1.7.0"
 
     const val circleindicator = "2.1.6"
 
@@ -12,19 +12,19 @@ object Versions {
     const val truth = "1.1.3"
     const val robolectric = "4.7.3"
 
-    const val gradle_android = "8.1.0"
+    const val gradle_android = "8.6.0"
     const val jacoco = "0.8.8"
 
     const val min_sdk = 14
     const val sample_min_sdk = 21
-    const val target_sdk = 33
-    const val compile_sdk = 33
+    const val target_sdk = 35
+    const val compile_sdk = 35
 
     const val lemniscate_version_code = 204
     const val lemniscate_version_name = "2.0.4"
 
-    const val sample_version_code = 143
-    const val sample_version_name = "1.4.3"
+    const val sample_version_code = 144
+    const val sample_version_name = "1.4.4"
 }
 
 object Deps {

@@ -17,8 +17,11 @@
 package com.vlad1m1r.lemniscate.sample
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 
 class PresentationActivity : AppCompatActivity() {
 
@@ -33,6 +36,13 @@ class PresentationActivity : AppCompatActivity() {
             setTitle(R.string.screen_presentation)
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
+        }
+
+        val rootView = findViewById<View>(R.id.root_view)
+        ViewCompat.setOnApplyWindowInsetsListener(rootView) { view, insets ->
+            val systemInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(0, systemInsets.top, 0, systemInsets.bottom)
+            insets
         }
     }
 }
