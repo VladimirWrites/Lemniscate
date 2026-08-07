@@ -11,8 +11,8 @@ android {
         applicationId = "com.vlad1m1r.lemniscate.sample"
         minSdk = 23
         targetSdk = 37
-        versionCode = 145
-        versionName = "1.4.5"
+        versionCode = 150
+        versionName = "1.5.0"
     }
     buildTypes {
         release {
