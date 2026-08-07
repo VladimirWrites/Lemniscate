@@ -15,16 +15,18 @@
  */
 package com.vlad1m1r.lemniscate.base.models
 
-import java.util.*
-
 class Points {
     private val points = ArrayList<Point>()
 
     val isEmpty: Boolean
         get() = points.isEmpty()
 
+    /**
+     * Read-only view of the points. Not a copy: this is read on every frame, and
+     * copying the list there allocated garbage on the drawing hot path.
+     */
     fun getPoints(): List<Point> {
-        return points.toList()
+        return points
     }
 
     fun addPoint(point: Point) {

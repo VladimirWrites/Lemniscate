@@ -18,6 +18,7 @@ package com.vlad1m1r.lemniscate.base.settings
 import android.graphics.Paint
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.core.os.ParcelCompat
 import com.vlad1m1r.lemniscate.base.models.LineLength
 
 open class CurveSettings (val paint: Paint = Paint(Paint.ANTI_ALIAS_FLAG), var lineLength: LineLength = LineLength()) : Parcelable {
@@ -50,7 +51,7 @@ open class CurveSettings (val paint: Paint = Paint(Paint.ANTI_ALIAS_FLAG), var l
         this.precision = state.readInt()
         this.strokeWidth = state.readFloat()
         this.color = state.readInt()
-        this.lineLength = state.readParcelable(LineLength::class.java.classLoader)!!
+        this.lineLength = ParcelCompat.readParcelable(state, LineLength::class.java.classLoader, LineLength::class.java)!!
         this.hasHole = state.readByte().toInt() != 0
     }
 

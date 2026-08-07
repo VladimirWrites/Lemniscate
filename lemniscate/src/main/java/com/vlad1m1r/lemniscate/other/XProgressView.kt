@@ -24,13 +24,11 @@ import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.sin
 
-class XProgressView : BaseCurveProgressView {
-
-    constructor(context: Context) : super(context)
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+class XProgressView @JvmOverloads constructor(
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0
+) : BaseCurveProgressView(context, attrs, defStyleAttr) {
 
     override fun getGraphX(t: Float): Float =
             size * abs(sin(t)) * cos(t)
@@ -38,10 +36,7 @@ class XProgressView : BaseCurveProgressView {
     override fun getGraphY(t: Float): Float =
             size * sin(t) * cos(t)
 
-    // Disable hasHole setter. Should stay false
-    override var hasHole: Boolean = false
-        set(hasHole) {
-            super.hasHole = hasHole && false
-            field = hasHole && false
-        }
+    // The hole cut-out breaks this curve, so it stays disabled.
+    override val supportsHole: Boolean
+        get() = false
 }

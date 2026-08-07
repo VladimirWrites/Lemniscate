@@ -1,6 +1,22 @@
 Change Log
 ==========
 
+Version 2.1.0 *(unreleased)*
+----------------------------
+
+* **Breaking:** `minSdk` raised from 14 to 23 (required by androidx 1.19)
+* Build on AGP 9 (built-in Kotlin, new DSL), Gradle 9.7, Kotlin 2.4, `compileSdk` 37, sample `targetSdk` 37
+* Dependencies moved from `buildSrc` to a Gradle version catalog; `jcenter()` removed
+* Fix views created programmatically (`View(context)`) getting no default stroke width or color
+* Fix `app:*` attributes being ignored by the 3-argument (`defStyleAttr`) constructor
+* Fix `app:hasHole="true"` turning on the hole for curves that do not support it
+  (`HeartProgressView`, `CannabisProgressView`, `XProgressView`, roulettes)
+* Fix hang when the starting point on the curve fell outside a reduced `precision`
+* Reject `precision <= 0` and negative `duration` instead of failing later
+* Drop per-frame list copy in `Points.getPoints()`
+* Sample: fix settings fragment being inflated without its container layout params, and
+  the precision slider starting 10 points off
+
 Version 2.0.2 *(2019-07-27)*
 ----------------------------
 

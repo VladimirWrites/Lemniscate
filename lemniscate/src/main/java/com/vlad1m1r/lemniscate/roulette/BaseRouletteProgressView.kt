@@ -20,12 +20,17 @@ import android.content.Context
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
+import androidx.core.os.ParcelCompat
 import com.vlad1m1r.lemniscate.R
 import com.vlad1m1r.lemniscate.base.BaseCurveProgressView
 import com.vlad1m1r.lemniscate.roulette.settings.RouletteCurveSettings
 import kotlin.math.PI
 
-abstract class BaseRouletteProgressView : BaseCurveProgressView {
+abstract class BaseRouletteProgressView @JvmOverloads constructor(
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0
+) : BaseCurveProgressView(context, attrs, defStyleAttr) {
 
     protected var rouletteCurveSettings: RouletteCurveSettings = RouletteCurveSettings()
 
@@ -33,21 +38,18 @@ abstract class BaseRouletteProgressView : BaseCurveProgressView {
         get() = rouletteCurveSettings.radiusFixed
         set(radiusFixed) {
             rouletteCurveSettings.radiusFixed = radiusFixed
-            recalculateConstants()
         }
 
     var radiusMoving: Float
         get() = rouletteCurveSettings.radiusMoving
         set(radiusMoving) {
             rouletteCurveSettings.radiusMoving = radiusMoving
-            recalculateConstants()
         }
 
     var distanceFromCenter: Float
         get() = rouletteCurveSettings.distanceFromCenter
         set(distanceFromCenter) {
             rouletteCurveSettings.distanceFromCenter = distanceFromCenter
-            recalculateConstants()
         }
 
     var numberOfCycles: Float
@@ -56,13 +58,11 @@ abstract class BaseRouletteProgressView : BaseCurveProgressView {
             rouletteCurveSettings.numberOfCycles = numberOfCycles
         }
 
-    constructor(context: Context) : super(context)
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+    init {
         val rouletteCurveAttributes = context.obtainStyledAttributes(
                 attrs,
                 R.styleable.RouletteCurveProgressView,
-                0, 0)
+                defStyleAttr, 0)
 
         try {
             radiusFixed = rouletteCurveAttributes.getFloat(R.styleable.RouletteCurveProgressView_radiusFixed, rouletteCurveSettings.radiusFixed)
@@ -74,16 +74,9 @@ abstract class BaseRouletteProgressView : BaseCurveProgressView {
         }
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
-
-    internal open fun recalculateConstants() {}
-
-    // Disable hasHole setter. Should stay false
-    override var hasHole: Boolean = false
-        set(hasHole) {
-            super.hasHole = hasHole && false
-            field = hasHole && false
-        }
+    // The hole cut-out breaks this curve, so it stays disabled.
+    override val supportsHole: Boolean
+        get() = false
 
 
     override fun getT(i: Int, precision: Int): Float {
@@ -114,7 +107,7 @@ abstract class BaseRouletteProgressView : BaseCurveProgressView {
         constructor(superState: Parcelable) : super(superState)
 
         constructor(source: Parcel) : super(source) {
-            this.rouletteCurveSettings = source.readParcelable(RouletteCurveSettings::class.java.classLoader)
+            this.rouletteCurveSettings = ParcelCompat.readParcelable(source, RouletteCurveSettings::class.java.classLoader, RouletteCurveSettings::class.java)
         }
 
         override fun writeToParcel(out: Parcel, flags: Int) {

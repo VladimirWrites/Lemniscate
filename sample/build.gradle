@@ -1,39 +1,38 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+plugins {
+    alias(libs.plugins.android.application)
+}
 
 android {
-    namespace "com.vlad1m1r.lemniscate.sample"
+    namespace = "com.vlad1m1r.lemniscate.sample"
+    compileSdk = 37
+    compileSdkMinor = 1
 
     defaultConfig {
-        applicationId "com.vlad1m1r.lemniscate.sample"
-        minSdkVersion Versions.sample_min_sdk
-        targetSdkVersion Versions.target_sdk
-        compileSdk Versions.compile_sdk
-        versionCode Versions.sample_version_code
-        versionName Versions.sample_version_name
+        applicationId = "com.vlad1m1r.lemniscate.sample"
+        minSdk = 23
+        targetSdk = 37
+        versionCode = 145
+        versionName = "1.4.5"
     }
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled = false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures {
-        viewBinding true
+        viewBinding = true
     }
 }
 
 dependencies {
-    implementation Deps.appcompat
-    implementation Deps.circleindicator
-    implementation Deps.kotlin_stdlib
+    implementation libs.androidx.appcompat
+    implementation libs.androidx.core.ktx
+    implementation libs.circleindicator
 
     implementation project(':lemniscate')
 }

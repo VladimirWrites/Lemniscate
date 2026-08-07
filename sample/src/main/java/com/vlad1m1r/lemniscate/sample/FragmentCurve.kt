@@ -86,22 +86,22 @@ class FragmentCurve : Fragment() {
 
     private fun getViewForPosition(position: Int): BaseCurveProgressView {
         when (position) {
-            0 -> return BernoullisProgressView(context!!)
-            1 -> return GeronosProgressView(context!!)
-            2 -> return BernoullisBowProgressView(context!!)
-            3 -> return BernoullisSharpProgressView(context!!)
+            0 -> return BernoullisProgressView(requireContext())
+            1 -> return GeronosProgressView(requireContext())
+            2 -> return BernoullisBowProgressView(requireContext())
+            3 -> return BernoullisSharpProgressView(requireContext())
 
-            4 -> return EpitrochoidProgressView(context!!)
-            5 -> return HypotrochoidProgressView(context!!)
+            4 -> return EpitrochoidProgressView(requireContext())
+            5 -> return HypotrochoidProgressView(requireContext())
 
-            6 -> return XProgressView(context!!)
+            6 -> return XProgressView(requireContext())
 
-            7 -> return RoundScribbleProgressView(context!!)
-            8 -> return ScribbleProgressView(context!!)
+            7 -> return RoundScribbleProgressView(requireContext())
+            8 -> return ScribbleProgressView(requireContext())
 
-            9 -> return CannabisProgressView(context!!)
-            10 -> return HeartProgressView(context!!)
-            else -> return BernoullisProgressView(context!!)
+            9 -> return CannabisProgressView(requireContext())
+            10 -> return HeartProgressView(requireContext())
+            else -> return BernoullisProgressView(requireContext())
         }
     }
 

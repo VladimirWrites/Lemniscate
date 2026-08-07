@@ -50,10 +50,32 @@ class BaseCurvePresenterTest {
 
     @Test
     fun getCorrectStartingPoint_whenPointsIsEmpty() {
+        whenever(curveSettings.precision).thenReturn(200)
         whenever(animationSettings.startingPointOnCurve).thenReturn(10)
         whenever(points.isEmpty).thenReturn(true)
 
         assertThat(presenter.getStartingPoint()).isEqualTo(10)
+    }
+
+    @Test
+    fun getCorrectStartingPoint_whenStartingPointIsOutsideOfCurve() {
+        whenever(curveSettings.precision).thenReturn(20)
+        whenever(animationSettings.startingPointOnCurve).thenReturn(100)
+        whenever(points.isEmpty).thenReturn(true)
+
+        assertThat(presenter.getStartingPoint()).isEqualTo(19)
+    }
+
+    @Test(timeout = 5000)
+    fun createNewPoints_terminates_whenStartingPointIsOutsideOfCurve() {
+        whenever(curveSettings.precision).thenReturn(20)
+        whenever(drawState.currentLineLength).thenReturn(1f)
+        whenever(animationSettings.startingPointOnCurve).thenReturn(100)
+        whenever(points.isEmpty).thenReturn(true)
+
+        presenter.createNewPoints()
+
+        verify(points, atLeastOnce()).addPoint(any())
     }
 
     @Test
