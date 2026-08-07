@@ -23,13 +23,11 @@ import com.vlad1m1r.lemniscate.base.BaseCurveProgressView
 import kotlin.math.cos
 import kotlin.math.sin
 
-class CannabisProgressView : BaseCurveProgressView {
-
-    constructor(context: Context) : super(context)
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+class CannabisProgressView @JvmOverloads constructor(
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0
+) : BaseCurveProgressView(context, attrs, defStyleAttr) {
 
     override fun getGraphX(t: Float): Float =
             ((size / 6)
@@ -47,10 +45,7 @@ class CannabisProgressView : BaseCurveProgressView {
                     * (1 / 10f * cos(24 * t) + 1)
                     * (1 / 10f * cos(200 * t) + 9 / 10f)) + size / 4
 
-    // Disable hasHole setter. Should stay false
-    override var hasHole: Boolean = false
-        set(hasHole) {
-            super.hasHole = hasHole && false
-            field = hasHole && false
-        }
+    // The hole cut-out breaks this curve, so it stays disabled.
+    override val supportsHole: Boolean
+        get() = false
 }

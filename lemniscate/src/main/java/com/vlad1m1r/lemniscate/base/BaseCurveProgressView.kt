@@ -25,6 +25,7 @@ import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.LinearInterpolator
+import androidx.core.os.ParcelCompat
 import androidx.customview.view.AbsSavedState
 import com.vlad1m1r.lemniscate.R
 import com.vlad1m1r.lemniscate.base.models.DrawState
@@ -35,7 +36,11 @@ import com.vlad1m1r.lemniscate.base.settings.CurveSettings
 import kotlin.math.min
 import kotlin.math.round
 
-abstract class BaseCurveProgressView : View, IBaseCurveView {
+abstract class BaseCurveProgressView @JvmOverloads constructor(
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0
+) : View(context, attrs, defStyleAttr), IBaseCurveView {
 
     protected var presenter: IBaseCurvePresenter = BaseCurvePresenter(
             this,
@@ -46,16 +51,23 @@ abstract class BaseCurveProgressView : View, IBaseCurveView {
 
     private var valueAnimator: ValueAnimator? = null
 
-    constructor(context: Context) : super(context)
+    /**
+     * Curves whose shape would be broken by the hole cut-out report `false` here,
+     * which makes [hasHole] stay `false` no matter how it is set.
+     */
+    protected open val supportsHole: Boolean
+        get() = true
 
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-
+    init {
         val curveAttributes = context.obtainStyledAttributes(
                 attrs,
                 R.styleable.BaseCurveProgressView,
-                0, 0)
+                defStyleAttr, 0)
 
-        val colorAccentAttributes = context.obtainStyledAttributes(attrs, intArrayOf(android.R.attr.colorAccent))
+        val colorAccentAttributes = context.obtainStyledAttributes(
+                attrs,
+                intArrayOf(android.R.attr.colorAccent),
+                defStyleAttr, 0)
 
         try {
             val colorAccent = colorAccentAttributes.getColor(0, 0)
@@ -64,7 +76,7 @@ abstract class BaseCurveProgressView : View, IBaseCurveView {
             presenter.curveSettings.lineLength.lineMinLength = curveAttributes.getFloat(R.styleable.BaseCurveProgressView_minLineLength, 0.4f)
 
             presenter.curveSettings.color = curveAttributes.getColor(R.styleable.BaseCurveProgressView_lineColor, colorAccent)
-            presenter.curveSettings.hasHole = curveAttributes.getBoolean(R.styleable.BaseCurveProgressView_hasHole, false)
+            presenter.curveSettings.hasHole = curveAttributes.getBoolean(R.styleable.BaseCurveProgressView_hasHole, false) && supportsHole
             presenter.curveSettings.strokeWidth = curveAttributes.getDimension(R.styleable.BaseCurveProgressView_strokeWidth, resources.getDimension(R.dimen.lemniscate_stroke_width))
             presenter.curveSettings.precision = curveAttributes.getInteger(R.styleable.BaseCurveProgressView_precision, 200)
 
@@ -74,8 +86,6 @@ abstract class BaseCurveProgressView : View, IBaseCurveView {
             colorAccentAttributes.recycle()
         }
     }
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
@@ -171,13 +181,15 @@ abstract class BaseCurveProgressView : View, IBaseCurveView {
     var duration
         get() = presenter.animationSettings.duration
         set(duration) {
+            require(duration >= 0) { "'duration' must not be negative!" }
             presenter.animationSettings.duration = duration
-            if (valueAnimator != null) valueAnimator!!.duration = duration.toLong()
+            valueAnimator?.duration = duration.toLong()
         }
 
     var precision
         get() = presenter.curveSettings.precision
         set(precision) {
+            require(precision > 0) { "'precision' must be greater than 0!" }
             presenter.curveSettings.precision = precision
             animateLemniscate()
             invalidate()
@@ -191,14 +203,13 @@ abstract class BaseCurveProgressView : View, IBaseCurveView {
             invalidate()
         }
 
-    var size = presenter.viewSize.size
+    val size: Float
         get() = presenter.viewSize.size
-        private set
 
-    open var hasHole
+    open var hasHole: Boolean
         get() = presenter.curveSettings.hasHole
         set(hasHole) {
-            presenter.curveSettings.hasHole = hasHole
+            presenter.curveSettings.hasHole = hasHole && supportsHole
         }
 
     public override fun onSaveInstanceState(): Parcelable {
@@ -229,8 +240,8 @@ abstract class BaseCurveProgressView : View, IBaseCurveView {
         constructor(superState: Parcelable) : super(superState)
 
         constructor(state: Parcel) : super(state, BaseCurveSavedState::class.java.classLoader) {
-            this.curveSettings = state.readParcelable(CurveSettings::class.java.classLoader)
-            this.animationSettings = state.readParcelable(AnimationSettings::class.java.classLoader)
+            this.curveSettings = ParcelCompat.readParcelable(state, CurveSettings::class.java.classLoader, CurveSettings::class.java)
+            this.animationSettings = ParcelCompat.readParcelable(state, AnimationSettings::class.java.classLoader, AnimationSettings::class.java)
         }
 
         override fun writeToParcel(out: Parcel, flags: Int) {

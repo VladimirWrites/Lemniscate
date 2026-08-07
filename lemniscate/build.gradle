@@ -1,89 +1,60 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'jacoco'
+plugins {
+    alias(libs.plugins.android.library)
+    id 'jacoco'
+}
+
+version = '2.1.0'
 
 jacoco {
-    toolVersion = Versions.jacoco
+    toolVersion = libs.versions.jacoco.get()
 }
 
 android {
-    namespace "com.vlad1m1r.lemniscate"
+    namespace = "com.vlad1m1r.lemniscate"
+    compileSdk = 37
+    compileSdkMinor = 1
+
     defaultConfig {
-        minSdkVersion Versions.min_sdk
-        targetSdkVersion Versions.target_sdk
-        compileSdk Versions.compile_sdk
-        versionCode Versions.lemniscate_version_code
-        versionName Versions.lemniscate_version_name
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        minSdk = 23
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         debug {
-            testCoverageEnabled true
+            enableUnitTestCoverage = true
+            enableAndroidTestCoverage = true
         }
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled = false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
     }
     testOptions {
-        unitTests.all {
-            jacoco {
-                includeNoLocationClasses = true
-            }
-        }
         unitTests {
             includeAndroidResources = true
+            all {
+                jacoco {
+                    includeNoLocationClasses = true
+                    // Without this, JaCoCo instruments the JVM's runtime-generated
+                    // reflection/serialization accessors and the test worker dies with
+                    // NoClassDefFoundError: jdk/internal/reflect/GeneratedSerializationConstructorAccessor1
+                    excludes = ["jdk.internal.*"]
+                }
+            }
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-    }
-}
-
-task jacocoDebugReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
-
-    reports {
-        csv {
-            enabled true
-        }
-        xml {
-            enabled true
-        }
-        html {
-            enabled true
-        }
-    }
-
-    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
-    def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
-    def kotlinDebugTree = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", excludes: fileFilter)
-    def mainSrc = "${project.projectDir}/src/androidTest/java"
-
-    getSourceDirectories().setFrom(files([mainSrc]))
-    getClassDirectories().setFrom(files([debugTree], [kotlinDebugTree]))
-    getExecutionData().setFrom(fileTree(dir: "$buildDir", includes: [
-            "jacoco/testDebugUnitTest.exec",
-            "outputs/code-coverage/connected/*coverage.ec"
-    ]))
 }
 
 dependencies {
-    implementation Deps.appcompat
-    implementation Deps.kotlin_stdlib
+    implementation libs.androidx.appcompat
+    implementation libs.androidx.core.ktx
 
-    testImplementation Deps.junit
-    testImplementation Deps.mockito_core
-    testImplementation Deps.mockito_kotlin
-    testImplementation Deps.truth
-    testImplementation Deps.robolectric
-}
-repositories {
-    mavenCentral()
+    testImplementation libs.junit
+    testImplementation libs.mockito.core
+    testImplementation libs.mockito.kotlin
+    testImplementation libs.truth
+    testImplementation libs.robolectric
 }

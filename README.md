@@ -3,7 +3,7 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/VladimirWrites/Lemniscate/blob/master/LICENSE)
 [![](https://jitpack.io/v/VladimirWrites/Lemniscate.svg)](https://jitpack.io/#VladimirWrites/Lemniscate) 
-[![API](https://img.shields.io/badge/API-14%2B-green.svg?style=flat)](https://android-arsenal.com/api?level-11) 
+[![API](https://img.shields.io/badge/API-23%2B-green.svg?style=flat)](https://android-arsenal.com/api?level-23) 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Lemniscate-green.svg?style=flat)](https://android-arsenal.com/details/1/5142)
 [![Build Status](https://app.bitrise.io/app/a22f82dd1a84f058.svg?token=sufo7FQOqMK9NjUqcP4CzA&branch=master)](https://app.bitrise.io/app/a22f82dd1a84f058#/builds)
 [![codecov](https://codecov.io/gh/VladimirWrites/Lemniscate/branch/master/graph/badge.svg)](https://codecov.io/gh/VladimirWrites/Lemniscate)
@@ -28,13 +28,14 @@ The application is intentionally simple, without any libraries, to be understand
 Setup
 -----
 
-Add to your module's `build.gradle`:
+Add JitPack to your `settings.gradle`:
 
 ```groovy
-allprojects {
+dependencyResolutionManagement {
     repositories {
-        ...
-        maven { url 'https://jitpack.io' }
+        google()
+        mavenCentral()
+        maven { url = 'https://jitpack.io' }
     }
 }
 ```
@@ -48,7 +49,7 @@ dependencies {
 }
 ```
     
-###### Android Support Library (Depricated)
+###### Android Support Library (Deprecated)
 ```groovy
 dependencies {
     implementation 'com.github.VladimirWrites:Lemniscate:1.4.5'

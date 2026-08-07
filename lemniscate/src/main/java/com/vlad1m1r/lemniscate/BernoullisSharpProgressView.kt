@@ -24,13 +24,11 @@ import kotlin.math.cos
 import kotlin.math.pow
 import kotlin.math.sin
 
-class BernoullisSharpProgressView : BaseCurveProgressView {
-
-    constructor(context: Context) : super(context)
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+class BernoullisSharpProgressView @JvmOverloads constructor(
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0
+) : BaseCurveProgressView(context, attrs, defStyleAttr) {
 
     override fun getGraphX(t: Float): Float =
             size * cos(t) / (1 + cos(t).pow(2))

@@ -21,23 +21,19 @@ import android.util.AttributeSet
 import kotlin.math.cos
 import kotlin.math.sin
 
-class HypotrochoidProgressView : BaseRouletteProgressView {
+class HypotrochoidProgressView @JvmOverloads constructor(
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0
+) : BaseRouletteProgressView(context, attrs, defStyleAttr) {
 
-    internal var radiusDiff = 0f
+    internal val radiusDiff: Float
         get() = radiusFixed - radiusMoving
-        private set
 
-    internal var sizeFactor = 0f
+    internal val sizeFactor: Float
         get() = 2 * (radiusDiff + distanceFromCenter)
-        private set
 
     // radiusFixed = 5, radiusMoving=3, distanceFromCenter=5, numberOfCycles = 3 to get pentagram
-
-    constructor(context: Context) : super(context)
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     override fun getGraphX(t: Float): Float =
             size / sizeFactor * (radiusDiff * cos(t) - distanceFromCenter * cos(radiusDiff / radiusMoving * t))

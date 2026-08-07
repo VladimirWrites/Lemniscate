@@ -34,14 +34,24 @@ class BaseCurvePresenter(override val view: IBaseCurveView,
         var lineLengthToDraw = lineLengthToDraw
 
         while (lineLengthToDraw > 0) {
-            lineLengthToDraw = addPointsToCurve(
+            val remaining = addPointsToCurve(
                     getStartingPoint(),
                     lineLengthToDraw
             )
+            // No progress means no point can ever be added; bail out instead of hanging.
+            if (remaining == lineLengthToDraw) break
+            lineLengthToDraw = remaining
         }
     }
 
-    internal fun getStartingPoint() = if (points.isEmpty) animationSettings.startingPointOnCurve else 0
+    /**
+     * The starting point is clamped to the curve: a starting point at or past [CurveSettings.precision]
+     * would make [addPointsToCurve] add nothing, and [createNewPoints] would spin forever.
+     */
+    internal fun getStartingPoint() =
+            if (points.isEmpty) {
+                animationSettings.startingPointOnCurve.coerceIn(0, (curveSettings.precision - 1).coerceAtLeast(0))
+            } else 0
 
     internal fun addPointsToPath() {
         drawState.addPointsToPath(points.getPoints(), curveSettings, viewSize)
@@ -61,9 +71,10 @@ class BaseCurvePresenter(override val view: IBaseCurveView,
     }
 
     internal fun getPoint(i: Int): Point {
+        val t = getT(i)
         return Point(
-                view.getGraphX(getT(i)),
-                view.getGraphY(getT(i)),
+                view.getGraphX(t),
+                view.getGraphY(t),
                 curveSettings.strokeWidth,
                 viewSize.size
         )

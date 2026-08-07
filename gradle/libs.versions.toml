@@ -1,0 +1,33 @@
+[versions]
+agp = "9.3.1"
+kotlin = "2.4.10"
+
+androidxAppcompat = "1.7.1"
+androidxCore = "1.19.0"
+
+circleindicator = "2.1.6"
+
+junit = "4.13.2"
+mockito = "5.23.0"
+mockitoKotlin = "6.3.0"
+truth = "1.4.5"
+robolectric = "4.16.1"
+jacoco = "0.8.15"
+
+[libraries]
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidxAppcompat" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
+
+circleindicator = { module = "me.relex:circleindicator", version.ref = "circleindicator" }
+
+junit = { module = "junit:junit", version.ref = "junit" }
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
+mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockitoKotlin" }
+truth = { module = "com.google.truth:truth", version.ref = "truth" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }

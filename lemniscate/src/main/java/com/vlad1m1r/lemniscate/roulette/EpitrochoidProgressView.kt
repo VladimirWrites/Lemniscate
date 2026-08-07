@@ -21,30 +21,21 @@ import android.util.AttributeSet
 import kotlin.math.cos
 import kotlin.math.sin
 
-class EpitrochoidProgressView : BaseRouletteProgressView {
+class EpitrochoidProgressView @JvmOverloads constructor(
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0
+) : BaseRouletteProgressView(context, attrs, defStyleAttr) {
 
-    internal var radiusSum = 0f
+    internal val radiusSum: Float
         get() = radiusFixed + radiusMoving
-        private set
 
-    internal var sizeFactor = 0f
+    internal val sizeFactor: Float
         get() = 2 * (radiusSum + distanceFromCenter)
-        private set
-
-    constructor(context: Context) : super(context)
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     override fun getGraphX(t: Float): Float =
             size / sizeFactor * (radiusSum * cos(t) - distanceFromCenter * cos(radiusSum / radiusMoving * t))
 
     override fun getGraphY(t: Float): Float =
             size / sizeFactor * (radiusSum * sin(t) - distanceFromCenter * sin(radiusSum / radiusMoving * t))
-
-    override fun recalculateConstants() {
-        radiusSum = radiusFixed + radiusMoving
-        sizeFactor = 2 * (radiusSum + distanceFromCenter)
-    }
 }

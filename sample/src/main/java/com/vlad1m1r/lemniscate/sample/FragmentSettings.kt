@@ -21,6 +21,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
+import androidx.core.os.BundleCompat
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
@@ -47,7 +48,7 @@ class FragmentSettings : Fragment(), SeekBar.OnSeekBarChangeListener, CompoundBu
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSettingsBinding.inflate(layoutInflater)
+        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -58,11 +59,9 @@ class FragmentSettings : Fragment(), SeekBar.OnSeekBarChangeListener, CompoundBu
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        curveData = if(savedInstanceState != null && savedInstanceState.containsKey("curve_data")) {
-            savedInstanceState.getParcelable("curve_data")!!
-        } else {
-            CurveData(color = ContextCompat.getColor(requireContext(), R.color.picker_color_1))
-        }
+        curveData = savedInstanceState
+                ?.let { BundleCompat.getParcelable(it, KEY_CURVE_DATA, CurveData::class.java) }
+                ?: CurveData(color = ContextCompat.getColor(requireContext(), R.color.picker_color_1))
 
         setupViews()
     }
@@ -94,7 +93,8 @@ class FragmentSettings : Fragment(), SeekBar.OnSeekBarChangeListener, CompoundBu
         binding.checkBoxHasHole.isChecked = curveData.hasHole
 
         binding.seekBarPrecision.max = 990
-        binding.seekBarPrecision.progress = curveData.precision
+        // onProgressChanged maps progress to `progress + MIN_PRECISION`, so invert that here.
+        binding.seekBarPrecision.progress = curveData.precision - MIN_PRECISION
         binding.seekBarPrecision.setOnSeekBarChangeListener(this)
 
         binding.seekBarA.max = 10
@@ -135,7 +135,7 @@ class FragmentSettings : Fragment(), SeekBar.OnSeekBarChangeListener, CompoundBu
             binding.seekBarA.isEnabled = true
             binding.seekBarB.isEnabled = true
             binding.seekBarD.isEnabled = true
-            binding.seekBarNumberOfCycles!!.isEnabled = true
+            binding.seekBarNumberOfCycles.isEnabled = true
         } else {
             binding.seekBarA.isEnabled = false
             binding.seekBarB.isEnabled = false
@@ -160,7 +160,7 @@ class FragmentSettings : Fragment(), SeekBar.OnSeekBarChangeListener, CompoundBu
                 curveData.lineMinLength = (i + 1) / 100.0f
             R.id.seekBarSizeMultiplier -> curveData.sizeMultiplier = (i + 5) / 10.0f
             R.id.seekBarAnimationDuration -> curveData.duration = (i + 1) * 10
-            R.id.seekBarPrecision -> curveData.precision = i + 10
+            R.id.seekBarPrecision -> curveData.precision = i + MIN_PRECISION
             R.id.seekBarA -> curveData.radiusFixed = (i + 1).toFloat()
             R.id.seekBarB -> curveData.radiusMoving = (i + 1).toFloat()
             R.id.seekBarD -> curveData.distanceFromCenter = (i + 1).toFloat()
@@ -229,7 +229,12 @@ class FragmentSettings : Fragment(), SeekBar.OnSeekBarChangeListener, CompoundBu
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putParcelable("curve_data", curveData)
+        outState.putParcelable(KEY_CURVE_DATA, curveData)
+    }
+
+    companion object {
+        private const val KEY_CURVE_DATA = "curve_data"
+        private const val MIN_PRECISION = 10
     }
 }
 
