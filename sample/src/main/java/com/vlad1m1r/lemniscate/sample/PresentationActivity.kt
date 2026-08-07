@@ -16,34 +16,35 @@
 
 package com.vlad1m1r.lemniscate.sample
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class PresentationActivity : AppCompatActivity() {
 
     private lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // The toolbar is always dark, so the status bar icons have to stay light.
+        enableEdgeToEdge(statusBarStyle = SystemBarStyle.dark(Color.TRANSPARENT))
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_presentation)
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        // The toolbar overlays the content, so it draws behind the status bar and cutout.
+        toolbar.addSystemBarInsetsToPadding(left = true, top = true, right = true)
         supportActionBar?.apply {
             setTitle(R.string.screen_presentation)
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }
 
-        val rootView = findViewById<View>(R.id.root_view)
-        ViewCompat.setOnApplyWindowInsetsListener(rootView) { view, insets ->
-            val systemInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            view.setPadding(0, systemInsets.top, 0, systemInsets.bottom)
-            insets
-        }
+        findViewById<View>(R.id.content).addSystemBarInsetsToPadding(
+                left = true, top = true, right = true, bottom = true)
     }
 }
 
