@@ -17,8 +17,11 @@
 package com.vlad1m1r.lemniscate.sample
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
@@ -28,8 +31,6 @@ import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 import com.vlad1m1r.lemniscate.base.BaseCurveProgressView
 import me.relex.circleindicator.CircleIndicator
@@ -46,11 +47,15 @@ class MainActivity : AppCompatActivity(), FragmentCurve.OnViewCreated {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // The toolbar is always dark, so the status bar icons have to stay light.
+        enableEdgeToEdge(statusBarStyle = SystemBarStyle.dark(Color.TRANSPARENT))
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        // The toolbar draws its background behind the status bar and the cutout.
+        toolbar.addSystemBarInsetsToPadding(left = true, top = true, right = true)
         fragmentSettings = supportFragmentManager.findFragmentById(R.id.fragment_settings) as FragmentSettings
         pager = findViewById(R.id.viewPager)
         pagerAdapter = CurvesPagerAdapter(supportFragmentManager)
@@ -58,12 +63,10 @@ class MainActivity : AppCompatActivity(), FragmentCurve.OnViewCreated {
         pager.adapter = pagerAdapter
         indicator.setViewPager(pager)
 
-        val rootView = findViewById<View>(R.id.root_view)
-        ViewCompat.setOnApplyWindowInsetsListener(rootView) { view, insets ->
-            val systemInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            view.setPadding(0, systemInsets.top, 0, systemInsets.bottom)
-            insets
-        }
+        // The curve pager only needs to stay clear of a side cutout; the settings pane
+        // below it handles the bottom inset itself so it can scroll behind the
+        // navigation bar (see FragmentSettings).
+        findViewById<View>(R.id.viewPager).addSystemBarInsetsToPadding(left = true, right = true)
     }
 
     override fun onViewShown(position: Int, baseCurveProgressView: BaseCurveProgressView?) {

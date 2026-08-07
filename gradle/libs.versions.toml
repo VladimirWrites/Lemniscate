@@ -2,6 +2,7 @@
 agp = "9.3.1"
 kotlin = "2.4.10"
 
+androidxActivity = "1.13.0"
 androidxAppcompat = "1.7.1"
 androidxCore = "1.19.0"
 
@@ -15,6 +16,7 @@ robolectric = "4.16.1"
 jacoco = "0.8.15"
 
 [libraries]
+androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidxActivity" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidxAppcompat" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
 

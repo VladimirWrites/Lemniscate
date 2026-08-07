@@ -59,6 +59,10 @@ class FragmentSettings : Fragment(), SeekBar.OnSeekBarChangeListener, CompoundBu
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // The root is a ScrollView with clipToPadding="false", so the settings scroll
+        // behind the navigation bar but the last one can still be reached.
+        binding.root.addSystemBarInsetsToPadding(left = true, right = true, bottom = true)
         curveData = savedInstanceState
                 ?.let { BundleCompat.getParcelable(it, KEY_CURVE_DATA, CurveData::class.java) }
                 ?: CurveData(color = ContextCompat.getColor(requireContext(), R.color.picker_color_1))
